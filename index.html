@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinitarium - Sandbox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Share Tech Mono", monospace;
+            font-weight: 400;
+            font-style: normal;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #0b0b0f, #1a0a0a);
+            color: #f0f0f0;
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.75);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid #c00000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            color: #ff4d4d;
+            text-shadow: 0 0 12px rgba(255, 77, 77, 0.6);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .game-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .description,
+        .features {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(20, 5, 5, 0.6);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid #5a0000;
+        }
+
+        h2 {
+            color: #ff6666;
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.75rem;
+            position: relative;
+            color: #e0e0e0;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            color: #ff4d4d;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .screenshots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .screenshot {
+            width: calc(33% - 1.25rem);
+            min-width: 250px;
+            height: 200px;
+            background-color: #0f0505;
+            border: 1px solid #800000;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .screenshot:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(128, 0, 0, 0.4);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .screenshot-label {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ff6666;
+            padding: 4px 8px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        .download-section {
+            background-color: rgba(15, 5, 5, 0.8);
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 2rem;
+            border: 1px solid #c00000;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .download-link {
+            display: inline-block;
+            background: linear-gradient(to bottom, #d32f2f, #b71c1c);
+            color: white;
+            text-decoration: none;
+            padding: 1.1rem 2.5rem;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        .download-link:hover {
+            background: linear-gradient(to bottom, #ff4d4d, #d32f2f);
+            transform: scale(1.07);
+            box-shadow: 0 6px 14px rgba(179, 27, 27, 0.6);
+        }
+
+        .download-link:active {
+            transform: scale(1);
+        }
+
+        @media (max-width: 768px) {
+            .game-info {
+                flex-direction: column;
+            }
+
+            .screenshot {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Infinitarium</h1>
+    </header>
+
+    <div class="container">
+        <div class="game-info">
+            <div class="description">
+                <h2><strong>Description</strong></h2>
+                <p><strong>Infinitarium</strong> is a sandbox game developed in Unity 3D. The game has no specific goal
+                    or objective. The player can explore, create, and experiment with current game features. It's the perfect place for creativity and free exploration without the pressure of completing
+                    objectives.</p>
+            </div>
+        </div>
+
+        <div class="screenshots">
+            <div class="screenshot">
+                <div class="screenshot-label">Mini-games</div>
+                <img src="img/screenshot1.png" alt="Image 1">
+            </div>
+            <div class="screenshot">
+                <div class="screenshot-label">Multiplayer (soon)</div>
+                <img src="img/screenshot2.png" alt="Image 2">
+            </div>
+            <div class="screenshot">
+                <div class="screenshot-label">Cool maps</div>
+                <img src="img/screenshot3.png" alt="Image 3">
+            </div>
+        </div>
+
+        <div class="download-section">
+            <h2>Download the game</h2>
+            <p>Last version: v12.2.1</p>
+            <a href="https://drive.google.com/drive/folders/1X4A29JdEg92HhxWjvgIwLQ2GinbnY5re" target="_blank" class="download-link">Install now <small>(GOOGLE DRIVE)</small></a>
+        </div>
+    </div>
+</body>
+
+</html>
