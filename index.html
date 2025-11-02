@@ -357,7 +357,7 @@
 
         <div class="download-section">
             <h2>Download the game</h2>
-            <p>Last version: v12.3</p>
+            <p>Last version: v12.3.1</p>
             <a href="https://drive.google.com/drive/folders/1X4A29JdEg92HhxWjvgIwLQ2GinbnY5re?usp=sharing"
                 target="_blank" class="download-link">Install now <small>(GOOGLE DRIVE)</small></a>
             <button class="changelog-btn" onclick="showChangelog()">Changelog</button>
@@ -368,12 +368,20 @@
         <div class="changelog-content" onclick="event.stopPropagation()">
             <h2>Changelog</h2>
             <div class="changelog-tabs">
+                <button class="tab-btn" data-tab="v12.3.1">v12.3.1</button>
                 <button class="tab-btn active" data-tab="v12.3">v12.3</button>
                 <button class="tab-btn" data-tab="v12.2.1">v12.2.1</button>
                 <button class="tab-btn" data-tab="v12.2.0">v12.2</button>
                 <button class="tab-btn" data-tab="older">Older</button>
             </div>
-
+            <div id="v12.3.1" class="tab-content">
+                <div class="changelog-section">
+                    <h3>Changes:</h3>
+                    <ul class="changelog-list">
+                        <li>Improved Modding Documentation</li>
+                    </ul>
+                </div>
+            </div>
             <div id="v12.3" class="tab-content active">
                 <div class="changelog-section">
                     <h3>Additions:</h3>
@@ -498,3 +506,4 @@
 </body>
 
 </html>
+
