@@ -17,11 +17,9 @@
             --shadow: rgba(0, 0, 0, 0.5);
             --hover: #25293d;
         }
-
         * {
             box-sizing: border-box;
         }
-
         body {
             font-family: 'Share Tech Mono', monospace;
             background: var(--bg);
@@ -31,13 +29,11 @@
             line-height: 1.6;
             font-size: 15px;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 24px;
         }
-
         header {
             text-align: center;
             padding: 48px 20px 32px;
@@ -48,7 +44,6 @@
             position: relative;
             overflow: hidden;
         }
-
         h1 {
             font-size: 3em;
             background: linear-gradient(to right, var(--accent), var(--accent-secondary));
@@ -59,13 +54,11 @@
             letter-spacing: 1.2px;
             text-shadow: none;
         }
-
         .subtitle {
             color: var(--text-muted);
             font-size: 1.1em;
             margin-top: 12px;
         }
-
         /* Controls Panel */
         .controls-panel {
             display: flex;
@@ -79,7 +72,6 @@
             box-shadow: 0 4px 16px var(--shadow);
             flex-wrap: wrap;
         }
-
         .lang-switch {
             display: flex;
             background: var(--card-bg);
@@ -87,7 +79,6 @@
             overflow: hidden;
             border: 1px solid var(--border);
         }
-
         .lang-btn {
             padding: 10px 20px;
             background: transparent;
@@ -98,17 +89,14 @@
             font-size: 15px;
             transition: all 0.2s ease;
         }
-
         .lang-btn.active {
             background: var(--accent);
             color: #0d0f1a;
             font-weight: bold;
         }
-
         .lang-btn:hover:not(.active) {
             background: var(--hover);
         }
-
         .search-box {
             padding: 12px 18px;
             width: 280px;
@@ -121,11 +109,9 @@
             outline: none;
             transition: border-color 0.3s;
         }
-
         .search-box:focus {
             border-color: var(--accent);
         }
-
         /* Categories */
         .categories {
             display: flex;
@@ -138,7 +124,6 @@
             scrollbar-width: thin;
             scrollbar-color: var(--accent) var(--bg-panel);
         }
-
         .cat-btn {
             white-space: nowrap;
             padding: 8px 18px;
@@ -151,14 +136,12 @@
             cursor: pointer;
             transition: all 0.25s ease;
         }
-
         .cat-btn:hover, .cat-btn.active {
             background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
             color: #0d0f1a;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 245, 212, 0.25);
         }
-
         /* Function Entry */
         .func-entry {
             display: none;
@@ -171,18 +154,15 @@
             position: relative;
             border-left: 4px solid var(--accent);
         }
-
         .func-entry:hover {
             transform: translateY(-4px);
         }
-
         .func {
             background: #161925;
             padding: 22px;
             border-radius: 14px;
             border-left: 4px solid var(--accent-secondary);
         }
-
         .tag {
             display: inline-block;
             background: var(--accent-secondary);
@@ -193,14 +173,12 @@
             margin-right: 10px;
             font-weight: bold;
         }
-
         .signature {
             font-weight: bold;
             color: var(--accent);
             font-size: 1.25em;
             margin: 12px 0 16px;
         }
-
         .example {
             background: #0f111d;
             padding: 16px;
@@ -212,7 +190,6 @@
             overflow-x: auto;
             position: relative;
         }
-
         .example::after {
             content: 'Lua';
             position: absolute;
@@ -221,35 +198,29 @@
             font-size: 0.85em;
             color: var(--text-muted);
         }
-
         ul {
             padding-left: 24px;
             margin: 14px 0;
         }
-
         ul li {
             margin: 8px 0;
         }
-
         /* Category Sections (Prefabs/Fonts) */
         .category-section {
             margin-top: 36px;
             padding-top: 24px;
             border-top: 1px solid var(--border);
         }
-
         .category-header {
             display: flex;
             align-items: center;
             margin-bottom: 16px;
         }
-
         .category-header h3 {
             margin: 0;
             color: var(--accent);
             font-size: 1.5em;
         }
-
         .count {
             background: var(--accent-secondary);
             color: white;
@@ -258,32 +229,27 @@
             font-size: 0.9em;
             margin-left: 14px;
         }
-
         .tree ul {
             list-style: none;
             padding-left: 20px;
         }
-
         .tree li {
             margin: 6px 0;
             position: relative;
             padding-left: 20px;
         }
-
         .tree li::before {
             content: "• ";
             color: var(--accent);
             position: absolute;
             left: 0;
         }
-
         .prefab-list, .font-list {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
             gap: 14px;
             margin-top: 16px;
         }
-
         .prefab-item, .font-item {
             background: var(--bg-panel);
             padding: 12px;
@@ -293,12 +259,10 @@
             transition: all 0.25s ease;
             cursor: default;
         }
-
         .prefab-item:hover, .font-item:hover {
             background: var(--hover);
             transform: scale(1.03);
         }
-
         /* No match */
         .no-match {
             text-align: center;
@@ -310,7 +274,6 @@
             margin: 30px 0;
             font-size: 1.1em;
         }
-
         /* Scrollbar */
         ::-webkit-scrollbar {
             height: 8px;
@@ -326,7 +289,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--accent-secondary);
         }
-
         /* Responsive */
         @media (max-width: 768px) {
             .controls-panel {
@@ -354,6 +316,22 @@
                 grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             }
         }
+        /* Lua Docs Link */
+        .lua-docs {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+            font-size: 0.95em;
+        }
+        .lua-docs a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        .lua-docs a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -364,7 +342,7 @@
             Modding system for the game Infinitarium using Lua scripting
         </p>
     </header>
-    <div class="controls">
+    <div class="controls-panel">
         <div class="lang-switch">
             <button class="lang-btn active" data-lang="en">English</button>
             <button class="lang-btn" data-lang="ru">Русский</button>
@@ -376,6 +354,7 @@
         <button class="cat-btn" data-cat="config">Config</button>
         <button class="cat-btn" data-cat="object">Objects</button>
         <button class="cat-btn" data-cat="ui">UI</button>
+        <button class="cat-btn" data-cat="gui">GUI</button>
         <button class="cat-btn" data-cat="audio">Audio</button>
         <button class="cat-btn" data-cat="input">Input</button>
         <button class="cat-btn" data-cat="data">Data</button>
@@ -386,8 +365,459 @@
         <button class="cat-btn" data-cat="player">Player</button>
         <button class="cat-btn" data-cat="weapon">Weapon</button>
         <button class="cat-btn" data-cat="melee">Melee</button>
+        <button class="cat-btn" data-cat="minigame">Minigame</button>
         <button class="cat-btn" data-cat="misc">Misc</button>
     </div>
+
+    <!-- GUI API (NEW) -->
+    <div class="func-entry" data-lang="en" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Function</span> gui.label(x, y, w, h, text)</h3>
+            <p>Draws a non-interactive label.</p>
+            <div class="example">
+                gui.label(10, 10, 200, 30, "Hello World")
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Функция</span> gui.label(x, y, w, h, текст)</h3>
+            <p>Рисует неинтерактивную метку.</p>
+            <div class="example">
+                gui.label(10, 10, 200, 30, "Привет, мир!")
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Function</span> gui.button(x, y, w, h, text)</h3>
+            <p>Returns true if the button was clicked.</p>
+            <div class="example">
+                if gui.button(10, 50, 150, 40, "Click Me") then<br>
+                &nbsp;&nbsp;printLog("Button clicked!")<br>
+                end
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Функция</span> gui.button(x, y, w, h, текст)</h3>
+            <p>Возвращает true, если кнопка была нажата.</p>
+            <div class="example">
+                if gui.button(10, 50, 150, 40, "Нажми меня") then<br>
+                &nbsp;&nbsp;printLog("Кнопка нажата!")<br>
+                end
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Function</span> gui.checkbox(x, y, w, h, value, text)</h3>
+            <p>Returns the new boolean state of a checkbox/toggle.</p>
+            <div class="example">
+                myCheck = gui.checkbox(10, 100, 200, 30, myCheck or false, "Enable Cheats")
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Функция</span> gui.checkbox(x, y, w, h, значение, текст)</h3>
+            <p>Возвращает новое состояние чекбокса.</p>
+            <div class="example">
+                myCheck = gui.checkbox(10, 100, 200, 30, myCheck or false, "Включить читы")
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Function</span> gui.textField(x, y, w, h, text)</h3>
+            <p>Returns edited text from a single-line input field.</p>
+            <div class="example">
+                inputText = gui.textField(10, 150, 200, 30, inputText or "")
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Функция</span> gui.textField(x, y, w, h, текст)</h3>
+            <p>Возвращает изменённый текст из однострочного поля ввода.</p>
+            <div class="example">
+                inputText = gui.textField(10, 150, 200, 30, inputText or "")
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Function</span> gui.textArea(x, y, w, h, text)</h3>
+            <p>Returns edited multiline text.</p>
+            <div class="example">
+                notes = gui.textArea(10, 200, 300, 100, notes or "")
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Функция</span> gui.textArea(x, y, w, h, текст)</h3>
+            <p>Возвращает изменённый многострочный текст.</p>
+            <div class="example">
+                notes = gui.textArea(10, 200, 300, 100, notes or "")
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Function</span> gui.slider(x, y, w, h, value, min, max)</h3>
+            <p>Returns new float value from a slider.</p>
+            <div class="example">
+                volume = gui.slider(10, 320, 200, 30, volume or 0.5, 0.0, 1.0)
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Функция</span> gui.slider(x, y, w, h, значение, мин, макс)</h3>
+            <p>Возвращает новое значение слайдера.</p>
+            <div class="example">
+                volume = gui.slider(10, 320, 200, 30, volume or 0.5, 0.0, 1.0)
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Function</span> gui.passwordField(x, y, w, h, password, mask)</h3>
+            <p>Returns password input (masked).</p>
+            <div class="example">
+                pwd = gui.passwordField(10, 370, 200, 30, pwd or "", "*")
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Функция</span> gui.passwordField(x, y, w, h, пароль, маска)</h3>
+            <p>Возвращает введённый пароль (в маске).</p>
+            <div class="example">
+                pwd = gui.passwordField(10, 370, 200, 30, pwd or "", "*")
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Function</span> gui.box(x, y, w, h, text)</h3>
+            <p>Draws a framed box with text.</p>
+            <div class="example">
+                gui.box(10, 420, 200, 50, "Info Panel")
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Функция</span> gui.box(x, y, w, h, текст)</h3>
+            <p>Рисует обрамлённую рамкой панель с текстом.</p>
+            <div class="example">
+                gui.box(10, 420, 200, 50, "Информация")
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Function</span> gui.repeatButton(x, y, w, h, text)</h3>
+            <p>Returns true while the button is held down.</p>
+            <div class="example">
+                if gui.repeatButton(10, 490, 150, 40, "Hold Me") then<br>
+                &nbsp;&nbsp;printLog("Holding...")<br>
+                end
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Функция</span> gui.repeatButton(x, y, w, h, текст)</h3>
+            <p>Возвращает true, пока кнопка удерживается.</p>
+            <div class="example">
+                if gui.repeatButton(10, 490, 150, 40, "Удерживай") then<br>
+                &nbsp;&nbsp;printLog("Удерживаю...")<br>
+                end
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Function</span> gui.selectionGrid(x, y, w, h, selected, "opt1", "opt2", ..., columns)</h3>
+            <p>Returns the index of the selected option.</p>
+            <div class="example">
+                choice = gui.selectionGrid(10, 550, 300, 60, choice or 0, "Red", "Green", "Blue", 3)
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Функция</span> gui.selectionGrid(x, y, w, h, выбрано, "опц1", "опц2", ..., столбцы)</h3>
+            <p>Возвращает индекс выбранной опции.</p>
+            <div class="example">
+                choice = gui.selectionGrid(10, 550, 300, 60, choice or 0, "Красный", "Зелёный", "Синий", 3)
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Function</span> gui.toggle(x, y, w, h, value, text)</h3>
+            <p>Same as checkbox. Returns new boolean value.</p>
+            <div class="example">
+                enabled = gui.toggle(10, 630, 200, 30, enabled or false, "Toggle Feature")
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="gui">
+        <div class="func">
+            <h3><span class="tag">Функция</span> gui.toggle(x, y, w, h, значение, текст)</h3>
+            <p>Аналог checkbox. Возвращает новое булево значение.</p>
+            <div class="example">
+                enabled = gui.toggle(10, 630, 200, 30, enabled or false, "Переключить")
+            </div>
+        </div>
+    </div>
+
+    <!-- Minigame API -->
+    <div class="func-entry" data-lang="en" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Table</span> minigame</h3>
+            <p>Read-only properties of the current minigame state:</p>
+            <ul>
+                <li><code>currentWave</code>, <code>maxWaves</code>, <code>isGameWon</code></li>
+                <li><code>activeEnemiesCount</code>, <code>isWaitingForNextWave</code>, <code>timeUntilNextWave</code></li>
+            </ul>
+            <div class="example">
+                printLog("Wave:", minigame.currentWave)<br>
+                if minigame.isGameWon then printLog("You won!") end
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Таблица</span> minigame</h3>
+            <p>Только для чтения — состояние мини-игры:</p>
+            <ul>
+                <li><code>currentWave</code>, <code>maxWaves</code>, <code>isGameWon</code></li>
+                <li><code>activeEnemiesCount</code>, <code>isWaitingForNextWave</code>, <code>timeUntilNextWave</code></li>
+            </ul>
+            <div class="example">
+                printLog("Волна:", minigame.currentWave)<br>
+                if minigame.isGameWon then printLog("Победа!") end
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Function</span> minigame.StartNextWave()</h3>
+            <p>Manually start the next enemy wave.</p>
+            <div class="example">
+                minigame.StartNextWave()
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Функция</span> minigame.StartNextWave()</h3>
+            <p>Вручную запускает следующую волну.</p>
+            <div class="example">
+                minigame.StartNextWave()
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Function</span> minigame.Victory()</h3>
+            <p>Instantly win the minigame.</p>
+            <div class="example">
+                minigame.Victory()
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Функция</span> minigame.Victory()</h3>
+            <p>Мгновенно завершает мини-игру победой.</p>
+            <div class="example">
+                minigame.Victory()
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Event</span> minigame.OnWaveStarted(callback)</h3>
+            <p>Registers a callback for when a wave starts. Receives wave number.</p>
+            <div class="example">
+                minigame.OnWaveStarted(function(wave)<br>
+                &nbsp;&nbsp;printLog("Wave " .. wave .. " started!")<br>
+                end)
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Событие</span> minigame.OnWaveStarted(функция)</h3>
+            <p>Подписывается на начало волны. Получает номер волны.</p>
+            <div class="example">
+                minigame.OnWaveStarted(function(wave)<br>
+                &nbsp;&nbsp;printLog("Волна " .. wave .. " началась!")<br>
+                end)
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Event</span> minigame.OnWaveCompleted(callback)</h3>
+            <p>Called when a wave finishes.</p>
+            <div class="example">
+                minigame.OnWaveCompleted(function(wave)<br>
+                &nbsp;&nbsp;printLog("Wave " .. wave .. " cleared!")<br>
+                end)
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Событие</span> minigame.OnWaveCompleted(функция)</h3>
+            <p>Вызывается при завершении волны.</p>
+            <div class="example">
+                minigame.OnWaveCompleted(function(wave)<br>
+                &nbsp;&nbsp;printLog("Волна " .. wave .. " завершена!")<br>
+                end)
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Event</span> minigame.OnEnemyKilled(callback)</h3>
+            <p>Called when an enemy is killed. Receives enemy name.</p>
+            <div class="example">
+                minigame.OnEnemyKilled(function(name)<br>
+                &nbsp;&nbsp;printLog("Killed: " .. name)<br>
+                end)
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Событие</span> minigame.OnEnemyKilled(функция)</h3>
+            <p>Вызывается при убийстве врага. Получает имя.</p>
+            <div class="example">
+                minigame.OnEnemyKilled(function(name)<br>
+                &nbsp;&nbsp;printLog("Убит: " .. name)<br>
+                end)
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Event</span> minigame.OnGameWon(callback)</h3>
+            <p>Called when the minigame is won.</p>
+            <div class="example">
+                minigame.OnGameWon(function()<br>
+                &nbsp;&nbsp;printLog("Game won!")<br>
+                end)
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="minigame">
+        <div class="func">
+            <h3><span class="tag">Событие</span> minigame.OnGameWon(функция)</h3>
+            <p>Вызывается при победе в мини-игре.</p>
+            <div class="example">
+                minigame.OnGameWon(function()<br>
+                &nbsp;&nbsp;printLog("Победа!")<br>
+                end)
+            </div>
+        </div>
+    </div>
+
+    <!-- Player Events -->
+    <div class="func-entry" data-lang="en" data-cat="player">
+        <div class="func">
+            <h3><span class="tag">Event</span> OnPlayerDeath()</h3>
+            <p>Global function called when player dies.</p>
+            <div class="example">
+                function OnPlayerDeath()<br>
+                &nbsp;&nbsp;printLog("Player died!")<br>
+                end
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="player">
+        <div class="func">
+            <h3><span class="tag">Событие</span> OnPlayerDeath()</h3>
+            <p>Глобальная функция, вызываемая при смерти игрока.</p>
+            <div class="example">
+                function OnPlayerDeath()<br>
+                &nbsp;&nbsp;printLog("Игрок умер!")<br>
+                end
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="player">
+        <div class="func">
+            <h3><span class="tag">Event</span> OnPlayerDamage(amount)</h3>
+            <p>Called when player takes damage.</p>
+            <div class="example">
+                function OnPlayerDamage(amount)<br>
+                &nbsp;&nbsp;printLog("Took " .. amount .. " damage")<br>
+                end
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="player">
+        <div class="func">
+            <h3><span class="tag">Событие</span> OnPlayerDamage(урон)</h3>
+            <p>Вызывается при получении урона игроком.</p>
+            <div class="example">
+                function OnPlayerDamage(amount)<br>
+                &nbsp;&nbsp;printLog("Получено " .. amount .. " урона")<br>
+                end
+            </div>
+        </div>
+    </div>
+
+    <div class="func-entry" data-lang="en" data-cat="player">
+        <div class="func">
+            <h3><span class="tag">Event</span> OnPlayerHeal(amount)</h3>
+            <p>Called when player is healed.</p>
+            <div class="example">
+                function OnPlayerHeal(amount)<br>
+                &nbsp;&nbsp;printLog("Healed for " .. amount)<br>
+                end
+            </div>
+        </div>
+    </div>
+    <div class="func-entry" data-lang="ru" data-cat="player">
+        <div class="func">
+            <h3><span class="tag">Событие</span> OnPlayerHeal(восстановление)</h3>
+            <p>Вызывается при восстановлении здоровья.</p>
+            <div class="example">
+                function OnPlayerHeal(amount)<br>
+                &nbsp;&nbsp;printLog("Восстановлено " .. amount .. " HP")<br>
+                end
+            </div>
+        </div>
+    </div>
+
+    <!-- ... (Остальные уже существующие функции без изменений) -->
     <!-- Input -->
     <div class="func-entry" data-lang="en" data-cat="input">
         <div class="func">
@@ -1875,6 +2305,13 @@
     <div class="no-match" id="noMatch">
         No functions match your search criteria.
     </div>
+
+    <div class="lua-docs">
+        <p>
+            For Lua language syntax and standard library reference, see the
+            <a href="https://www.lua.org/manual/5.4/" target="_blank">official Lua 5.4 documentation</a>.
+        </p>
+    </div>
 </div>
 <script>
     const langBtns = document.querySelectorAll('.lang-btn');
@@ -1884,7 +2321,6 @@
     const noMatch = document.getElementById('noMatch');
     let currentLang = 'en';
     let currentCat = 'all';
-
     function updateDisplay() {
         let visibleCount = 0;
         const searchValue = searchInput.value.toLowerCase();
@@ -1907,7 +2343,6 @@
         });
         noMatch.style.display = visibleCount === 0 ? 'block' : 'none';
     }
-
     langBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             langBtns.forEach(b => b.classList.remove('active'));
@@ -1917,7 +2352,6 @@
             document.querySelector('.subtitle').innerText = document.querySelector(`.subtitle`).getAttribute(`data-${currentLang}`);
         });
     });
-
     catBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             catBtns.forEach(b => b.classList.remove('active'));
@@ -1926,10 +2360,8 @@
             updateDisplay();
         });
     });
-
     searchInput.addEventListener('input', updateDisplay);
     updateDisplay();
 </script>
 </body>
-
 </html>
