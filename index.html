@@ -7,36 +7,108 @@
     <title>Infinitarium</title>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-color: #ff4d4d;
+            --primary-dark: #c00000;
+            --primary-light: #ff6666;
+            --bg-dark: #0b0b0f;
+            --bg-darker: #050508;
+            --bg-card: rgba(20, 5, 5, 0.7);
+            --text-light: #f0f0f0;
+            --text-dim: #e0e0e0;
+            --accent-glow: 0 0 12px rgba(255, 77, 77, 0.6);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: "Share Tech Mono", monospace;
-            font-weight: 400;
-            font-style: normal;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to bottom, #0b0b0f, #1a0a0a);
-            color: #f0f0f0;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            color: var(--text-light);
             line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(255, 77, 77, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 77, 77, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 77, 77, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
         }
 
         header {
-            background-color: rgba(0, 0, 0, 0.75);
+            background-color: rgba(0, 0, 0, 0.85);
             padding: 1.5rem 2rem;
             text-align: center;
-            border-bottom: 2px solid #c00000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid var(--primary-dark);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
         }
 
         h1 {
             margin: 0;
             font-size: 2.8rem;
-            color: #ff4d4d;
-            text-shadow: 0 0 12px rgba(255, 77, 77, 0.6);
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            opacity: 0.7;
         }
 
         .container {
             max-width: 1200px;
             margin: 2.5rem auto;
             padding: 0 1.5rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .game-info {
@@ -50,16 +122,58 @@
         .features {
             flex: 1;
             min-width: 300px;
-            background: rgba(20, 5, 5, 0.6);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border: 1px solid #5a0000;
+            background: var(--bg-card);
+            padding: 1.8rem;
+            border-radius: 12px;
+            border: 1px solid rgba(90, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .description::before,
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .description:hover::before,
+        .features:hover::before {
+            transform: scaleX(1);
+        }
+
+        .description:hover,
+        .features:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: rgba(192, 0, 0, 0.7);
         }
 
         h2 {
-            color: #ff6666;
+            color: var(--primary-light);
             margin-top: 0;
             font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-color);
         }
 
         .feature-list {
@@ -71,12 +185,18 @@
             margin-bottom: 0.75rem;
             padding-left: 1.75rem;
             position: relative;
-            color: #e0e0e0;
+            color: var(--text-dim);
+            transition: var(--transition);
+        }
+
+        .feature-list li:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
         }
 
         .feature-list li:before {
             content: "✓";
-            color: #ff4d4d;
+            color: var(--primary-color);
             position: absolute;
             left: 0;
             font-weight: bold;
@@ -96,69 +216,152 @@
             height: 200px;
             background-color: #0f0505;
             border: 1px solid #800000;
-            border-radius: 8px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: var(--transition);
             position: relative;
+            cursor: pointer;
         }
 
         .screenshot:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(128, 0, 0, 0.4);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 20px rgba(128, 0, 0, 0.4);
+            border-color: var(--primary-color);
         }
 
         .screenshot img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .screenshot:hover img {
+            transform: scale(1.05);
         }
 
         .screenshot-label {
             position: absolute;
             top: 8px;
             left: 8px;
-            background: rgba(0, 0, 0, 0.6);
-            color: #ff6666;
-            padding: 4px 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--primary-light);
+            padding: 6px 12px;
             font-size: 0.9rem;
-            border-radius: 4px;
+            border-radius: 6px;
             font-weight: bold;
             z-index: 2;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+
+        .screenshot:hover .screenshot-label {
+            background: rgba(0, 0, 0, 0.9);
+            transform: translateY(-2px);
         }
 
         .download-section {
             background-color: rgba(15, 5, 5, 0.8);
             padding: 2.5rem;
-            border-radius: 12px;
+            border-radius: 16px;
             text-align: center;
             margin-top: 2rem;
-            border: 1px solid #c00000;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--primary-dark);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
             position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+        }
+
+        .download-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 77, 77, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .download-section:hover::before {
+            opacity: 1;
+        }
+
+        .download-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(192, 0, 0, 0.2);
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            /* чтобы на мобильных устройствах переносились */
+        }
+
+        .download-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 1rem 0;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(192, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .download-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(192, 0, 0, 0.6);
+        }
+
+        .download-link:hover::before {
+            left: 100%;
         }
 
         .changelog-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
             background: rgba(50, 10, 10, 0.7);
             color: #ff9999;
             border: 1px solid #800000;
-            padding: 0.5rem 1rem;
+            padding: 0.7rem 1.5rem;
             font-family: "Share Tech Mono", monospace;
             font-size: 1rem;
             cursor: pointer;
-            border-radius: 6px;
-            transition: background 0.3s ease, color 0.3s ease;
+            border-radius: 8px;
+            transition: var(--transition);
+            margin-left: 1rem;
         }
 
         .changelog-btn:hover {
             background: rgba(80, 15, 15, 0.9);
             color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         #changelog-modal {
@@ -168,24 +371,49 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.9);
             z-index: 1000;
             justify-content: center;
             align-items: center;
+            backdrop-filter: blur(5px);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .changelog-content {
             background: rgba(10, 5, 5, 0.95);
-            color: #f0f0f0;
+            color: var(--text-light);
             width: 90%;
-            max-width: 800px;
+            max-width: 900px;
             max-height: 85vh;
             padding: 2rem;
-            border: 1px solid #c00000;
-            border-radius: 12px;
+            border: 1px solid var(--primary-dark);
+            border-radius: 16px;
             overflow-y: auto;
-            box-shadow: 0 0 20px rgba(192, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(192, 0, 0, 0.5);
             position: relative;
+            animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .close-changelog {
@@ -195,18 +423,20 @@
             background: #b71c1c;
             color: white;
             border: none;
-            width: 30px;
-            height: 30px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             font-weight: bold;
             cursor: pointer;
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: var(--transition);
         }
 
         .close-changelog:hover {
-            background: #ff4d4d;
+            background: var(--primary-color);
+            transform: rotate(90deg);
         }
 
         /* Tabs */
@@ -221,26 +451,29 @@
             background: rgba(30, 10, 10, 0.8);
             color: #ff9999;
             border: 1px solid #800000;
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.2rem;
             font-family: "Share Tech Mono", monospace;
             cursor: pointer;
-            border-radius: 6px;
-            transition: background 0.2s, color 0.2s;
+            border-radius: 8px;
+            transition: var(--transition);
         }
 
         .tab-btn:hover {
             background: rgba(60, 15, 15, 0.9);
             color: #fff;
+            transform: translateY(-2px);
         }
 
         .tab-btn.active {
-            background: #c00000;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
             color: white;
             font-weight: bold;
+            box-shadow: 0 4px 8px rgba(192, 0, 0, 0.4);
         }
 
         .tab-content {
             display: none;
+            animation: fadeIn 0.3s ease;
         }
 
         .tab-content.active {
@@ -248,10 +481,22 @@
         }
 
         .changelog-section h3 {
-            color: #ff6666;
+            color: var(--primary-light);
             margin-top: 1.2rem;
             margin-bottom: 0.5rem;
             font-size: 1.3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .changelog-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--primary-color);
         }
 
         .changelog-list {
@@ -262,22 +507,76 @@
         .changelog-list li {
             margin-bottom: 0.5rem;
             position: relative;
+            transition: var(--transition);
+            padding: 4px 0;
+        }
+
+        .changelog-list li:hover {
+            transform: translateX(5px);
         }
 
         .changelog-list li:before {
             content: "•";
-            color: #ff4d4d;
+            color: var(--primary-color);
             position: absolute;
             left: -1.2rem;
+            font-size: 1.2rem;
         }
 
         .external-link {
             color: #ff9999;
             text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .external-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #ff9999;
+            transition: width 0.3s ease;
         }
 
         .external-link:hover {
-            text-decoration: underline;
+            color: #ffcccc;
+        }
+
+        .external-link:hover::after {
+            width: 100%;
+        }
+
+        .docs-link {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(30, 10, 10, 0.8);
+            color: #da7272;
+            border: 1px solid #f25858;
+            padding: 0.5rem 1rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .docs-link:hover {
+            background: rgba(50, 15, 15, 0.9);
+            color: #ff9999;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .docs-link::after {
+            content: '↗';
+            font-size: 0.8rem;
         }
 
         @media (max-width: 768px) {
@@ -305,20 +604,43 @@
                 position: static;
                 margin-top: 1rem;
                 display: inline-block;
+                margin-left: 0;
             }
 
             .changelog-tabs {
                 justify-content: center;
             }
+
+            .docs-link {
+                position: static;
+                margin-top: 1rem;
+                display: inline-block;
+            }
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 5, 5, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-dark);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
         }
     </style>
 </head>
 
 <body>
     <header>
-        <a href="https://minichekfire.github.io/infinitarium.github.io/docs.html" target="_blank" style="position: absolute; top: 1rem; right: 1rem; background: rgba(30, 10, 10, 0.8); color: #da7272; 
-          border: 1px solid #f25858; padding: 0.4rem 0.8rem; font-family: 'Share Tech Mono', monospace; 
-          font-size: 0.95rem; text-decoration: none; border-radius: 6px; transition: background 0.3s, color 0.3s;">
+        <a href="https://minichekfire.github.io/infinitarium.github.io/docs.html" target="_blank" class="docs-link">
             Modding Documentation
         </a>
 
@@ -332,29 +654,41 @@
                 <p><strong>Infinitarium</strong> is a sandbox game developed in Unity 3D. The game has no specific goal
                     or objective. The player can explore, create, and experiment with current game features.</p>
             </div>
+            <div class="features">
+                <h2><strong>Features</strong></h2>
+                <ul class="feature-list">
+                    <li>Advanced NPCs with melee weapons</li>
+                    <li>8 playable maps</li>
+                    <li>Wave survival gamemode</li>
+                    <li>Cool Melee system</li>
+                    <li>Modding support</li>
+                </ul>
+            </div>
         </div>
 
         <div class="screenshots">
             <div class="screenshot">
                 <div class="screenshot-label">Mini-games</div>
-                <img src="img/screenshot1.png" alt="Image 1">
+                <img src="img/screenshot1.png" alt="Mini-games screenshot">
             </div>
             <div class="screenshot">
                 <div class="screenshot-label">Remaster (2026)</div>
-                <img src="img/screenshot2.png" alt="Image 2">
+                <img src="img/screenshot2.png" alt="Remaster screenshot">
             </div>
             <div class="screenshot">
                 <div class="screenshot-label">Cool maps</div>
-                <img src="img/screenshot3.png" alt="Image 3">
+                <img src="img/screenshot3.png" alt="Maps screenshot">
             </div>
         </div>
 
         <div class="download-section">
             <h2>Download the game</h2>
             <p>Last version: v12.4</p>
-            <a href="https://drive.google.com/drive/folders/1X4A29JdEg92HhxWjvgIwLQ2GinbnY5re?usp=sharing"
-                target="_blank" class="download-link">Install now <small>(GOOGLE DRIVE)</small></a>
-            <button class="changelog-btn" onclick="showChangelog()">Changelog</button>
+            <div class="download-buttons">
+                <a href="https://drive.google.com/drive/folders/1X4A29JdEg92HhxWjvgIwLQ2GinbnY5re?usp=sharing"
+                    target="_blank" class="download-link">Install now <small>(GOOGLE DRIVE)</small></a>
+                <button class="changelog-btn" onclick="showChangelog()">Changelog</button>
+            </div>
         </div>
     </div>
 
@@ -544,6 +878,17 @@
 
                 button.classList.add('active');
                 document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Add subtle parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.description, .features, .screenshot');
+
+            parallaxElements.forEach(el => {
+                const speed = 0.05;
+                el.style.transform = `translateY(${scrolled * speed}px)`;
             });
         });
     </script>

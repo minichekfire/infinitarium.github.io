@@ -59,7 +59,6 @@
             font-size: 1.1em;
             margin-top: 12px;
         }
-        /* Controls Panel */
         .controls-panel {
             display: flex;
             justify-content: space-between;
@@ -112,7 +111,6 @@
         .search-box:focus {
             border-color: var(--accent);
         }
-        /* Categories */
         .categories {
             display: flex;
             gap: 12px;
@@ -142,7 +140,6 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 245, 212, 0.25);
         }
-        /* Function Entry */
         .func-entry {
             display: none;
             background: var(--card-bg);
@@ -205,7 +202,6 @@
         ul li {
             margin: 8px 0;
         }
-        /* Category Sections (Prefabs/Fonts) */
         .category-section {
             margin-top: 36px;
             padding-top: 24px;
@@ -263,7 +259,6 @@
             background: var(--hover);
             transform: scale(1.03);
         }
-        /* No match */
         .no-match {
             text-align: center;
             padding: 50px 20px;
@@ -274,7 +269,6 @@
             margin: 30px 0;
             font-size: 1.1em;
         }
-        /* Scrollbar */
         ::-webkit-scrollbar {
             height: 8px;
             width: 8px;
@@ -289,7 +283,6 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--accent-secondary);
         }
-        /* Responsive */
         @media (max-width: 768px) {
             .controls-panel {
                 flex-direction: column;
@@ -316,7 +309,6 @@
                 grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             }
         }
-        /* Lua Docs Link */
         .lua-docs {
             text-align: center;
             margin-top: 40px;
@@ -350,7 +342,7 @@
         <input type="text" class="search-box" placeholder="Search functions, categories, etc..." id="searchInput">
     </div>
     <div class="categories" id="categories">
-        <button class="cat-btn" data-cat="all">All</button>
+        <button class="cat-btn active" data-cat="all">All</button>
         <button class="cat-btn" data-cat="config">Config</button>
         <button class="cat-btn" data-cat="object">Objects</button>
         <button class="cat-btn" data-cat="ui">UI</button>
@@ -369,1943 +361,11 @@
         <button class="cat-btn" data-cat="misc">Misc</button>
     </div>
 
-    <!-- GUI API (NEW) -->
-    <div class="func-entry" data-lang="en" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Function</span> gui.label(x, y, w, h, text)</h3>
-            <p>Draws a non-interactive label.</p>
-            <div class="example">
-                gui.label(10, 10, 200, 30, "Hello World")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> gui.label(x, y, w, h, текст)</h3>
-            <p>Рисует неинтерактивную метку.</p>
-            <div class="example">
-                gui.label(10, 10, 200, 30, "Привет, мир!")
-            </div>
-        </div>
-    </div>
+    <!-- Dynamic content will be inserted here -->
 
-    <div class="func-entry" data-lang="en" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Function</span> gui.button(x, y, w, h, text)</h3>
-            <p>Returns true if the button was clicked.</p>
-            <div class="example">
-                if gui.button(10, 50, 150, 40, "Click Me") then<br>
-                &nbsp;&nbsp;printLog("Button clicked!")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> gui.button(x, y, w, h, текст)</h3>
-            <p>Возвращает true, если кнопка была нажата.</p>
-            <div class="example">
-                if gui.button(10, 50, 150, 40, "Нажми меня") then<br>
-                &nbsp;&nbsp;printLog("Кнопка нажата!")<br>
-                end
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Function</span> gui.checkbox(x, y, w, h, value, text)</h3>
-            <p>Returns the new boolean state of a checkbox/toggle.</p>
-            <div class="example">
-                myCheck = gui.checkbox(10, 100, 200, 30, myCheck or false, "Enable Cheats")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> gui.checkbox(x, y, w, h, значение, текст)</h3>
-            <p>Возвращает новое состояние чекбокса.</p>
-            <div class="example">
-                myCheck = gui.checkbox(10, 100, 200, 30, myCheck or false, "Включить читы")
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Function</span> gui.textField(x, y, w, h, text)</h3>
-            <p>Returns edited text from a single-line input field.</p>
-            <div class="example">
-                inputText = gui.textField(10, 150, 200, 30, inputText or "")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> gui.textField(x, y, w, h, текст)</h3>
-            <p>Возвращает изменённый текст из однострочного поля ввода.</p>
-            <div class="example">
-                inputText = gui.textField(10, 150, 200, 30, inputText or "")
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Function</span> gui.textArea(x, y, w, h, text)</h3>
-            <p>Returns edited multiline text.</p>
-            <div class="example">
-                notes = gui.textArea(10, 200, 300, 100, notes or "")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> gui.textArea(x, y, w, h, текст)</h3>
-            <p>Возвращает изменённый многострочный текст.</p>
-            <div class="example">
-                notes = gui.textArea(10, 200, 300, 100, notes or "")
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Function</span> gui.slider(x, y, w, h, value, min, max)</h3>
-            <p>Returns new float value from a slider.</p>
-            <div class="example">
-                volume = gui.slider(10, 320, 200, 30, volume or 0.5, 0.0, 1.0)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> gui.slider(x, y, w, h, значение, мин, макс)</h3>
-            <p>Возвращает новое значение слайдера.</p>
-            <div class="example">
-                volume = gui.slider(10, 320, 200, 30, volume or 0.5, 0.0, 1.0)
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Function</span> gui.passwordField(x, y, w, h, password, mask)</h3>
-            <p>Returns password input (masked).</p>
-            <div class="example">
-                pwd = gui.passwordField(10, 370, 200, 30, pwd or "", "*")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> gui.passwordField(x, y, w, h, пароль, маска)</h3>
-            <p>Возвращает введённый пароль (в маске).</p>
-            <div class="example">
-                pwd = gui.passwordField(10, 370, 200, 30, pwd or "", "*")
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Function</span> gui.box(x, y, w, h, text)</h3>
-            <p>Draws a framed box with text.</p>
-            <div class="example">
-                gui.box(10, 420, 200, 50, "Info Panel")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> gui.box(x, y, w, h, текст)</h3>
-            <p>Рисует обрамлённую рамкой панель с текстом.</p>
-            <div class="example">
-                gui.box(10, 420, 200, 50, "Информация")
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Function</span> gui.repeatButton(x, y, w, h, text)</h3>
-            <p>Returns true while the button is held down.</p>
-            <div class="example">
-                if gui.repeatButton(10, 490, 150, 40, "Hold Me") then<br>
-                &nbsp;&nbsp;printLog("Holding...")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> gui.repeatButton(x, y, w, h, текст)</h3>
-            <p>Возвращает true, пока кнопка удерживается.</p>
-            <div class="example">
-                if gui.repeatButton(10, 490, 150, 40, "Удерживай") then<br>
-                &nbsp;&nbsp;printLog("Удерживаю...")<br>
-                end
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Function</span> gui.selectionGrid(x, y, w, h, selected, "opt1", "opt2", ..., columns)</h3>
-            <p>Returns the index of the selected option.</p>
-            <div class="example">
-                choice = gui.selectionGrid(10, 550, 300, 60, choice or 0, "Red", "Green", "Blue", 3)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> gui.selectionGrid(x, y, w, h, выбрано, "опц1", "опц2", ..., столбцы)</h3>
-            <p>Возвращает индекс выбранной опции.</p>
-            <div class="example">
-                choice = gui.selectionGrid(10, 550, 300, 60, choice or 0, "Красный", "Зелёный", "Синий", 3)
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Function</span> gui.toggle(x, y, w, h, value, text)</h3>
-            <p>Same as checkbox. Returns new boolean value.</p>
-            <div class="example">
-                enabled = gui.toggle(10, 630, 200, 30, enabled or false, "Toggle Feature")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="gui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> gui.toggle(x, y, w, h, значение, текст)</h3>
-            <p>Аналог checkbox. Возвращает новое булево значение.</p>
-            <div class="example">
-                enabled = gui.toggle(10, 630, 200, 30, enabled or false, "Переключить")
-            </div>
-        </div>
-    </div>
-
-    <!-- Minigame API -->
-    <div class="func-entry" data-lang="en" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Table</span> minigame</h3>
-            <p>Read-only properties of the current minigame state:</p>
-            <ul>
-                <li><code>currentWave</code>, <code>maxWaves</code>, <code>isGameWon</code></li>
-                <li><code>activeEnemiesCount</code>, <code>isWaitingForNextWave</code>, <code>timeUntilNextWave</code></li>
-            </ul>
-            <div class="example">
-                printLog("Wave:", minigame.currentWave)<br>
-                if minigame.isGameWon then printLog("You won!") end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Таблица</span> minigame</h3>
-            <p>Только для чтения — состояние мини-игры:</p>
-            <ul>
-                <li><code>currentWave</code>, <code>maxWaves</code>, <code>isGameWon</code></li>
-                <li><code>activeEnemiesCount</code>, <code>isWaitingForNextWave</code>, <code>timeUntilNextWave</code></li>
-            </ul>
-            <div class="example">
-                printLog("Волна:", minigame.currentWave)<br>
-                if minigame.isGameWon then printLog("Победа!") end
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Function</span> minigame.StartNextWave()</h3>
-            <p>Manually start the next enemy wave.</p>
-            <div class="example">
-                minigame.StartNextWave()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Функция</span> minigame.StartNextWave()</h3>
-            <p>Вручную запускает следующую волну.</p>
-            <div class="example">
-                minigame.StartNextWave()
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Function</span> minigame.Victory()</h3>
-            <p>Instantly win the minigame.</p>
-            <div class="example">
-                minigame.Victory()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Функция</span> minigame.Victory()</h3>
-            <p>Мгновенно завершает мини-игру победой.</p>
-            <div class="example">
-                minigame.Victory()
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Event</span> minigame.OnWaveStarted(callback)</h3>
-            <p>Registers a callback for when a wave starts. Receives wave number.</p>
-            <div class="example">
-                minigame.OnWaveStarted(function(wave)<br>
-                &nbsp;&nbsp;printLog("Wave " .. wave .. " started!")<br>
-                end)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Событие</span> minigame.OnWaveStarted(функция)</h3>
-            <p>Подписывается на начало волны. Получает номер волны.</p>
-            <div class="example">
-                minigame.OnWaveStarted(function(wave)<br>
-                &nbsp;&nbsp;printLog("Волна " .. wave .. " началась!")<br>
-                end)
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Event</span> minigame.OnWaveCompleted(callback)</h3>
-            <p>Called when a wave finishes.</p>
-            <div class="example">
-                minigame.OnWaveCompleted(function(wave)<br>
-                &nbsp;&nbsp;printLog("Wave " .. wave .. " cleared!")<br>
-                end)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Событие</span> minigame.OnWaveCompleted(функция)</h3>
-            <p>Вызывается при завершении волны.</p>
-            <div class="example">
-                minigame.OnWaveCompleted(function(wave)<br>
-                &nbsp;&nbsp;printLog("Волна " .. wave .. " завершена!")<br>
-                end)
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Event</span> minigame.OnEnemyKilled(callback)</h3>
-            <p>Called when an enemy is killed. Receives enemy name.</p>
-            <div class="example">
-                minigame.OnEnemyKilled(function(name)<br>
-                &nbsp;&nbsp;printLog("Killed: " .. name)<br>
-                end)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Событие</span> minigame.OnEnemyKilled(функция)</h3>
-            <p>Вызывается при убийстве врага. Получает имя.</p>
-            <div class="example">
-                minigame.OnEnemyKilled(function(name)<br>
-                &nbsp;&nbsp;printLog("Убит: " .. name)<br>
-                end)
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Event</span> minigame.OnGameWon(callback)</h3>
-            <p>Called when the minigame is won.</p>
-            <div class="example">
-                minigame.OnGameWon(function()<br>
-                &nbsp;&nbsp;printLog("Game won!")<br>
-                end)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="minigame">
-        <div class="func">
-            <h3><span class="tag">Событие</span> minigame.OnGameWon(функция)</h3>
-            <p>Вызывается при победе в мини-игре.</p>
-            <div class="example">
-                minigame.OnGameWon(function()<br>
-                &nbsp;&nbsp;printLog("Победа!")<br>
-                end)
-            </div>
-        </div>
-    </div>
-
-    <!-- Player Events -->
-    <div class="func-entry" data-lang="en" data-cat="player">
-        <div class="func">
-            <h3><span class="tag">Event</span> OnPlayerDeath()</h3>
-            <p>Global function called when player dies.</p>
-            <div class="example">
-                function OnPlayerDeath()<br>
-                &nbsp;&nbsp;printLog("Player died!")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="player">
-        <div class="func">
-            <h3><span class="tag">Событие</span> OnPlayerDeath()</h3>
-            <p>Глобальная функция, вызываемая при смерти игрока.</p>
-            <div class="example">
-                function OnPlayerDeath()<br>
-                &nbsp;&nbsp;printLog("Игрок умер!")<br>
-                end
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="player">
-        <div class="func">
-            <h3><span class="tag">Event</span> OnPlayerDamage(amount)</h3>
-            <p>Called when player takes damage.</p>
-            <div class="example">
-                function OnPlayerDamage(amount)<br>
-                &nbsp;&nbsp;printLog("Took " .. amount .. " damage")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="player">
-        <div class="func">
-            <h3><span class="tag">Событие</span> OnPlayerDamage(урон)</h3>
-            <p>Вызывается при получении урона игроком.</p>
-            <div class="example">
-                function OnPlayerDamage(amount)<br>
-                &nbsp;&nbsp;printLog("Получено " .. amount .. " урона")<br>
-                end
-            </div>
-        </div>
-    </div>
-
-    <div class="func-entry" data-lang="en" data-cat="player">
-        <div class="func">
-            <h3><span class="tag">Event</span> OnPlayerHeal(amount)</h3>
-            <p>Called when player is healed.</p>
-            <div class="example">
-                function OnPlayerHeal(amount)<br>
-                &nbsp;&nbsp;printLog("Healed for " .. amount)<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="player">
-        <div class="func">
-            <h3><span class="tag">Событие</span> OnPlayerHeal(восстановление)</h3>
-            <p>Вызывается при восстановлении здоровья.</p>
-            <div class="example">
-                function OnPlayerHeal(amount)<br>
-                &nbsp;&nbsp;printLog("Восстановлено " .. amount .. " HP")<br>
-                end
-            </div>
-        </div>
-    </div>
-
-    <!-- ... (Остальные уже существующие функции без изменений) -->
-    <!-- Input -->
-    <div class="func-entry" data-lang="en" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Function</span> IsKeyDown(key)</h3>
-            <p>Returns true if key was pressed this frame.</p>
-            <div class="example">
-                if IsKeyDown("space") then<br>
-                &nbsp;&nbsp;printLog("Space was pressed!")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Функция</span> IsKeyDown(ключ)</h3>
-            <p>Возвращает true, если клавиша была нажата в этом кадре.</p>
-            <div class="example">
-                if IsKeyDown("space") then<br>
-                &nbsp;&nbsp;printLog("Пробел был нажат!")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Function</span> IsKeyUp(key)</h3>
-            <p>Returns true if key was released this frame.</p>
-            <div class="example">
-                if IsKeyUp("space") then<br>
-                &nbsp;&nbsp;printLog("Space was released!")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Функция</span> IsKeyUp(ключ)</h3>
-            <p>Возвращает true, если клавиша была отпущена в этом кадре.</p>
-            <div class="example">
-                if IsKeyUp("space") then<br>
-                &nbsp;&nbsp;printLog("Пробел был отпущен!")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetAxis(axis)</h3>
-            <p>Returns a virtual axis value with smooth return to zero.</p>
-            <div class="example">
-                local horizontal = GetAxis("Horizontal")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetAxis(ось)</h3>
-            <p>Возвращает значение виртуальной оси с плавным возвращением к нулю.</p>
-            <div class="example">
-                local horizontal = GetAxis("Horizontal")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetAxisRaw(axis)</h3>
-            <p>Returns a virtual axis value without smooth return to zero (-1, 0, or 1).</p>
-            <div class="example">
-                local vertical = GetAxisRaw("Vertical")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetAxisRaw(ось)</h3>
-            <p>Возвращает значение виртуальной оси без плавного возвращения к нулю (-1, 0 или 1).</p>
-            <div class="example">
-                local vertical = GetAxisRaw("Vertical")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetMouseButton(button)</h3>
-            <p>Returns true if mouse button is held down.</p>
-            <div class="example">
-                if GetMouseButton(0) then<br>
-                &nbsp;&nbsp;printLog("Left mouse button is held")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetMouseButton(кнопка)</h3>
-            <p>Возвращает true, если кнопка мыши удерживается.</p>
-            <div class="example">
-                if GetMouseButton(0) then<br>
-                &nbsp;&nbsp;printLog("Левая кнопка мыши удерживается")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetMouseButtonDown(button)</h3>
-            <p>Returns true if mouse button was pressed this frame.</p>
-            <div class="example">
-                if GetMouseButtonDown(0) then<br>
-                &nbsp;&nbsp;printLog("Left mouse button was pressed")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetMouseButtonDown(кнопка)</h3>
-            <p>Возвращает true, если кнопка мыши была нажата в этом кадре.</p>
-            <div class="example">
-                if GetMouseButtonDown(0) then<br>
-                &nbsp;&nbsp;printLog("Левая кнопка мыши была нажата")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetMouseButtonUp(button)</h3>
-            <p>Returns true if mouse button was released this frame.</p>
-            <div class="example">
-                if GetMouseButtonUp(0) then<br>
-                &nbsp;&nbsp;printLog("Left mouse button was released")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetMouseButtonUp(кнопка)</h3>
-            <p>Возвращает true, если кнопка мыши была отпущена в этом кадре.</p>
-            <div class="example">
-                if GetMouseButtonUp(0) then<br>
-                &nbsp;&nbsp;printLog("Левая кнопка мыши была отпущена")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Function</span> Random(min, max)</h3>
-            <p>Returns a random float between min and max.</p>
-            <div class="example">
-                local rand = Random(0, 10)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Функция</span> Random(мин, макс)</h3>
-            <p>Возвращает случайное число с плавающей точкой в заданном диапазоне.</p>
-            <div class="example">
-                local rand = Random(0, 10)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Function</span> IsKeyPressed(key)</h3>
-            <p>Returns true if key is held.</p>
-            <div class="example">
-                if IsKeyPressed("w") then ... end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Функция</span> IsKeyPressed(ключ)</h3>
-            <p>Проверяет, нажата ли клавиша.</p>
-            <div class="example">
-                if IsKeyPressed("w") then ... end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetMousePosition()</h3>
-            <p>Returns table with x and y.</p>
-            <div class="example">
-                local pos = GetMousePosition()<br>printLog(pos.x, pos.y)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetMousePosition()</h3>
-            <p>Возвращает позицию мыши (x, y).</p>
-            <div class="example">
-                local pos = GetMousePosition()<br>printLog(pos.x, pos.y)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetScreenSize()</h3>
-            <p>Returns table with width and height.</p>
-            <div class="example">
-                local size = GetScreenSize()<br>printLog(size.width, size.height)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="input">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetScreenSize()</h3>
-            <p>Возвращает размер экрана (ширина, высота).</p>
-            <div class="example">
-                local size = GetScreenSize()<br>printLog(size.width, size.height)
-            </div>
-        </div>
-    </div>
-    <!-- Objects -->
-    <div class="func-entry" data-lang="en" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetModPath()</h3>
-            <p>Returns the path to the current mod's directory.</p>
-            <div class="example">
-                local modPath = GetModPath()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetModPath()</h3>
-            <p>Возвращает путь к директории текущего мода.</p>
-            <div class="example">
-                local modPath = GetModPath()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Function</span> CreateObject(path, name, x, y, z)</h3>
-            <p>Instantiates a prefab from Resources.</p>
-            <ul>
-                <li><strong>path</strong>: Resource path (e.g. "Prefabs/Cube")</li>
-                <li><strong>name</strong>: Name of the new object</li>
-                <li><strong>x, y, z</strong>: World position</li>
-            </ul>
-            <p><strong>Returns:</strong> boolean (false if prefab not found)</p>
-            <div class="example">
-                CreateObject("Player", "da player", 0, 1, 0)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Функция</span> CreateObject(путь, имя, x, y, z)</h3>
-            <p>Создаёт объект из префаба Resources.</p>
-            <ul>
-                <li><strong>путь</strong>: Путь к префабу</li>
-                <li><strong>имя</strong>: Имя объекта</li>
-                <li><strong>x, y, z</strong>: Позиция в мире</li>
-            </ul>
-            <p><strong>Возвращает:</strong> boolean (false, если префаб не найден)</p>
-            <div class="example">
-                CreateObject("Player", "da player", 0, 1, 0)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Function</span> DestroyObject(name)</h3>
-            <p>Destroys a GameObject by name.</p>
-            <div class="example">
-                DestroyObject("da player")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Функция</span> DestroyObject(имя)</h3>
-            <p>Удаляет объект по имени.</p>
-            <div class="example">
-                DestroyObject("Игрок")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Function</span> PositionObject(name, x, y, z)</h3>
-            <p>Sets the position of a GameObject.</p>
-            <div class="example">
-                PositionObject("Hero", 10, 0, 5)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Функция</span> PositionObject(имя, x, y, z)</h3>
-            <p>Устанавливает позицию объекта.</p>
-            <div class="example">
-                PositionObject("Игрок", 10, 0, 5)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Function</span> RotationObject(name, x, y, z)</h3>
-            <p>Sets rotation (Euler angles).</p>
-            <div class="example">
-                RotationObject("Hero", 0, 180, 0)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Функция</span> RotationObject(имя, x, y, z)</h3>
-            <p>Устанавливает поворот (в градусах).</p>
-            <div class="example">
-                RotationObject("Игрок", 0, 180, 0)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Function</span> ScaleObject(name, x, y, z)</h3>
-            <p>Scales a GameObject.</p>
-            <div class="example">
-                ScaleObject("Hero", 2, 2, 2)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Функция</span> ScaleObject(имя, x, y, z)</h3>
-            <p>Масштабирует объект.</p>
-            <div class="example">
-                ScaleObject("Игрок", 2, 2, 2)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetComponent(objName, componentName)</h3>
-            <p>Checks if a GameObject has a component.</p>
-            <ul>
-                <li><strong>objName</strong>: Name of the GameObject</li>
-                <li><strong>componentName</strong>: Name of the component (e.g. "Rigidbody")</li>
-            </ul>
-            <p><strong>Returns:</strong> boolean (true if component exists)</p>
-            <div class="example">
-                if GetComponent("Player", "Rigidbody") then<br>
-                &nbsp;&nbsp;printLog("Player has Rigidbody")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetComponent(имяОбъекта, имяКомпонента)</h3>
-            <p>Проверяет наличие компонента на объекте.</p>
-            <ul>
-                <li><strong>имяОбъекта</strong>: Имя объекта</li>
-                <li><strong>имяКомпонента</strong>: Имя компонента (например, "Rigidbody")</li>
-            </ul>
-            <p><strong>Возвращает:</strong> boolean (true если компонент существует)</p>
-            <div class="example">
-                if GetComponent("Игрок", "Rigidbody") then<br>
-                &nbsp;&nbsp;printLog("Игрок имеет Rigidbody")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Function</span> Exists(objName)</h3>
-            <p>Checks if a GameObject exists.</p>
-            <ul>
-                <li><strong>objName</strong>: Name of the GameObject</li>
-            </ul>
-            <p><strong>Returns:</strong> boolean (true if object exists)</p>
-            <div class="example">
-                if Exists("Player") then<br>
-                &nbsp;&nbsp;printLog("Player exists")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Функция</span> Exists(имяОбъекта)</h3>
-            <p>Проверяет существование объекта.</p>
-            <ul>
-                <li><strong>имяОбъекта</strong>: Имя объекта</li>
-            </ul>
-            <p><strong>Возвращает:</strong> boolean (true если объект существует)</p>
-            <div class="example">
-                if Exists("Игрок") then<br>
-                &nbsp;&nbsp;printLog("Игрок существует")<br>
-                end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Function</span> DontDestroyOnLoad(name)</h3>
-            <p>Persists object across scene changes.</p>
-            <div class="example">
-                DontDestroyOnLoad("MyCube")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Функция</span> DontDestroyOnLoad(имя)</h3>
-            <p>Сохраняет объект при смене сцены.</p>
-            <div class="example">
-                DontDestroyOnLoad("MyCube")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Function</span> RegisterObject(name)</h3>
-            <p>Registers a GameObject as the default target for API calls without explicit name.</p>
-            <div class="example">
-                RegisterObject("MyCube")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="object">
-        <div class="func">
-            <h3><span class="tag">Функция</span> RegisterObject(имя)</h3>
-            <p>Регистрирует объект как целевой по умолчанию для вызовов API без указания имени.</p>
-            <div class="example">
-                RegisterObject("MyCube")
-            </div>
-        </div>
-    </div>
-    <!-- UI -->
-    <div class="func-entry" data-lang="en" data-cat="ui">
-        <div class="func">
-            <h3><span class="tag">Function</span> CreateText(text, name, x, y, fontSize, width, height)</h3>
-            <p>Creates a Text element on UI.</p>
-            <div class="example">
-                CreateText("hi", "Text", -100, 200, 24, 150, 40)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="ui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> CreateText(текст, имя, x, y, размерШрифта, ширина, высота)</h3>
-            <p>Создаёт текст на интерфейсе.</p>
-            <div class="example">
-                CreateText("хай", "Text", -100, 200, 24, 150, 40)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="ui">
-        <div class="func">
-            <h3><span class="tag">Function</span> CreateSprite(path, x, y, z, wx, wy)</h3>
-            <p>Creates a 3D sprite from an image in the mod folder.</p>
-            <div class="example">
-                CreateSprite("images/logo.png", 0, 2, 5, 1, 1)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="ui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> CreateSprite(путь, x, y, z, wx, wy)</h3>
-            <p>Создаёт 3D-спрайт из изображения.</p>
-            <div class="example">
-                CreateSprite("images/logo.png", 0, 2, 5, 1, 1)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="ui">
-        <div class="func">
-            <h3><span class="tag">Function</span> CreateUISprite(path, x, y, wx, wy)</h3>
-            <p>Creates a UI Image (Image component).</p>
-            <div class="example">
-                CreateUISprite("ui/hud_bg.png", 0, 0, 400, 200)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="ui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> CreateUISprite(путь, x, y, wx, wy)</h3>
-            <p>Создаёт UI-изображение (Image).</p>
-            <div class="example">
-                CreateUISprite("ui/hud_bg.png", 0, 0, 400, 200)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="ui">
-        <div class="func">
-            <h3><span class="tag">Function</span> SetText(objName, text)</h3>
-            <p>Sets text on TextMeshPro or child.</p>
-            <div class="example">
-                SetText("ScoreText", "Score: 200")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="ui">
-        <div class="func">
-            <h3><span class="tag">Функция</span> SetText(имяОбъекта, текст)</h3>
-            <p>Меняет текст объекта.</p>
-            <div class="example">
-                SetText("ScoreText", "Очки: 200")
-            </div>
-        </div>
-    </div>
-    <!-- Audio -->
-    <div class="func-entry" data-lang="en" data-cat="audio">
-        <div class="func">
-            <h3><span class="tag">Function</span> LoadAudio(path, name)</h3>
-            <p>Loads audio from file (only .wav, .ogg).</p>
-            <div class="example">
-                LoadAudio("my mod/audio/music.ogg", "my music")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="audio">
-        <div class="func">
-            <h3><span class="tag">Функция</span> LoadAudio(путь, имя)</h3>
-            <p>Загружает аудио из файла (только .wav, .ogg).</p>
-            <div class="example">
-                LoadAudio("my mod/audio/music.ogg", "my music")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="audio">
-        <div class="func">
-            <h3><span class="tag">Function</span> PlayAudio(name)</h3>
-            <p>Plays a loaded audio clip.</p>
-            <div class="example">
-                PlayAudio("my music")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="audio">
-        <div class="func">
-            <h3><span class="tag">Функция</span> PlayAudio(имя)</h3>
-            <p>Воспроизводит звук.</p>
-            <div class="example">
-                PlayAudio("my music")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="audio">
-        <div class="func">
-            <h3><span class="tag">Function</span> StopAudio(name)</h3>
-            <p>Stops playback.</p>
-            <div class="example">
-                StopAudio("my music")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="audio">
-        <div class="func">
-            <h3><span class="tag">Функция</span> StopAudio(имя)</h3>
-            <p>Останавливает воспроизведение.</p>
-            <div class="example">
-                StopAudio("my music")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="audio">
-        <div class="func">
-            <h3><span class="tag">Function</span> PauseAudio(name)</h3>
-            <p>Pauses audio.</p>
-            <div class="example">
-                PauseAudio("my music")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="audio">
-        <div class="func">
-            <h3><span class="tag">Функция</span> PauseAudio(имя)</h3>
-            <p>Ставит на паузу.</p>
-            <div class="example">
-                PauseAudio("my music")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="audio">
-        <div class="func">
-            <h3><span class="tag">Function</span> SetVolume(name, volume)</h3>
-            <p>Sets volume (0.0 to 1.0).</p>
-            <div class="example">
-                SetVolume("my music", 0.7)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="audio">
-        <div class="func">
-            <h3><span class="tag">Функция</span> SetVolume(имя, громкость)</h3>
-            <p>Устанавливает громкость (0.0 – 1.0).</p>
-            <div class="example">
-                SetVolume("my music", 0.7)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="audio">
-        <div class="func">
-            <h3><span class="tag">Function</span> ReplaceAudio(objName, audioPath, audioName)</h3>
-            <p>Replaces and plays audio on a GameObject's AudioSource.</p>
-            <div class="example">
-                ReplaceAudio("MenuMusic", "audio/ultra_instinct.wav", "ULTRA INSTINCT")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="audio">
-        <div class="func">
-            <h3><span class="tag">Функция</span> ReplaceAudio(имяОбъекта, путь, имяКлипа)</h3>
-            <p>Заменяет аудиоклип на объекте и запускает его.</p>
-            <div class="example">
-                ReplaceAudio("MenuMusic", "audio/ultra_instinct.wav", "ULTRA INSTINCT")
-            </div>
-        </div>
-    </div>
-    <!-- Scene -->
-    <div class="func-entry" data-lang="en" data-cat="scene">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetTime()</h3>
-            <p>Returns the time in seconds since the start of the game.</p>
-            <div class="example">
-                local time = GetTime()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="scene">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetTime()</h3>
-            <p>Возвращает общее время, прошедшее с начала игры (в секундах).</p>
-            <div class="example">
-                local time = GetTime()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="scene">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetDeltaTime()</h3>
-            <p>Returns the time in seconds between the last two frames.</p>
-            <div class="example">
-                local delta = GetDeltaTime()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="scene">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetDeltaTime()</h3>
-            <p>Возвращает время, прошедшее между последними двумя кадрами (в секундах).</p>
-            <div class="example">
-                local delta = GetDeltaTime()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="scene">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetFrameCount()</h3>
-            <p>Returns the total number of rendered frames since the start of the game.</p>
-            <div class="example">
-                local frame = GetFrameCount()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="scene">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetFrameCount()</h3>
-            <p>Возвращает общее количество отрендеренных кадров с начала игры.</p>
-            <div class="example">
-                local frame = GetFrameCount()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="scene">
-        <div class="func">
-            <h3><span class="tag">Function</span> Quit()</h3>
-            <p>Quits the application.</p>
-            <div class="example">
-                Quit()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="scene">
-        <div class="func">
-            <h3><span class="tag">Функция</span> Quit()</h3>
-            <p>Завершает работу приложения (игры).</p>
-            <div class="example">
-                Quit()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="scene">
-        <div class="func">
-            <h3><span class="tag">Function</span> LoadScene(sceneName)</h3>
-            <p>Loads a new scene by name.</p>
-            <div class="example">
-                LoadScene("lvl_Tower")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="scene">
-        <div class="func">
-            <h3><span class="tag">Функция</span> LoadScene(имяСцены)</h3>
-            <p>Загружает новую сцену.</p>
-            <div class="example">
-                LoadScene("lvl_Tower")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="scene">
-        <div class="func">
-            <h3><span class="tag">Event</span> OnSceneChanged(sceneName)</h3>
-            <p>Called when scene changes. Define globally.</p>
-            <div class="example">
-                function OnSceneChanged(sceneName)<br>&nbsp;&nbsp;printLog("Now in: " .. sceneName)<br>end
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="scene">
-        <div class="func">
-            <h3><span class="tag">Событие</span> OnSceneChanged(sceneName)</h3>
-            <p>Вызывается при смене сцены. Определяется глобально.</p>
-            <div class="example">
-                function OnSceneChanged(sceneName)<br>&nbsp;&nbsp;printLog("Теперь в: " .. sceneName)<br>end
-            </div>
-        </div>
-    </div>
-    <!-- Data -->
-    <div class="func-entry" data-lang="en" data-cat="data">
-        <div class="func">
-            <h3><span class="tag">Function</span> SaveData(key, value)</h3>
-            <p>Saves string data. "PlayerNickname" is protected.</p>
-            <div class="example">
-                SaveData("score", "5")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="data">
-        <div class="func">
-            <h3><span class="tag">Функция</span> SaveData(ключ, значение)</h3>
-            <p>Сохраняет строку. "PlayerNickname" защищён.</p>
-            <div class="example">
-                SaveData("score", "5")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="data">
-        <div class="func">
-            <h3><span class="tag">Function</span> LoadData(key)</h3>
-            <p>Loads saved value.</p>
-            <div class="example">
-                local level = LoadData("score")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="data">
-        <div class="func">
-            <h3><span class="tag">Функция</span> LoadData(ключ)</h3>
-            <p>Загружает сохранённое значение.</p>
-            <div class="example">
-                local уровень = LoadData("score")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="data">
-        <div class="func">
-            <h3><span class="tag">Function</span> RemoveData(key)</h3>
-            <p>Deletes a saved key.</p>
-            <div class="example">
-                RemoveData("score")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="data">
-        <div class="func">
-            <h3><span class="tag">Функция</span> RemoveData(ключ)</h3>
-            <p>Удаляет сохранённые данные.</p>
-            <div class="example">
-                RemoveData("score")
-            </div>
-        </div>
-    </div>
-    <!-- Timers -->
-    <div class="func-entry" data-lang="en" data-cat="timer">
-        <div class="func">
-            <h3><span class="tag">Function</span> Timer(seconds, callback)</h3>
-            <p>Executes function once after delay.</p>
-            <div class="example">
-                Timer(3, function()<br>&nbsp;&nbsp;printLog("Done!")<br>end)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="timer">
-        <div class="func">
-            <h3><span class="tag">Функция</span> Timer(секунды, функция)</h3>
-            <p>Выполняет функцию один раз через задержку.</p>
-            <div class="example">
-                Timer(3, function()<br>&nbsp;&nbsp;printLog("Готово!")<br>end)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="timer">
-        <div class="func">
-            <h3><span class="tag">Function</span> TimerRepeat(seconds, repeats, callback)</h3>
-            <p>Repeats function. Use repeats = 0 for infinite.</p>
-            <div class="example">
-                TimerRepeat(1, 0, function()<br>&nbsp;&nbsp;printLog("Tick")<br>end)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="timer">
-        <div class="func">
-            <h3><span class="tag">Функция</span> TimerRepeat(секунды, повторы, функция)</h3>
-            <p>Повторяет функцию. repeats = 0 — бесконечно.</p>
-            <div class="example">
-                TimerRepeat(1, 0, function()<br>&nbsp;&nbsp;printLog("Тик")<br>end)
-            </div>
-        </div>
-    </div>
-    <!-- Text Logging -->
-    <div class="func-entry" data-lang="en" data-cat="text">
-        <div class="func">
-            <h3><span class="tag">Function</span> printLog(message)</h3>
-            <p>Logs string.</p>
-            <div class="example">
-                printLog("Executed")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="text">
-        <div class="func">
-            <h3><span class="tag">Функция</span> printLog(сообщение)</h3>
-            <p>Выводит сообщение.</p>
-            <div class="example">
-                printLog("Выполнено")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="text">
-        <div class="func">
-            <h3><span class="tag">Function</span> printError(message)</h3>
-            <p>Logs error (red in console).</p>
-            <div class="example">
-                printError("Something went wrong!")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="text">
-        <div class="func">
-            <h3><span class="tag">Функция</span> printError(сообщение)</h3>
-            <p>Выводит ошибку (красный цвет).</p>
-            <div class="example">
-                printError("Что-то пошло не так!")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="text">
-        <div class="func">
-            <h3><span class="tag">Function</span> printWarn(message)</h3>
-            <p>Logs warning (yellow).</p>
-            <div class="example">
-                printWarn("idk to write here.")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="text">
-        <div class="func">
-            <h3><span class="tag">Функция</span> printWarn(сообщение)</h3>
-            <p>Выводит предупреждение (жёлтый).</p>
-            <div class="example">
-                printWarn("хрен знает что писать тут.")
-            </div>
-        </div>
-    </div>
-    <!-- Physics -->
-    <div class="func-entry" data-lang="en" data-cat="physics">
-        <div class="func">
-            <h3><span class="tag">Function</span> RemoveRigidbody(objName)</h3>
-            <p>Removes Rigidbody component.</p>
-            <div class="example">
-                RemoveRigidbody("Wall")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="physics">
-        <div class="func">
-            <h3><span class="tag">Функция</span> RemoveRigidbody(имя)</h3>
-            <p>Удаляет компонент Rigidbody.</p>
-            <div class="example">
-                RemoveRigidbody("Wall")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="physics">
-        <div class="func">
-            <h3><span class="tag">Function</span> AddForce(objName, x, y, z, mode)</h3>
-            <p>Applies force to Rigidbody. Mode: "Force", "Impulse", etc.</p>
-            <div class="example">
-                AddForce("Ball", 0, 10, 0, "Force")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="physics">
-        <div class="func">
-            <h3><span class="tag">Функция</span> AddForce(имя, x, y, z, режим)</h3>
-            <p>Применяет силу к Rigidbody. Режим: "Force", "Impulse" и т.д.</p>
-            <div class="example">
-                AddForce("Ball", 0, 10, 0, "Force")
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="physics">
-        <div class="func">
-            <h3><span class="tag">Function</span> AddImpulse(objName, x, y, z)</h3>
-            <p>Applies instant impulse to Rigidbody.</p>
-            <div class="example">
-                AddImpulse("Rocket", 0, 0, 50)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="physics">
-        <div class="func">
-            <h3><span class="tag">Функция</span> AddImpulse(имя, x, y, z)</h3>
-            <p>Применяет мгновенный импульс к Rigidbody.</p>
-            <div class="example">
-                AddImpulse("Rocket", 0, 0, 50)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="physics">
-        <div class="func">
-            <h3><span class="tag">Function</span> SetVelocity(objName, x, y, z)</h3>
-            <p>Sets Rigidbody linear velocity directly.</p>
-            <div class="example">
-                SetVelocity("Player", 0, 0, 5)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="physics">
-        <div class="func">
-            <h3><span class="tag">Функция</span> SetVelocity(имя, x, y, z)</h3>
-            <p>Устанавливает линейную скорость Rigidbody напрямую.</p>
-            <div class="example">
-                SetVelocity("Player", 0, 0, 5)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="en" data-cat="physics">
-        <div class="func">
-            <h3><span class="tag">Function</span> GetVelocity(objName)</h3>
-            <p>Returns table {x, y, z} of Rigidbody velocity.</p>
-            <div class="example">
-                local v = GetVelocity("Player")<br>printLog(v.x, v.y, v.z)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="physics">
-        <div class="func">
-            <h3><span class="tag">Функция</span> GetVelocity(имя)</h3>
-            <p>Возвращает таблицу {x, y, z} скорости Rigidbody.</p>
-            <div class="example">
-                local v = GetVelocity("Player")<br>printLog(v.x, v.y, v.z)
-            </div>
-        </div>
-    </div>
-    <!-- Player -->
-    <div class="func-entry" data-lang="en" data-cat="player">
-        <div class="func">
-            <h3><span class="tag">Table</span> player</h3>
-            <p>Global table exposing player stats. Read/write properties:</p>
-            <ul>
-                <li><code>health</code>, <code>maxHealth</code>, <code>godMode</code></li>
-                <li><code>speed</code>, <code>jumpForce</code>, <code>gravity</code>, <code>noclipSpeed</code></li>
-                <li><code>maxStamina</code>, <code>currentStamina</code></li>
-            </ul>
-            <div class="example">
-                player.health = 100<br>
-                player.godMode = true<br>
-                printLog("Speed:", player.speed)
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="player">
-        <div class="func">
-            <h3><span class="tag">Таблица</span> player</h3>
-            <p>Глобальная таблица с параметрами игрока. Чтение/запись:</p>
-            <ul>
-                <li><code>health</code>, <code>maxHealth</code>, <code>godMode</code></li>
-                <li><code>speed</code>, <code>jumpForce</code>, <code>gravity</code>, <code>noclipSpeed</code></li>
-                <li><code>maxStamina</code>, <code>currentStamina</code></li>
-            </ul>
-            <div class="example">
-                player.health = 100<br>
-                player.godMode = true<br>
-                printLog("Скорость:", player.speed)
-            </div>
-        </div>
-    </div>
-    <!-- Weapon -->
-    <div class="func-entry" data-lang="en" data-cat="weapon">
-        <div class="func">
-            <h3><span class="tag">Table</span> weapon</h3>
-            <p>Global table for current weapon stats. Read/write:</p>
-            <ul>
-                <li><code>fireRate</code>, <code>damage</code>, <code>bulletsPerShot</code></li>
-                <li><code>spread</code>, <code>maxAmmo</code>, <code>currentAmmo</code></li>
-                <li><code>reloadTime</code>, <code>infiniteAmmo</code></li>
-            </ul>
-            <div class="example">
-                weapon.damage = 100<br>
-                weapon.infiniteAmmo = true
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="weapon">
-        <div class="func">
-            <h3><span class="tag">Таблица</span> weapon</h3>
-            <p>Глобальная таблица текущего оружия. Чтение/запись:</p>
-            <ul>
-                <li><code>fireRate</code>, <code>damage</code>, <code>bulletsPerShot</code></li>
-                <li><code>spread</code>, <code>maxAmmo</code>, <code>currentAmmo</code></li>
-                <li><code>reloadTime</code>, <code>infiniteAmmo</code></li>
-            </ul>
-            <div class="example">
-                weapon.damage = 100<br>
-                weapon.infiniteAmmo = true
-            </div>
-        </div>
-    </div>
-    <!-- Melee -->
-    <div class="func-entry" data-lang="en" data-cat="melee">
-        <div class="func">
-            <h3><span class="tag">Table</span> melee</h3>
-            <p>Global table for current melee weapon stats. Read/write:</p>
-            <ul>
-                <li><code>damage</code>, <code>attackRate</code>, <code>attackDelay</code></li>
-                <li><code>staminaCost</code>, <code>powerStaminaCost</code></li>
-                <li><code>powerAttackDamageMultiplier</code></li>
-            </ul>
-            <div class="example">
-                melee.damage = 50<br>
-                melee.powerAttackDamageMultiplier = 3.0
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="melee">
-        <div class="func">
-            <h3><span class="tag">Таблица</span> melee</h3>
-            <p>Глобальная таблица текущего оружия ближнего боя. Чтение/запись:</p>
-            <ul>
-                <li><code>damage</code>, <code>attackRate</code>, <code>attackDelay</code></li>
-                <li><code>staminaCost</code>, <code>powerStaminaCost</code></li>
-                <li><code>powerAttackDamageMultiplier</code></li>
-            </ul>
-            <div class="example">
-                melee.damage = 50<br>
-                melee.powerAttackDamageMultiplier = 3.0
-            </div>
-        </div>
-    </div>
-    <!-- Misc -->
-    <div class="func-entry" data-lang="en" data-cat="misc">
-        <div class="func">
-            <h3><span class="tag">Function</span> Reload()</h3>
-            <p>Reloads all mods.</p>
-            <div class="example">
-                Reload()
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="misc">
-        <div class="func">
-            <h3><span class="tag">Функция</span> Reload()</h3>
-            <p>Перезагружает все моды.</p>
-            <div class="example">
-                Reload()
-            </div>
-        </div>
-    </div>
-    <!-- Config Section -->
-    <div class="func-entry" data-lang="en" data-cat="config">
-        <div class="func">
-            <h3><span class="tag">File</span> config.json</h3>
-            <p>Required for each mod. Example:</p>
-            <div class="example">
-{
-  "name": "My Mod",
-  "author": "Dev",
-  "description": "Adds cool features",
-  "iconPath": "icon.png"
-}
-            </div>
-            <p>Fields: <code>name</code>, <code>author</code>, <code>description</code>, <code>iconPath</code> (relative path)</p>
-            <p>All mods must be placed in the following directory:<br>
-            <strong>AppData/LocalLow/Infini-DEV/Infinitarium/mods/</strong>
-            </p>
-            <div class="category-section">
-                <div class="category-header">
-                    <h3>Available Prefabs</h3>
-                    <span class="count">120+</span>
-                </div>
-                <div class="category-content">
-                    <div class="tree">
-                        <ul>
-                            <li class="prefab">EmptyObject</li>
-                            <li class="prefab">Explosion</li>
-                            <li class="prefab">Player 1</li>
-                            <li class="prefab">Player</li>
-                            <li class="prefab">Ragdoll</li>
-                            <li class="prefab">AI
-                                <ul>
-                                    <li class="prefab">Advanced AI ally</li>
-                                    <li class="prefab">Ally with Pistol</li>
-                                    <li class="prefab">Ally</li>
-                                    <li class="prefab">Bandit</li>
-                                    <li class="prefab">Enemy</li>
-                                    <li class="prefab">NPC with Pistol</li>
-                                    <li class="prefab">SurvivalTower
-                                        <ul>
-                                            <li class="prefab">Advanced AI enemy</li>
-                                            <li class="prefab">Boss</li>
-                                            <li class="prefab">NPC with Pistol</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="prefab">Entities
-                                <ul>
-                                    <li class="prefab">BoomBox</li>
-                                    <li class="prefab">Destructible
-                                        <ul>
-                                            <li class="prefab">DestructibleCube</li>
-                                            <li class="prefab">DestructibleSphere</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="prefab">Spawnables
-                                <ul>
-                                    <li class="prefab">BigPlate</li>
-                                    <li class="prefab">Cube</li>
-                                    <li class="prefab">Plate</li>
-                                    <li class="prefab">Sphere</li>
-                                    <li class="prefab">City
-                                        <ul>
-                                            <li class="prefab">Bench01</li>
-                                            <li class="prefab">Lamp01</li>
-                                            <li class="prefab">TrafficCone01</li>
-                                            <li class="prefab">TrashBag01</li>
-                                            <li class="prefab">TrashCan03</li>
-                                        </ul>
-                                    </li>
-                                    <li class="prefab">Light
-                                        <ul>
-                                            <li class="prefab">Light Cube</li>
-                                            <li class="prefab">Light Sphere</li>
-                                        </ul>
-                                    </li>
-                                    <li class="prefab">Nature
-                                        <ul>
-                                            <li class="prefab">Bush 1</li>
-                                            <li class="prefab">Bush 2</li>
-                                            <li class="prefab">Fir_Tree</li>
-                                            <li class="prefab">Hedge 2</li>
-                                            <li class="prefab">Log 1</li>
-                                            <li class="prefab">Log 2</li>
-                                            <li class="prefab">Potted Plant 1</li>
-                                            <li class="prefab">Potted Plant 2</li>
-                                            <li class="prefab">Potted Plant 3</li>
-                                            <li class="prefab">Potted Plant 4</li>
-                                            <li class="prefab">Street Tree 1</li>
-                                            <li class="prefab">Street Tree 2</li>
-                                            <li class="prefab">Street Tree 3</li>
-                                            <li class="prefab">Street Tree 4</li>
-                                            <li class="prefab">Street Tree 5</li>
-                                            <li class="prefab">Street Tree 6</li>
-                                            <li class="prefab">tree 1</li>
-                                            <li class="prefab">tree 10</li>
-                                            <li class="prefab">tree 11</li>
-                                            <li class="prefab">tree 12</li>
-                                            <li class="prefab">tree 13</li>
-                                            <li class="prefab">tree 14</li>
-                                            <li class="prefab">tree 15</li>
-                                            <li class="prefab">tree 2</li>
-                                            <li class="prefab">tree 3</li>
-                                            <li class="prefab">tree 4</li>
-                                            <li class="prefab">tree 5</li>
-                                            <li class="prefab">tree 6</li>
-                                            <li class="prefab">tree 7</li>
-                                            <li class="prefab">tree 8</li>
-                                            <li class="prefab">tree 9</li>
-                                            <li class="prefab">Tree Trunk 1</li>
-                                            <li class="prefab">Tree Trunk 2</li>
-                                        </ul>
-                                    </li>
-                                    <li class="prefab">Other
-                                        <ul>
-                                            <li class="prefab">Bag_01</li>
-                                            <li class="prefab">Barrel_01</li>
-                                            <li class="prefab">Bottle_01</li>
-                                            <li class="prefab">Bottle_02</li>
-                                            <li class="prefab">Bottle_03</li>
-                                            <li class="prefab">Box_01</li>
-                                            <li class="prefab">Bucket_01</li>
-                                            <li class="prefab">Cabinet_01</li>
-                                            <li class="prefab">Cabinet_02</li>
-                                            <li class="prefab">Cabinet_03</li>
-                                            <li class="prefab">Candle_01</li>
-                                            <li class="prefab">Candle_02</li>
-                                            <li class="prefab">Candle_03</li>
-                                            <li class="prefab">Carpet_01</li>
-                                            <li class="prefab">Coin_01</li>
-                                            <li class="prefab">Coin_02</li>
-                                            <li class="prefab">Coin_03</li>
-                                            <li class="prefab">Cup_01</li>
-                                            <li class="prefab">Cup_02</li>
-                                            <li class="prefab">Fence_01</li>
-                                            <li class="prefab">Fence_02</li>
-                                            <li class="prefab">Firewood_01</li>
-                                            <li class="prefab">Fire_01</li>
-                                            <li class="prefab">Furniture_01</li>
-                                            <li class="prefab">Furniture_02</li>
-                                            <li class="prefab">Furniture_03</li>
-                                            <li class="prefab">HosePulley</li>
-                                            <li class="prefab">Jug_01</li>
-                                            <li class="prefab">Jug_02</li>
-                                            <li class="prefab">Jug_03</li>
-                                            <li class="prefab">Jug_04</li>
-                                            <li class="prefab">OilDrum</li>
-                                            <li class="prefab">Palette</li>
-                                            <li class="prefab">Phone</li>
-                                            <li class="prefab">Pipe_Corner</li>
-                                            <li class="prefab">Pipe_Straight</li>
-                                            <li class="prefab">PlasticCan</li>
-                                            <li class="prefab">Plate_01</li>
-                                            <li class="prefab">Plate_02</li>
-                                            <li class="prefab">Plate_03</li>
-                                            <li class="prefab">Plate_04</li>
-                                            <li class="prefab">Pointer_01</li>
-                                            <li class="prefab">Pointer_02</li>
-                                            <li class="prefab">Pointer_03</li>
-                                            <li class="prefab">Stairs_01</li>
-                                            <li class="prefab">Stone_01</li>
-                                            <li class="prefab">Valve</li>
-                                            <li class="prefab">Wineglass_01</li>
-                                            <li class="prefab">WoodenBox</li>
-                                            <li class="prefab">WoodPlank_01</li>
-                                            <li class="prefab">WoodPlank_02</li>
-                                            <li class="prefab">WoodPlank_03</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="category-section">
-                <div class="category-header">
-                    <h3>Available Fonts</h3>
-                    <span class="count">11</span>
-                </div>
-                <div class="category-content">
-                    <div class="font-list">
-                        <div class="font-item">Bangers-Regular</div>
-                        <div class="font-item">BioRhymeExpanded-Regular</div>
-                        <div class="font-item">CormorantUnicase-Regular</div>
-                        <div class="font-item">DancingScript-Regular</div>
-                        <div class="font-item">IndieFlower</div>
-                        <div class="font-item">Merriweather-Regular</div>
-                        <div class="font-item">Orbitron-Regular</div>
-                        <div class="font-item">PressStart2P-Regular</div>
-                        <div class="font-item">Raleway-Regular</div>
-                        <div class="font-item">ShareTechMonoRegular</div>
-                        <div class="font-item">ZCOOLKuaiLe-Regular</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="func-entry" data-lang="ru" data-cat="config">
-        <div class="func">
-            <h3><span class="tag">Файл</span> config.json</h3>
-            <p>Обязателен для каждого мода. Пример:</p>
-            <div class="example">
-{
-  "name": "Мой мод",
-  "author": "Разраб",
-  "description": "Добавляет крутые функции",
-  "iconPath": "icon.png"
-}
-            </div>
-            <p>Поля: <code>name</code>, <code>author</code>, <code>description</code>, <code>iconPath</code> (относительный путь)</p>
-            <p>Все моды должны быть размещены по пути:<br>
-            <strong>AppData/LocalLow/Infini-DEV/Infinitarium/mods/</strong>
-            </p>
-            <div class="category-section">
-                <div class="category-header">
-                    <h3>Доступные префабы</h3>
-                    <span class="count">120+</span>
-                </div>
-                <div class="category-content">
-                    <div class="tree">
-                        <ul>
-                            <li class="prefab">EmptyObject</li>
-                            <li class="prefab">Explosion</li>
-                            <li class="prefab">Player 1</li>
-                            <li class="prefab">Player</li>
-                            <li class="prefab">Ragdoll</li>
-                            <li class="prefab">AI
-                                <ul>
-                                    <li class="prefab">Advanced Ally</li>
-                                    <li class="prefab">Pistol Ally</li>
-                                    <li class="prefab">Ally</li>
-                                    <li class="prefab">Bandit</li>
-                                    <li class="prefab">Enemy</li>
-                                    <li class="prefab">Pistol Enemy</li>
-                                    <li class="prefab">Rifle Ally</li>
-                                    <li class="prefab">Rifle NPC</li>
-                                    <li class="prefab">SurvivalTower
-                                        <ul>
-                                            <li class="prefab">Advanced Enemy</li>
-                                            <li class="prefab">Player Clone</li>
-                                            <li class="prefab">NPC with Pistol</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="prefab">Entities
-                                <ul>
-                                    <li class="prefab">BoomBox</li>
-                                    <li class="prefab">Destructible
-                                        <ul>
-                                            <li class="prefab">DestructibleCube</li>
-                                            <li class="prefab">DestructibleSphere</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="prefab">Spawnables
-                                <ul>
-                                    <li class="prefab">BigPlate</li>
-                                    <li class="prefab">Cube</li>
-                                    <li class="prefab">Plate</li>
-                                    <li class="prefab">Sphere</li>
-                                    <li class="prefab">City
-                                        <ul>
-                                            <li class="prefab">Bench01</li>
-                                            <li class="prefab">Lamp01</li>
-                                            <li class="prefab">TrafficCone01</li>
-                                            <li class="prefab">TrashBag01</li>
-                                            <li class="prefab">TrashCan03</li>
-                                        </ul>
-                                    </li>
-                                    <li class="prefab">Light
-                                        <ul>
-                                            <li class="prefab">Light Cube</li>
-                                            <li class="prefab">Light Sphere</li>
-                                        </ul>
-                                    </li>
-                                    <li class="prefab">Nature
-                                        <ul>
-                                            <li class="prefab">Bush 1</li>
-                                            <li class="prefab">Bush 2</li>
-                                            <li class="prefab">Fir_Tree</li>
-                                            <li class="prefab">Hedge 2</li>
-                                            <li class="prefab">Log 1</li>
-                                            <li class="prefab">Log 2</li>
-                                            <li class="prefab">Potted Plant 1</li>
-                                            <li class="prefab">Potted Plant 2</li>
-                                            <li class="prefab">Potted Plant 3</li>
-                                            <li class="prefab">Potted Plant 4</li>
-                                            <li class="prefab">Street Tree 1</li>
-                                            <li class="prefab">Street Tree 2</li>
-                                            <li class="prefab">Street Tree 3</li>
-                                            <li class="prefab">Street Tree 4</li>
-                                            <li class="prefab">Street Tree 5</li>
-                                            <li class="prefab">Street Tree 6</li>
-                                            <li class="prefab">tree 1</li>
-                                            <li class="prefab">tree 10</li>
-                                            <li class="prefab">tree 11</li>
-                                            <li class="prefab">tree 12</li>
-                                            <li class="prefab">tree 13</li>
-                                            <li class="prefab">tree 14</li>
-                                            <li class="prefab">tree 15</li>
-                                            <li class="prefab">tree 2</li>
-                                            <li class="prefab">tree 3</li>
-                                            <li class="prefab">tree 4</li>
-                                            <li class="prefab">tree 5</li>
-                                            <li class="prefab">tree 6</li>
-                                            <li class="prefab">tree 7</li>
-                                            <li class="prefab">tree 8</li>
-                                            <li class="prefab">tree 9</li>
-                                            <li class="prefab">Tree Trunk 1</li>
-                                            <li class="prefab">Tree Trunk 2</li>
-                                        </ul>
-                                    </li>
-                                    <li class="prefab">Other
-                                        <ul>
-                                            <li class="prefab">Bag_01</li>
-                                            <li class="prefab">Barrel_01</li>
-                                            <li class="prefab">Bottle_01</li>
-                                            <li class="prefab">Bottle_02</li>
-                                            <li class="prefab">Bottle_03</li>
-                                            <li class="prefab">Box_01</li>
-                                            <li class="prefab">Bucket_01</li>
-                                            <li class="prefab">Cabinet_01</li>
-                                            <li class="prefab">Cabinet_02</li>
-                                            <li class="prefab">Cabinet_03</li>
-                                            <li class="prefab">Candle_01</li>
-                                            <li class="prefab">Candle_02</li>
-                                            <li class="prefab">Candle_03</li>
-                                            <li class="prefab">Carpet_01</li>
-                                            <li class="prefab">Coin_01</li>
-                                            <li class="prefab">Coin_02</li>
-                                            <li class="prefab">Coin_03</li>
-                                            <li class="prefab">Cup_01</li>
-                                            <li class="prefab">Cup_02</li>
-                                            <li class="prefab">Fence_01</li>
-                                            <li class="prefab">Fence_02</li>
-                                            <li class="prefab">Firewood_01</li>
-                                            <li class="prefab">Fire_01</li>
-                                            <li class="prefab">Furniture_01</li>
-                                            <li class="prefab">Furniture_02</li>
-                                            <li class="prefab">Furniture_03</li>
-                                            <li class="prefab">HosePulley</li>
-                                            <li class="prefab">Jug_01</li>
-                                            <li class="prefab">Jug_02</li>
-                                            <li class="prefab">Jug_03</li>
-                                            <li class="prefab">Jug_04</li>
-                                            <li class="prefab">OilDrum</li>
-                                            <li class="prefab">Palette</li>
-                                            <li class="prefab">Phone</li>
-                                            <li class="prefab">Pipe_Corner</li>
-                                            <li class="prefab">Pipe_Straight</li>
-                                            <li class="prefab">PlasticCan</li>
-                                            <li class="prefab">Plate_01</li>
-                                            <li class="prefab">Plate_02</li>
-                                            <li class="prefab">Plate_03</li>
-                                            <li class="prefab">Plate_04</li>
-                                            <li class="prefab">Pointer_01</li>
-                                            <li class="prefab">Pointer_02</li>
-                                            <li class="prefab">Pointer_03</li>
-                                            <li class="prefab">Stairs_01</li>
-                                            <li class="prefab">Stone_01</li>
-                                            <li class="prefab">Valve</li>
-                                            <li class="prefab">Wineglass_01</li>
-                                            <li class="prefab">WoodenBox</li>
-                                            <li class="prefab">WoodPlank_01</li>
-                                            <li class="prefab">WoodPlank_02</li>
-                                            <li class="prefab">WoodPlank_03</li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="category-section">
-                <div class="category-header">
-                    <h3>Доступные шрифты</h3>
-                    <span class="count">11</span>
-                </div>
-                <div class="category-content">
-                    <div class="font-list">
-                        <div class="font-item">Bangers-Regular</div>
-                        <div class="font-item">BioRhymeExpanded-Regular</div>
-                        <div class="font-item">CormorantUnicase-Regular</div>
-                        <div class="font-item">DancingScript-Regular</div>
-                        <div class="font-item">IndieFlower</div>
-                        <div class="font-item">Merriweather-Regular</div>
-                        <div class="font-item">Orbitron-Regular</div>
-                        <div class="font-item">PressStart2P-Regular</div>
-                        <div class="font-item">Raleway-Regular</div>
-                        <div class="font-item">ShareTechMonoRegular</div>
-                        <div class="font-item">ZCOOLKuaiLe-Regular</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="no-match" id="noMatch">
         No functions match your search criteria.
     </div>
-
     <div class="lua-docs">
         <p>
             For Lua language syntax and standard library reference, see the
@@ -2313,27 +373,128 @@
         </p>
     </div>
 </div>
+
 <script>
     const langBtns = document.querySelectorAll('.lang-btn');
     const catBtns = document.querySelectorAll('.cat-btn');
-    const funcEntries = document.querySelectorAll('.func-entry');
     const searchInput = document.getElementById('searchInput');
+    const container = document.querySelector('.container');
     const noMatch = document.getElementById('noMatch');
+
     let currentLang = 'en';
     let currentCat = 'all';
+    let allFunctions = [];
+
+    async function loadFunctions() {
+        const response = await fetch('functions.json');
+        const data = await response.json();
+        allFunctions = data.functions;
+        renderContent();
+    }
+
+    function createFuncEntry(fn) {
+        const div = document.createElement('div');
+        div.className = 'func-entry';
+        div.setAttribute('data-lang', fn.lang);
+        div.setAttribute('data-cat', fn.category);
+
+        let detailsHtml = '';
+        if (fn.details) {
+            detailsHtml = '<ul>';
+            fn.details.forEach(d => {
+                detailsHtml += `<li><code>${d}</code></li>`;
+            });
+            detailsHtml += '</ul>';
+        }
+
+        let exampleHtml = fn.example;
+        if (exampleHtml) exampleHtml = exampleHtml.replace(/\n/g, '<br>');
+
+        div.innerHTML = `
+            <div class="func">
+                <h3><span class="tag">${fn.type}</span> ${fn.signature}</h3>
+                <p>${fn.description}</p>
+                ${detailsHtml}
+                ${exampleHtml ? `<div class="example">${exampleHtml}</div>` : ''}
+            </div>
+        `;
+
+        if (fn.prefabs || fn.fonts) {
+            if (fn.prefabs) {
+                const prefabsHtml = buildTreeHtml(fn.prefabs);
+                div.querySelector('.func').insertAdjacentHTML('beforeend', `
+                    <div class="category-section">
+                        <div class="category-header">
+                            <h3>${fn.prefabsTitle || 'Available Prefabs'}</h3>
+                            <span class="count">${fn.prefabsCount || '120+'}</span>
+                        </div>
+                        <div class="category-content">
+                            <div class="tree">${prefabsHtml}</div>
+                        </div>
+                    </div>
+                `);
+            }
+            if (fn.fonts) {
+                const fontsHtml = fn.fonts.map(f => `<div class="font-item">${f}</div>`).join('');
+                div.querySelector('.func').insertAdjacentHTML('beforeend', `
+                    <div class="category-section">
+                        <div class="category-header">
+                            <h3>${fn.fontsTitle || 'Available Fonts'}</h3>
+                            <span class="count">${fn.fonts.length}</span>
+                        </div>
+                        <div class="category-content">
+                            <div class="font-list">${fontsHtml}</div>
+                        </div>
+                    </div>
+                `);
+            }
+        }
+
+        return div;
+    }
+
+    function buildTreeHtml(items) {
+        let html = '<ul>';
+        items.forEach(item => {
+            if (typeof item === 'string') {
+                html += `<li class="prefab">${item}</li>`;
+            } else if (typeof item === 'object') {
+                const key = Object.keys(item)[0];
+                html += `<li class="prefab">${key}${buildTreeHtml(item[key])}</li>`;
+            }
+        });
+        html += '</ul>';
+        return html;
+    }
+
+    function renderContent() {
+        const insertBeforeEl = noMatch;
+        document.querySelectorAll('.func-entry').forEach(el => el.remove());
+
+        allFunctions.forEach(fn => {
+            const el = createFuncEntry(fn);
+            container.insertBefore(el, insertBeforeEl);
+        });
+
+        updateDisplay();
+    }
+
     function updateDisplay() {
         let visibleCount = 0;
         const searchValue = searchInput.value.toLowerCase();
-        funcEntries.forEach(entry => {
+
+        document.querySelectorAll('.func-entry').forEach(entry => {
             const lang = entry.getAttribute('data-lang');
             const cat = entry.getAttribute('data-cat');
             const showLang = lang === currentLang;
             const showCat = currentCat === 'all' || cat === currentCat;
             let showSearch = true;
+
             if (searchValue) {
                 const text = entry.innerText.toLowerCase();
                 showSearch = text.includes(searchValue);
             }
+
             if (showLang && showCat && showSearch) {
                 entry.style.display = 'block';
                 visibleCount++;
@@ -2341,17 +502,20 @@
                 entry.style.display = 'none';
             }
         });
+
         noMatch.style.display = visibleCount === 0 ? 'block' : 'none';
     }
+
     langBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             langBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             currentLang = btn.getAttribute('data-lang');
-            updateDisplay();
             document.querySelector('.subtitle').innerText = document.querySelector(`.subtitle`).getAttribute(`data-${currentLang}`);
+            updateDisplay();
         });
     });
+
     catBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             catBtns.forEach(b => b.classList.remove('active'));
@@ -2360,8 +524,10 @@
             updateDisplay();
         });
     });
+
     searchInput.addEventListener('input', updateDisplay);
-    updateDisplay();
+
+    loadFunctions();
 </script>
 </body>
 </html>
