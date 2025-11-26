@@ -11,12 +11,17 @@
             --primary-color: #ff4d4d;
             --primary-dark: #c00000;
             --primary-light: #ff6666;
+            --secondary-color: #4d7cff;
+            --secondary-dark: #0039cb;
+            --secondary-light: #6691ff;
             --bg-dark: #0b0b0f;
             --bg-darker: #050508;
             --bg-card: rgba(20, 5, 5, 0.7);
+            --bg-card-secondary: rgba(5, 10, 20, 0.7);
             --text-light: #f0f0f0;
             --text-dim: #e0e0e0;
             --accent-glow: 0 0 12px rgba(255, 77, 77, 0.6);
+            --accent-glow-secondary: 0 0 12px rgba(77, 124, 255, 0.6);
             --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
@@ -45,7 +50,7 @@
             height: 100%;
             background:
                 radial-gradient(circle at 20% 80%, rgba(255, 77, 77, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 77, 77, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(77, 124, 255, 0.03) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(255, 77, 77, 0.02) 0%, transparent 50%);
             pointer-events: none;
             z-index: -1;
@@ -202,12 +207,74 @@
             font-weight: bold;
         }
 
+        /* Стили для Close Quarters */
+        .game-section {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .game-section:last-of-type {
+            border-bottom: none;
+        }
+
+        .game-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-title h2 {
+            margin: 0;
+        }
+
+        .game-badge {
+            background: var(--secondary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: var(--accent-glow-secondary);
+        }
+
+        .close-quarters .description,
+        .close-quarters .features {
+            background: var(--bg-card-secondary);
+            border: 1px solid rgba(0, 40, 90, 0.5);
+        }
+
+        .close-quarters .description::before,
+        .close-quarters .features::before {
+            background: linear-gradient(90deg, var(--secondary-dark), var(--secondary-color));
+        }
+
+        .close-quarters .description:hover,
+        .close-quarters .features:hover {
+            border-color: rgba(0, 57, 203, 0.7);
+        }
+
+        .close-quarters h2 {
+            color: var(--secondary-light);
+        }
+
+        .close-quarters h2::after {
+            background: var(--secondary-color);
+        }
+
+        .close-quarters .feature-list li:before {
+            color: var(--secondary-color);
+        }
+
         .screenshots {
             display: flex;
             flex-wrap: wrap;
             gap: 1.25rem;
             justify-content: center;
             margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .screenshot {
@@ -227,10 +294,20 @@
             cursor: pointer;
         }
 
+        .close-quarters .screenshot {
+            background-color: #05050f;
+            border: 1px solid #004080;
+        }
+
         .screenshot:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 12px 20px rgba(128, 0, 0, 0.4);
             border-color: var(--primary-color);
+        }
+
+        .close-quarters .screenshot:hover {
+            box-shadow: 0 12px 20px rgba(0, 64, 128, 0.4);
+            border-color: var(--secondary-color);
         }
 
         .screenshot img {
@@ -259,6 +336,10 @@
             transition: var(--transition);
         }
 
+        .close-quarters .screenshot-label {
+            color: var(--secondary-light);
+        }
+
         .screenshot:hover .screenshot-label {
             background: rgba(0, 0, 0, 0.9);
             transform: translateY(-2px);
@@ -276,6 +357,12 @@
             overflow: hidden;
             backdrop-filter: blur(10px);
             transition: var(--transition);
+            z-index: 2;
+        }
+
+        .close-quarters .download-section {
+            background-color: rgba(5, 10, 15, 0.8);
+            border: 1px solid var(--secondary-dark);
         }
 
         .download-section::before {
@@ -291,6 +378,10 @@
             pointer-events: none;
         }
 
+        .close-quarters .download-section::before {
+            background: radial-gradient(circle, rgba(77, 124, 255, 0.1) 0%, transparent 70%);
+        }
+
         .download-section:hover::before {
             opacity: 1;
         }
@@ -300,13 +391,16 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(192, 0, 0, 0.2);
         }
 
+        .close-quarters .download-section:hover {
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 57, 203, 0.2);
+        }
+
         .download-buttons {
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 1rem;
             flex-wrap: wrap;
-            /* чтобы на мобильных устройствах переносились */
         }
 
         .download-link {
@@ -324,6 +418,11 @@
             overflow: hidden;
         }
 
+        .close-quarters .download-link {
+            background: linear-gradient(135deg, var(--secondary-dark), var(--secondary-color));
+            box-shadow: 0 4px 15px rgba(0, 57, 203, 0.4);
+        }
+
         .download-link::before {
             content: '';
             position: absolute;
@@ -338,6 +437,10 @@
         .download-link:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(192, 0, 0, 0.6);
+        }
+
+        .close-quarters .download-link:hover {
+            box-shadow: 0 8px 20px rgba(0, 57, 203, 0.6);
         }
 
         .download-link:hover::before {
@@ -357,6 +460,12 @@
             margin-left: 1rem;
         }
 
+        .close-quarters .changelog-btn {
+            background: rgba(10, 20, 50, 0.7);
+            color: #9999ff;
+            border: 1px solid #004080;
+        }
+
         .changelog-btn:hover {
             background: rgba(80, 15, 15, 0.9);
             color: #fff;
@@ -364,7 +473,12 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        #changelog-modal {
+        .close-quarters .changelog-btn:hover {
+            background: rgba(15, 30, 80, 0.9);
+        }
+
+        /* Модальные окна */
+        #changelog-modal, #cq-changelog-modal {
             display: none;
             position: fixed;
             top: 0;
@@ -404,6 +518,12 @@
             animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
+        .close-quarters .changelog-content {
+            background: rgba(5, 10, 20, 0.95);
+            border: 1px solid var(--secondary-dark);
+            box-shadow: 0 0 30px rgba(0, 57, 203, 0.5);
+        }
+
         @keyframes modalSlideIn {
             from {
                 transform: translateY(-50px);
@@ -434,9 +554,17 @@
             transition: var(--transition);
         }
 
+        .close-quarters .close-changelog {
+            background: #1c3bb7;
+        }
+
         .close-changelog:hover {
             background: var(--primary-color);
             transform: rotate(90deg);
+        }
+
+        .close-quarters .close-changelog:hover {
+            background: var(--secondary-color);
         }
 
         /* Tabs */
@@ -471,6 +599,21 @@
             box-shadow: 0 4px 8px rgba(192, 0, 0, 0.4);
         }
 
+        .close-quarters .tab-btn {
+            background: rgba(10, 20, 30, 0.8);
+            color: #9999ff;
+            border: 1px solid #004080;
+        }
+
+        .close-quarters .tab-btn:hover {
+            background: rgba(15, 30, 60, 0.9);
+        }
+
+        .close-quarters .tab-btn.active {
+            background: linear-gradient(135deg, var(--secondary-dark), var(--secondary-color));
+            box-shadow: 0 4px 8px rgba(0, 57, 203, 0.4);
+        }
+
         .tab-content {
             display: none;
             animation: fadeIn 0.3s ease;
@@ -499,6 +642,14 @@
             background: var(--primary-color);
         }
 
+        .close-quarters .changelog-section h3 {
+            color: var(--secondary-light);
+        }
+
+        .close-quarters .changelog-section h3::after {
+            background: var(--secondary-color);
+        }
+
         .changelog-list {
             list-style-type: none;
             padding-left: 1.2rem;
@@ -521,6 +672,10 @@
             position: absolute;
             left: -1.2rem;
             font-size: 1.2rem;
+        }
+
+        .close-quarters .changelog-list li:before {
+            color: var(--secondary-color);
         }
 
         .external-link {
@@ -635,6 +790,18 @@
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary-color);
         }
+
+        .close-quarters ::-webkit-scrollbar-track {
+            background: rgba(5, 10, 20, 0.5);
+        }
+
+        .close-quarters ::-webkit-scrollbar-thumb {
+            background: var(--secondary-dark);
+        }
+
+        .close-quarters ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
     </style>
 </head>
 
@@ -648,53 +815,104 @@
     </header>
 
     <div class="container">
-        <div class="game-info">
-            <div class="description">
-                <h2><strong>Description</strong></h2>
-                <p><strong>Infinitarium</strong> is a sandbox game developed in Unity 3D. The game has no specific goal
-                    or objective. The player can explore, create, and experiment with current game features.</p>
+        <!-- Оригинальная Infinitarium -->
+        <div class="game-section">
+            <div class="game-title">
+                <h2>Infinitarium</h2>
             </div>
-            <div class="features">
-                <h2><strong>Features</strong></h2>
-                <ul class="feature-list">
-                    <li>Advanced NPCs with melee weapons</li>
-                    <li>8 playable maps</li>
-                    <li>Wave survival gamemode</li>
-                    <li>Cool Melee system</li>
-                    <li>Modding support</li>
-                </ul>
+            
+            <div class="game-info">
+                <div class="description">
+                    <h2><strong>Description</strong></h2>
+                    <p><strong>Infinitarium</strong> is a sandbox game developed in Unity 3D. The game has no specific goal
+                        or objective. The player can explore, create, and experiment with current game features.</p>
+                </div>
+                <div class="features">
+                    <h2><strong>Features</strong></h2>
+                    <ul class="feature-list">
+                        <li>Advanced NPCs with melee weapons</li>
+                        <li>8 playable maps</li>
+                        <li>Wave survival gamemode</li>
+                        <li>Cool Melee system</li>
+                        <li>Modding support</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="screenshots">
+                <div class="screenshot">
+                    <div class="screenshot-label">Mini-games</div>
+                    <img src="img/screenshot1.png" alt="Mini-games screenshot">
+                </div>
+                <div class="screenshot">
+                    <div class="screenshot-label">Remaster (2026)</div>
+                    <img src="img/screenshot2.png" alt="Remaster screenshot">
+                </div>
+                <div class="screenshot">
+                    <div class="screenshot-label">Cool maps</div>
+                    <img src="img/screenshot3.png" alt="Maps screenshot">
+                </div>
+            </div>
+
+            <div class="download-section">
+                <h2>Download Sandbox</h2>
+                <p>Last version: v12.4</p>
+                <div class="download-buttons">
+                    <a href="https://drive.google.com/drive/folders/1X4A29JdEg92HhxWjvgIwLQ2GinbnY5re?usp=sharing"
+                        target="_blank" class="download-link">Install now <small>(GOOGLE DRIVE)</small></a>
+                    <button class="changelog-btn" onclick="showChangelog()">Changelog</button>
+                </div>
             </div>
         </div>
 
-        <div class="screenshots">
-            <div class="screenshot">
-                <div class="screenshot-label">Mini-games</div>
-                <img src="img/screenshot1.png" alt="Mini-games screenshot">
+        <!-- Infinitarium: Close Quarters -->
+        <div class="game-section close-quarters">
+            <div class="game-title">
+                <h2>Infinitarium: Close Quarters</h2>
+                <div class="game-badge">NEW</div>
             </div>
-            <div class="screenshot">
-                <div class="screenshot-label">Remaster (2026)</div>
-                <img src="img/screenshot2.png" alt="Remaster screenshot">
+            
+            <div class="game-info">
+                <div class="description">
+                    <h2><strong>Description</strong></h2>
+                    <p><strong>Infinitarium: Close Quarters</strong> is a melee fighting game. Work in progress.</p>
+                </div>
+                <div class="features">
+                    <h2><strong>Features</strong></h2>
+                    <ul class="feature-list">
+                        <li>Melee system</li>
+                        <li>Kicking & Dropkicking</li>
+                        <li>Multiplayer</li>
+                    </ul>
+                </div>
             </div>
-            <div class="screenshot">
-                <div class="screenshot-label">Cool maps</div>
-                <img src="img/screenshot3.png" alt="Maps screenshot">
-            </div>
-        </div>
 
-        <div class="download-section">
-            <h2>Download the game</h2>
-            <p>Last version: v12.4</p>
-            <div class="download-buttons">
-                <a href="https://drive.google.com/drive/folders/1X4A29JdEg92HhxWjvgIwLQ2GinbnY5re?usp=sharing"
-                    target="_blank" class="download-link">Install now <small>(GOOGLE DRIVE)</small></a>
-                <button class="changelog-btn" onclick="showChangelog()">Changelog</button>
+            <!--<div class="screenshots">
+                <div class="screenshot">
+                    <div class="screenshot-label">Melee weapons</div>
+                    <img src="img/cq/screenshot1.png" alt="Screenshot 1">
+                </div>
+                <div class="screenshot">
+                    <div class="screenshot-label">NPCs</div>
+                    <img src="img/cq/screenshot2.png" alt="Screenshot 2">
+                </div>
+            </div>-->
+
+            <div class="download-section">
+                <h2>Download Close Quarters</h2>
+                <p>Current version: v1.2</p>
+                <div class="download-buttons">
+                    <a href="https://drive.google.com/file/d/18mW-UJOyOL6YCvDD9XKywL-pmWScNNzB/view?usp=sharing"
+                        target="_blank" class="download-link">Install Close Quarters <small>(GOOGLE DRIVE)</small></a>
+                    <button class="changelog-btn" onclick="showCQChangelog()">Changelog</button>
+                </div>
             </div>
         </div>
     </div>
 
     <div id="changelog-modal" onclick="hideChangelog(event)">
         <div class="changelog-content" onclick="event.stopPropagation()">
-            <h2>Changelog</h2>
+            <h2>Changelog - Infinitarium</h2>
             <div class="changelog-tabs">
                 <button class="tab-btn active" data-tab="v12.4.1">v12.4.1</button>
                 <button class="tab-btn" data-tab="v12.4.0">v12.4</button>
@@ -848,9 +1066,44 @@
         </div>
     </div>
 
+    <div id="cq-changelog-modal" onclick="hideCQChangelog(event)">
+        <div class="changelog-content close-quarters" onclick="event.stopPropagation()">
+            <h2>Changelog</h2>
+            <div class="changelog-tabs">
+                <button class="tab-btn active" data-tab="cq-v1.2">v1.2</button>
+            </div>
+            <div id="cq-v1.2" class="tab-content active">
+                <div class="changelog-section">
+                    <h3>Additions:</h3>
+                    <ul class="changelog-list">
+                        <li>Added machete</li>
+                        <li>Added sounds</li>
+                        <li>Added block ability (W.I.P.)</li>
+                        <li>Added power attack ability</li>
+                        <li>Added stamina (W.I.P.)</li>
+                    </ul>
+                    <h3>Improvements:</h3>
+                    <ul class="changelog-list">
+                        <li>Improved map</li>
+                        <li>Improved menu</li>
+                    </ul>
+                    <h3>Bug Fixes:</h3>
+                    <ul class="changelog-list">
+                        <li>Fixed connection problems</li>
+                    </ul>
+                </div>
+            </div>
+            <button class="close-changelog" onclick="hideCQChangelogDirect()">×</button>
+        </div>
+    </div>
+
     <script>
         function showChangelog() {
             document.getElementById('changelog-modal').style.display = 'flex';
+        }
+
+        function showCQChangelog() {
+            document.getElementById('cq-changelog-modal').style.display = 'flex';
         }
 
         function hideChangelog(event) {
@@ -859,36 +1112,37 @@
             }
         }
 
+        function hideCQChangelog(event) {
+            if (event.target.id === 'cq-changelog-modal') {
+                document.getElementById('cq-changelog-modal').style.display = 'none';
+            }
+        }
+
         function hideChangelogDirect() {
             document.getElementById('changelog-modal').style.display = 'none';
+        }
+
+        function hideCQChangelogDirect() {
+            document.getElementById('cq-changelog-modal').style.display = 'none';
         }
 
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 document.getElementById('changelog-modal').style.display = 'none';
+                document.getElementById('cq-changelog-modal').style.display = 'none';
             }
         });
 
         document.querySelectorAll('.tab-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const tabId = button.getAttribute('data-tab');
+                const modal = button.closest('.changelog-content');
 
-                document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                modal.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                modal.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
 
                 button.classList.add('active');
                 document.getElementById(tabId).classList.add('active');
-            });
-        });
-
-        // Add subtle parallax effect on scroll
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.description, .features, .screenshot');
-
-            parallaxElements.forEach(el => {
-                const speed = 0.05;
-                el.style.transform = `translateY(${scrolled * speed}px)`;
             });
         });
     </script>
