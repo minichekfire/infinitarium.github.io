@@ -672,32 +672,6 @@
       "category": "object",
       "lang": "en",
       "type": "Function",
-      "name": "GetComponent",
-      "signature": "GetComponent(objName, componentName)",
-      "description": "Checks if a GameObject has a component of specified type.",
-      "details": [
-        "objName: Name of the GameObject to check",
-        "componentName: Type of component (e.g., \"Rigidbody\", \"Collider\")"
-      ],
-      "example": "if GetComponent(\"Player\", \"Rigidbody\") then\n  printLog(\"Player has physics\")\nend"
-    },
-    {
-      "category": "object",
-      "lang": "ru",
-      "type": "Функция",
-      "name": "GetComponent",
-      "signature": "GetComponent(имяОбъекта, имяКомпонента)",
-      "description": "Проверяет наличие компонента указанного типа у GameObject.",
-      "details": [
-        "имяОбъекта: Имя объекта для проверки",
-        "имяКомпонента: Тип компонента (например, \"Rigidbody\", \"Collider\")"
-      ],
-      "example": "if GetComponent(\"Игрок\", \"Rigidbody\") then\n  printLog(\"У игрока есть физика\")\nend"
-    },
-    {
-      "category": "object",
-      "lang": "en",
-      "type": "Function",
       "name": "GetObjectID",
       "signature": "GetObjectID(name)",
       "description": "Returns the ID of a GameObject by name, or nil if not found.",
