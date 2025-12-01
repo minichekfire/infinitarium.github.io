@@ -541,7 +541,8 @@
         }
 
         /* Modal */
-        #changelog-modal, #cq-changelog-modal {
+        #changelog-modal,
+        #cq-changelog-modal {
             display: none;
             position: fixed;
             top: 0;
@@ -870,7 +871,8 @@
             <div class="game-info">
                 <div class="description">
                     <h2><strong>Description</strong></h2>
-                    <p><strong>Infinitarium</strong> is a sandbox game developed in Unity 3D. The game has no specific goal
+                    <p><strong>Infinitarium</strong> is a sandbox game developed in Unity 3D. The game has no specific
+                        goal
                         or objective. The player can explore, create, and experiment with current game features.</p>
                 </div>
                 <div class="features">
@@ -1107,7 +1109,8 @@
             <h2>Changelog</h2>
             <div class="changelog-tabs">
                 <button class="tab-btn" data-tab="cq-v1.2">v1.2</button>
-                <button class="tab-btn active" data-tab="cq-v1.2.1">v1.2.1</button>
+                <button class="tab-btn" data-tab="cq-v1.2.1">v1.2.1</button>
+                <button class="tab-btn active" data-tab="cq-v1.3">v1.3</button>
             </div>
             <div id="cq-v1.2" class="tab-content">
                 <div class="changelog-section">
@@ -1147,7 +1150,30 @@
                     </ul>
                 </div>
             </div>
-            <button class="close-changelog" onclick="hideCQChangelogDirect()">×</button>
+            <div id="cq-v1.3" class="tab-content active">
+                <div class="changelog-section">
+                    <h3>Additions:</h3>
+                    <ul class="changelog-list">
+                        <li>Added ability to stun NPCs (Perfect Block/Parry)</li>
+                        <li>Added Day Night Cycle</li>
+                        <li>Added "/give" command</li>
+                    </ul>
+                    <h3>Improvements:</h3>
+                    <ul class="changelog-list">
+                        <li>Improved Map</li>
+                        <li>Improved NPCs AI</li>
+                        <li>Improved Dropkick</li>
+                        <li>Added weapon sway</li>
+                        <li>Added camera tilt on attack</li>
+                        <li>Added delay of actions after power attack</li>
+                    </ul>
+                    <h3>Bug Fixes:</h3>
+                    <ul class="changelog-list">
+                        <li>Fixed HUD</li>
+                    </ul>
+                </div>
+            </div>
+            <button class="close-changelog" onclick="hideCQChangelogDirect()">x</button>
         </div>
     </div>
 
