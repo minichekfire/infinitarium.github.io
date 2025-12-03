@@ -849,10 +849,6 @@
 
 <body>
     <header>
-        <a href="https://minichekfire.github.io/infinitarium.github.io/docs.html" target="_blank" class="docs-link">
-            Modding Documentation
-        </a>
-
         <h1>Infinitarium</h1>
 
         <div class="game-selector">
@@ -864,6 +860,11 @@
     <div class="container">
         <!-- Оригинальная Infinitarium -->
         <div class="game-section active" id="infinitarium">
+            
+            <a href="https://minichekfire.github.io/infinitarium.github.io/docs.html" target="_blank" class="docs-link">
+                Modding Documentation
+            </a>
+
             <div class="game-title">
                 <h2>Infinitarium</h2>
             </div>
@@ -1110,6 +1111,7 @@
         <div class="changelog-content close-quarters" onclick="event.stopPropagation()">
             <h2>Changelog</h2>
             <div class="changelog-tabs">
+                <button class="tab-btn" data-tab="cq-v1.3.1">v1.3.1</button>
                 <button class="tab-btn active" data-tab="cq-v1.3">v1.3</button>
                 <button class="tab-btn" data-tab="cq-v1.2.1">v1.2.1</button>
                 <button class="tab-btn" data-tab="cq-v1.2">v1.2</button>
@@ -1176,6 +1178,18 @@
                     </ul>
                 </div>
             </div>
+            <div id="cq-v1.3.1" class="tab-content">
+                <div class="changelog-section">
+                    <h3>Additions</h3>
+                    <ul class="changelog-list">
+                        <li>Added new weapons: Crowbar, Cleaver, Knife, Leadpipe, Hammer, Brass Knuckles, Baseball Bat,
+                            Fire Axe, Telescopic Baton, Sledgehammer</li>
+                        <h3>Improvements:</h3>
+                        <ul class="changelog-list">
+                            <li>Reworked machete model</li>
+                        </ul>
+                </div>
+            </div>
             <button class="close-changelog" onclick="hideCQChangelogDirect()">x</button>
         </div>
     </div>
@@ -1184,69 +1198,72 @@
         function showChangelog() {
             document.getElementById('changelog-modal').style.display = 'flex';
         }
-
         function showCQChangelog() {
             document.getElementById('cq-changelog-modal').style.display = 'flex';
         }
-
         function hideChangelog(event) {
             if (event.target.id === 'changelog-modal') {
                 document.getElementById('changelog-modal').style.display = 'none';
             }
         }
-
         function hideCQChangelog(event) {
             if (event.target.id === 'cq-changelog-modal') {
                 document.getElementById('cq-changelog-modal').style.display = 'none';
             }
         }
-
         function hideChangelogDirect() {
             document.getElementById('changelog-modal').style.display = 'none';
         }
-
         function hideCQChangelogDirect() {
             document.getElementById('cq-changelog-modal').style.display = 'none';
         }
-
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 document.getElementById('changelog-modal').style.display = 'none';
                 document.getElementById('cq-changelog-modal').style.display = 'none';
             }
         });
-
         document.querySelectorAll('.tab-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const tabId = button.getAttribute('data-tab');
                 const modal = button.closest('.changelog-content');
-
                 modal.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
                 modal.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-
                 button.classList.add('active');
                 document.getElementById(tabId).classList.add('active');
             });
         });
 
+        function activateGame(gameId) {
+            document.querySelectorAll('.game-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(gameId).classList.add('active');
+
+            document.querySelectorAll('.game-selector-btn').forEach(btn => {
+                btn.classList.remove('active', 'close-quarters');
+            });
+            const activeBtn = document.querySelector(`.game-selector-btn[data-game="${gameId}"]`);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+                if (gameId === 'close-quarters') {
+                    activeBtn.classList.add('close-quarters');
+                }
+            }
+
+            localStorage.setItem('selectedGame', gameId);
+        }
+
         document.querySelectorAll('.game-selector-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const gameId = btn.getAttribute('data-game');
-
-                document.querySelectorAll('.game-section').forEach(section => {
-                    section.classList.remove('active');
-                });
-                document.getElementById(gameId).classList.add('active');
-
-                document.querySelectorAll('.game-selector-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                if (gameId === 'close-quarters') {
-                    btn.classList.add('close-quarters');
-                } else {
-                    document.querySelectorAll('.game-selector-btn').forEach(b => b.classList.remove('close-quarters'));
-                }
+                activateGame(gameId);
             });
+        });
+
+        window.addEventListener('load', () => {
+            const savedGame = localStorage.getItem('selectedGame') || 'infinitarium';
+            activateGame(savedGame);
         });
     </script>
 </body>
