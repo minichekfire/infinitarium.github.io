@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinitarium: Sandbox</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff4d4d;
+            --primary-dark: #c00000;
+            --primary-light: #ff6666;
+            --bg-dark: #0b0b0f;
+            --bg-darker: #050508;
+            --bg-card: rgba(20, 5, 5, 0.7);
+            --text-light: #f0f0f0;
+            --text-dim: #e0e0e0;
+            --accent-glow: 0 0 12px rgba(255, 77, 77, 0.6);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Share Tech Mono", monospace;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(255, 77, 77, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(77, 124, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 77, 77, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.85);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid var(--primary-dark);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            text-shadow: var(--accent-glow);
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10%;
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            opacity: 0.7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .game-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .game-title h2 {
+            margin: 0;
+        }
+
+        .description,
+        .features {
+            flex: 1;
+            min-width: 300px;
+            background: var(--bg-card);
+            padding: 1.8rem;
+            border-radius: 12px;
+            border: 1px solid rgba(90, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .description::before,
+        .features::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-dark), var(--primary-color));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .description:hover::before,
+        .features:hover::before {
+            transform: scaleX(1);
+        }
+
+        .description:hover,
+        .features:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-color: rgba(192, 0, 0, 0.7);
+        }
+
+        .back {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(30, 10, 10, 0.8);
+            color: #da7272;
+            border: 1px solid #f25858;
+            padding: 0.5rem 1rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back:hover {
+            background: rgba(50, 15, 15, 0.9);
+            color: #ff9999;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .back::before {
+            content: '<-';
+            font-size: 0.8rem;
+        }
+
+        h2 {
+            color: var(--primary-light);
+            margin-top: 0;
+            font-size: 1.8rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.75rem;
+            position: relative;
+            color: var(--text-dim);
+            transition: var(--transition);
+        }
+
+        .feature-list li:hover {
+            color: var(--text-light);
+            transform: translateX(5px);
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            color: var(--primary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        .screenshots {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .screenshot {
+            width: calc(33% - 1.25rem);
+            min-width: 250px;
+            height: 200px;
+            background-color: #0f0505;
+            border: 1px solid #800000;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+        }
+
+        .screenshot:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 20px rgba(128, 0, 0, 0.4);
+            border-color: var(--primary-color);
+        }
+
+        .screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .screenshot:hover img {
+            transform: scale(1.05);
+        }
+
+        .screenshot-label {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--primary-light);
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            border-radius: 6px;
+            font-weight: bold;
+            z-index: 2;
+            backdrop-filter: blur(5px);
+            transition: var(--transition);
+        }
+
+        .screenshot:hover .screenshot-label {
+            background: rgba(0, 0, 0, 0.9);
+            transform: translateY(-2px);
+        }
+
+        .download-section {
+            background-color: rgba(15, 5, 5, 0.8);
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 2rem;
+            border: 1px solid var(--primary-dark);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            z-index: 2;
+        }
+
+        .download-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 77, 77, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+        }
+
+        .download-section:hover::before {
+            opacity: 1;
+        }
+
+        .download-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(192, 0, 0, 0.2);
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .download-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            color: white;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 1rem 0;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(192, 0, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .download-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(192, 0, 0, 0.6);
+        }
+
+        .download-link:hover::before {
+            left: 100%;
+        }
+
+        .changelog-btn {
+            background: rgba(50, 10, 10, 0.7);
+            color: #ff9999;
+            border: 1px solid #800000;
+            padding: 0.7rem 1.5rem;
+            font-family: "Share Tech Mono", monospace;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: var(--transition);
+            margin-left: 1rem;
+        }
+
+        .changelog-btn:hover {
+            background: rgba(80, 15, 15, 0.9);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        #changelog-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .changelog-content {
+            background: rgba(10, 5, 5, 0.95);
+            color: var(--text-light);
+            width: 90%;
+            max-width: 900px;
+            max-height: 85vh;
+            padding: 2rem;
+            border: 1px solid var(--primary-dark);
+            border-radius: 16px;
+            overflow-y: auto;
+            box-shadow: 0 0 30px rgba(192, 0, 0, 0.5);
+            position: relative;
+            animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close-changelog {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #b71c1c;
+            color: white;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .close-changelog:hover {
+            background: var(--primary-color);
+            transform: rotate(90deg);
+        }
+
+        .changelog-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(30, 10, 10, 0.8);
+            color: #ff9999;
+            border: 1px solid #800000;
+            padding: 0.6rem 1.2rem;
+            font-family: "Share Tech Mono", monospace;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover {
+            background: rgba(60, 15, 15, 0.9);
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(192, 0, 0, 0.4);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .changelog-section h3 {
+            color: var(--primary-light);
+            margin-top: 1.2rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .changelog-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .changelog-list {
+            list-style-type: none;
+            padding-left: 1.2rem;
+        }
+
+        .changelog-list li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            transition: var(--transition);
+            padding: 4px 0;
+        }
+
+        .changelog-list li:hover {
+            transform: translateX(5px);
+        }
+
+        .changelog-list li:before {
+            content: "•";
+            color: var(--primary-color);
+            position: absolute;
+            left: -1.2rem;
+            font-size: 1.2rem;
+        }
+
+        .external-link {
+            color: #ff9999;
+            text-decoration: none;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .external-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: #ff9999;
+            transition: width 0.3s ease;
+        }
+
+        .external-link:hover {
+            color: #ffcccc;
+        }
+
+        .external-link:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .game-info {
+                flex-direction: column;
+            }
+
+            .screenshot {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .download-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .changelog-btn {
+                margin-top: 1rem;
+                display: inline-block;
+                margin-left: 0;
+            }
+
+            .changelog-tabs {
+                justify-content: center;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 5, 5, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-dark);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Infinitarium</h1>
+    </header>
+    <div class="container">
+        <div class="game-title">
+            <h2>Infinitarium: Sandbox</h2>
+        </div>
+
+        <a href="https://minichekfire.github.io/infinitarium.github.io/index.html" target="_blank" class="back">
+            Back
+        </a>
+
+        <div class="game-info" style="display: flex; gap: 1.5rem; margin-bottom: 2rem;">
+            <div class="description">
+                <h2><strong>Description</strong></h2>
+                <p><strong>Infinitarium</strong> is a sandbox game developed in Unity 3D. The game has no specific
+                    goal or objective. The player can explore, create, and experiment with current game features.</p>
+            </div>
+            <div class="features">
+                <h2><strong>Features</strong></h2>
+                <ul class="feature-list">
+                    <li>Advanced NPCs with melee weapons</li>
+                    <li>8 playable maps</li>
+                    <li>Wave survival gamemode</li>
+                    <li>Cool Melee system</li>
+                </ul>
+            </div>
+        </div>
+        <div class="screenshots">
+            <div class="screenshot">
+                <div class="screenshot-label">Mini-games</div>
+                <img src="img/screenshot1.png" alt="Mini-games screenshot">
+            </div>
+            <div class="screenshot">
+                <div class="screenshot-label">Remaster (2026)</div>
+                <img src="img/screenshot2.png" alt="Remaster screenshot">
+            </div>
+            <div class="screenshot">
+                <div class="screenshot-label">Cool maps</div>
+                <img src="img/screenshot3.png" alt="Maps screenshot">
+            </div>
+        </div>
+        <div class="download-section">
+            <h2>Download Sandbox</h2>
+            <p>Last version: v12.4</p>
+            <div class="download-buttons">
+                <a href="https://drive.google.com/drive/folders/1X4A29JdEg92HhxWjvgIwLQ2GinbnY5re?usp=sharing"
+                    target="_blank" class="download-link">Install now <small>(GOOGLE DRIVE)</small></a>
+                <button class="changelog-btn" onclick="showChangelog()">Changelog</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Changelog Modal -->
+    <div id="changelog-modal" onclick="hideChangelog(event)">
+        <div class="changelog-content" onclick="event.stopPropagation()">
+            <h2>Changelog - Infinitarium</h2>
+            <div class="changelog-tabs">
+                <button class="tab-btn active" data-tab="v12.4.0">v12.4</button>
+                <button class="tab-btn" data-tab="v12.3.1">v12.3.1</button>
+                <button class="tab-btn" data-tab="v12.3.0">v12.3</button>
+                <button class="tab-btn" data-tab="v12.2.1">v12.2.1</button>
+                <button class="tab-btn" data-tab="v12.2.0">v12.2</button>
+                <button class="tab-btn" data-tab="older">Older</button>
+            </div>
+            <div id="v12.4.0" class="tab-content active">
+                <div class="changelog-section">
+                    <h3>Additions:</h3>
+                    <ul class="changelog-list">
+                        <li>Readded Random Music in menu</li>
+                        <li>Readded Kamikaze NPCs</li>
+                        <li>New map: <b>Hills</b></li>
+                        <li>Advanced NPCs with Melee Weapons</li>
+                    </ul>
+                </div>
+                <div class="changelog-section">
+                    <h3>Changes:</h3>
+                    <ul class="changelog-list">
+                        <li>Heavily Improved UI in Menu</li>
+                        <li>Improved NPC's fight system</li>
+                        <li>Improved <b>Survival Tower</b></li>
+                    </ul>
+                </div>
+                <div class="changelog-section">
+                    <h3>Fixes:</h3>
+                    <ul class="changelog-list">
+                        <li>Fixed Translation bugs</li>
+                        <li>NPC blood particles</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="v12.3.1" class="tab-content">
+                <div class="changelog-section">
+                    <h3>Changes:</h3>
+                    <ul class="changelog-list">
+                        <li>Improved Modding Documentation</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="v12.3.0" class="tab-content">
+                <div class="changelog-section">
+                    <h3>Additions:</h3>
+                    <ul class="changelog-list">
+                        <li>New weapon: Hyper Pistol</li>
+                        <li>White Dot in the aim position</li>
+                        <li>New Setting: Language</li>
+                        <li>Hit sound for Advanced NPCs</li>
+                        <li>Small halloween decorations on some maps</li>
+                    </ul>
+                </div>
+                <div class="changelog-section">
+                    <h3>Changes:</h3>
+                    <ul class="changelog-list">
+                        <li>Improved Water</li>
+                        <li>Improved Pistol</li>
+                        <li>Improved Toolgun</li>
+                        <li>Improved Visual Effects in Menu</li>
+                        <li>Improved Weapon Sway</li>
+                    </ul>
+                </div>
+                <div class="changelog-section">
+                    <h3>Bug Fixes:</h3>
+                    <ul class="changelog-list">
+                        <li>Health was not showing on minigame maps</li>
+                        <li>Ragdoll (Entity) used player colors</li>
+                        <li>Fixed M16A4</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="v12.2.1" class="tab-content">
+                <div class="changelog-section">
+                    <h3>Additions:</h3>
+                    <ul class="changelog-list">
+                        <li>Wall Hit Particles (Firearms)</li>
+                        <li>Hit Animation (Melee)</li>
+                    </ul>
+                </div>
+                <div class="changelog-section">
+                    <h3>Changes:</h3>
+                    <ul class="changelog-list">
+                        <li>New Inventory</li>
+                        <li>Improved Bullet Projectile (Firearm NPCs)</li>
+                        <li>Removed Standart NPCs</li>
+                        <li>Improved Toolgun</li>
+                        <li>Changed game icon</li>
+                        <li>IL2CPP Scripting Backend</li>
+                        <li>Minor weapon reloading anim improvements</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="v12.2.0" class="tab-content">
+                <div class="changelog-section">
+                    <h3>Added:</h3>
+                    <ul class="changelog-list">
+                        <li>Custom "<strong>Survival Tower</strong>" music</li>
+                        <li>Sickle in Weapon Shop (Survival Tower)</li>
+                        <li>New NPC: Kamikaze</li>
+                        <li>Weapon Bullet Decals</li>
+                        <li>Added Basement in every <strong>Tower</strong> map</li>
+                    </ul>
+                </div>
+                <div class="changelog-section">
+                    <h3>Changed:</h3>
+                    <ul class="changelog-list">
+                        <li>Improved Boss in <strong>Survival Tower</strong></li>
+                    </ul>
+                </div>
+                <div class="changelog-section">
+                    <h3>Bug Fixes:</h3>
+                    <ul class="changelog-list">
+                        <li>Weapon position broken on spawn</li>
+                    </ul>
+                </div>
+            </div>
+            <div id="older" class="tab-content">
+                <p>View older changelogs on itch.io:</p>
+                <a href="https://bigwater6464.itch.io/infinitarium-beta/devlog" target="_blank"
+                    class="external-link">Click</a>
+            </div>
+            <button class="close-changelog" onclick="hideChangelogDirect()">x</button>
+        </div>
+    </div>
+
+    <script>
+        function showChangelog() {
+            document.getElementById('changelog-modal').style.display = 'flex';
+        }
+        function hideChangelog(event) {
+            if (event.target.id === 'changelog-modal') {
+                document.getElementById('changelog-modal').style.display = 'none';
+            }
+        }
+        function hideChangelogDirect() {
+            document.getElementById('changelog-modal').style.display = 'none';
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.getElementById('changelog-modal').style.display = 'none';
+            }
+        });
+        document.querySelectorAll('.tab-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                const modal = button.closest('.changelog-content');
+                modal.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+                modal.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+    </script>
+</body>
+
+</html>
