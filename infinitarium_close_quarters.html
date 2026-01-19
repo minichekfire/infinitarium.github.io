@@ -4,30 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Infinitarium: Close Quarters - Melee combat game with multiplayer features">
     <title>Infinitarium: Close Quarters</title>
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --secondary-color: #4d7cff;
             --secondary-dark: #0039cb;
             --secondary-light: #6691ff;
+            --accent-red: #ff4d4d;
+            --accent-orange: #ff994d;
             --bg-dark: #0b0b0f;
             --bg-darker: #050508;
             --bg-card-secondary: rgba(5, 10, 20, 0.7);
+            --bg-card-glow: rgba(77, 124, 255, 0.15);
             --text-light: #f0f0f0;
             --text-dim: #e0e0e0;
-            --accent-glow-secondary: 0 0 12px rgba(77, 124, 255, 0.6);
+            --text-accent: #ffb3b3;
+            --border-radius: 12px;
             --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --accent-glow-secondary: 0 0 15px rgba(77, 124, 255, 0.7);
+            --accent-glow-red: 0 0 15px rgba(255, 77, 77, 0.5);
+            --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.4);
         }
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
             font-family: "Share Tech Mono", monospace;
-            margin: 0;
-            padding: 0;
             background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
             color: var(--text-light);
             line-height: 1.6;
@@ -44,21 +54,37 @@
             width: 100%;
             height: 100%;
             background:
-                radial-gradient(circle at 20% 80%, rgba(255, 77, 77, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(77, 124, 255, 0.03) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 77, 77, 0.02) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, rgba(255, 77, 77, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(77, 124, 255, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(150, 150, 255, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(10, 20, 40, 0.1) 1px, rgba(10, 20, 40, 0.1) 2px),
+                repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(10, 20, 40, 0.1) 1px, rgba(10, 20, 40, 0.1) 2px);
+            opacity: 0.2;
             pointer-events: none;
             z-index: -1;
         }
 
         header {
-            background-color: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 5, 15, 0.85);
             padding: 1.5rem 2rem;
             text-align: center;
             border-bottom: 2px solid var(--secondary-dark);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(5px);
         }
 
         header::after {
@@ -67,16 +93,44 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 2px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+            animation: headerGlow 3s infinite alternate;
+        }
+
+        @keyframes headerGlow {
+            from { opacity: 0.6; }
+            to { opacity: 1; }
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            text-shadow: var(--accent-glow-secondary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         h1 {
             margin: 0;
-            font-size: 2.8rem;
-            color: var(--secondary-color);
-            text-shadow: var(--accent-glow-secondary);
-            letter-spacing: 1px;
+            font-size: 3.2rem;
+            background: linear-gradient(90deg, #fff, var(--secondary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            letter-spacing: 1.5px;
             position: relative;
             display: inline-block;
         }
@@ -84,128 +138,177 @@
         h1::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -8px;
             left: 10%;
             width: 80%;
-            height: 2px;
+            height: 3px;
             background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
-            opacity: 0.7;
+            opacity: 0.9;
         }
 
         .container {
             max-width: 1200px;
             margin: 2.5rem auto;
             padding: 0 1.5rem;
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            position: relative;
+            z-index: 2;
         }
 
         .game-title {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 1.5rem;
+            margin-bottom: 1.8rem;
+            position: relative;
         }
 
-        .game-title h2 {
-            margin: 0;
+        .game-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(77, 124, 255, 0.5), transparent);
         }
 
         .game-badge {
-            background: var(--secondary-color);
+            background: linear-gradient(45deg, var(--accent-red), #ff8080);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 4px;
-            font-size: 0.8rem;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
             font-weight: bold;
-            box-shadow: var(--accent-glow-secondary);
+            box-shadow: 0 0 15px rgba(255, 77, 77, 0.6);
+            animation: badgePulse 1.5s infinite alternate;
+            letter-spacing: 0.5px;
         }
 
-        .description,
-        .features {
-            flex: 1;
-            min-width: 300px;
-            background: var(--bg-card-secondary);
-            padding: 1.8rem;
-            border-radius: 12px;
-            border: 1px solid rgba(0, 40, 90, 0.5);
-            backdrop-filter: blur(10px);
-            transition: var(--transition);
+        @keyframes badgePulse {
+            from { box-shadow: 0 0 10px rgba(255, 77, 77, 0.4); }
+            to { box-shadow: 0 0 20px rgba(255, 77, 77, 0.8); }
+        }
+
+        .back-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .back {
             position: relative;
+            background: rgba(30, 10, 10, 0.7);
+            color: #da7272;
+            border: 1px solid rgba(242, 88, 88, 0.7);
+            padding: 0.6rem 1.2rem;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(3px);
             overflow: hidden;
         }
 
-        .description::before,
-        .features::before {
+        .back::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--secondary-dark), var(--secondary-color));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s ease;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(242, 88, 88, 0.1) 0%, transparent 100%);
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
-        .description:hover::before,
-        .features:hover::before {
-            transform: scaleX(1);
-        }
-
-        .description:hover,
-        .features:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: rgba(0, 57, 203, 0.7);
-        }
-
-        .back {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            background: rgba(30, 10, 10, 0.8);
-            color: #da7272;
-            border: 1px solid #f25858;
-            padding: 0.5rem 1rem;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 0.95rem;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .back:hover::before {
+            opacity: 1;
         }
 
         .back:hover {
-            background: rgba(50, 15, 15, 0.9);
+            background: rgba(45, 15, 15, 0.9);
             color: #ff9999;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: translateX(-3px);
+            box-shadow: 0 4px 15px rgba(242, 88, 88, 0.3), 0 0 10px rgba(242, 88, 88, 0.2);
+            border-color: #ff6666;
         }
 
-        .back::before {
-            content: '<-';
-            font-size: 0.8rem;
+        .game-info {
+            display: flex;
+            gap: 1.8rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .card {
+            flex: 1;
+            min-width: 300px;
+            background: var(--bg-card-secondary);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(0, 40, 90, 0.5);
+            backdrop-filter: blur(10px);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(120deg, transparent 0%, rgba(0, 20, 40, 0.2) 100%),
+                var(--bg-card-glow);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .description::before {
+            background: 
+                linear-gradient(120deg, transparent 0%, rgba(0, 20, 40, 0.2) 100%),
+                var(--bg-card-glow);
+        }
+
+        .features::before {
+            background: 
+                linear-gradient(120deg, transparent 0%, rgba(40, 0, 0, 0.2) 100%),
+                radial-gradient(circle at 20% 20%, rgba(255, 77, 77, 0.1) 0%, transparent 50%);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 1.2rem;
+        }
+
+        .card-icon {
+            font-size: 1.4rem;
+            color: var(--secondary-color);
+            filter: drop-shadow(0 0 5px rgba(77, 124, 255, 0.7));
         }
 
         h2 {
             color: var(--secondary-light);
-            margin-top: 0;
-            font-size: 1.8rem;
+            margin: 0;
+            font-size: 1.9rem;
             position: relative;
             display: inline-block;
         }
@@ -215,22 +318,27 @@
             position: absolute;
             bottom: -5px;
             left: 0;
-            width: 40px;
+            width: 50px;
             height: 2px;
             background: var(--secondary-color);
+            border-radius: 1px;
         }
 
         .feature-list {
             list-style-type: none;
             padding: 0;
+            flex-grow: 1;
         }
 
         .feature-list li {
-            margin-bottom: 0.75rem;
-            padding-left: 1.75rem;
+            margin-bottom: 1rem;
+            padding-left: 1.8rem;
             position: relative;
             color: var(--text-dim);
             transition: var(--transition);
+            padding-top: 4px;
+            display: flex;
+            align-items: flex-start;
         }
 
         .feature-list li:hover {
@@ -238,22 +346,26 @@
             transform: translateX(5px);
         }
 
-        .feature-list li:before {
-            content: "✓";
-            color: var(--secondary-color);
+        .feature-list li::before {
+            content: "";
             position: absolute;
             left: 0;
-            font-weight: bold;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            box-shadow: 0 0 5px var(--secondary-color);
         }
 
         .download-section {
-            background-color: rgba(5, 10, 15, 0.8);
-            padding: 2.5rem;
-            border-radius: 16px;
+            background: rgba(5, 10, 15, 0.85);
+            padding: 2.8rem;
+            border-radius: var(--border-radius);
             text-align: center;
             margin-top: 2rem;
             border: 1px solid var(--secondary-dark);
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.6), var(--shadow-card);
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
@@ -272,6 +384,7 @@
             opacity: 0;
             transition: opacity 0.5s ease;
             pointer-events: none;
+            z-index: -1;
         }
 
         .download-section:hover::before {
@@ -279,31 +392,55 @@
         }
 
         .download-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 57, 203, 0.2);
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(0, 57, 203, 0.3);
+        }
+
+        .download-title {
+            margin-bottom: 1rem;
+            font-size: 2.3rem;
+            color: var(--secondary-light);
+            text-shadow: 0 0 10px rgba(77, 124, 255, 0.5);
+        }
+
+        .version {
+            font-size: 1.2rem;
+            margin-bottom: 1.8rem;
+            color: var(--text-dim);
+            font-weight: normal;
         }
 
         .download-buttons {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
             flex-wrap: wrap;
+            margin-top: 1.5rem;
         }
 
         .download-link {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             background: linear-gradient(135deg, var(--secondary-dark), var(--secondary-color));
             color: white;
-            padding: 12px 28px;
-            border-radius: 8px;
+            padding: 14px 32px;
+            border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
-            margin: 1rem 0;
+            font-size: 1.1rem;
             transition: var(--transition);
-            box-shadow: 0 4px 15px rgba(0, 57, 203, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 57, 203, 0.5), var(--accent-glow-secondary);
             position: relative;
             overflow: hidden;
+            min-width: 280px;
+        }
+
+        .download-link i {
+            font-size: 1.3rem;
+            margin-right: 8px;
         }
 
         .download-link::before {
@@ -314,12 +451,12 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
+            transition: left 0.7s ease;
         }
 
         .download-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 57, 203, 0.6);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 25px rgba(0, 57, 203, 0.7), 0 0 20px rgba(77, 124, 255, 0.6);
         }
 
         .download-link:hover::before {
@@ -329,84 +466,85 @@
         .changelog-btn {
             background: rgba(10, 20, 50, 0.7);
             color: #9999ff;
-            border: 1px solid #004080;
-            padding: 0.7rem 1.5rem;
+            border: 1px solid rgba(0, 64, 128, 0.7);
+            padding: 14px 28px;
             font-family: "Share Tech Mono", monospace;
-            font-size: 1rem;
+            font-size: 1.05rem;
             cursor: pointer;
-            border-radius: 8px;
+            border-radius: 50px;
             transition: var(--transition);
-            margin-left: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(5px);
+            min-width: 220px;
+        }
+
+        .changelog-btn i {
+            font-size: 1.2rem;
         }
 
         .changelog-btn:hover {
             background: rgba(15, 30, 80, 0.9);
             color: #fff;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(0, 57, 203, 0.4), 0 0 15px rgba(100, 150, 255, 0.3);
+            border-color: rgba(77, 124, 255, 0.8);
         }
 
-        #cq-changelog-modal {
-            display: none;
+        .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            background: rgba(0, 3, 10, 0.95);
+            backdrop-filter: blur(3px);
             z-index: 1000;
+            display: flex;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
-            animation: modalFadeIn 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
         }
 
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
         }
 
-        .changelog-content {
-            background: rgba(5, 10, 20, 0.95);
+        .modal-content {
+            background: rgba(5, 10, 20, 0.97);
             color: var(--text-light);
             width: 90%;
-            max-width: 900px;
+            max-width: 950px;
             max-height: 85vh;
-            padding: 2rem;
+            padding: 2.5rem;
             border: 1px solid var(--secondary-dark);
-            border-radius: 16px;
+            border-radius: var(--border-radius);
             overflow-y: auto;
-            box-shadow: 0 0 30px rgba(0, 57, 203, 0.5);
+            box-shadow: 0 0 40px rgba(0, 57, 203, 0.6), inset 0 0 20px rgba(0, 30, 70, 0.5);
             position: relative;
-            animation: modalSlideIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
         }
 
-        @keyframes modalSlideIn {
-            from {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+            opacity: 1;
         }
 
-        .close-changelog {
+        .close-modal {
             position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: #1c3bb7;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: rgba(28, 59, 183, 0.8);
             color: white;
             border: none;
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             font-weight: bold;
             cursor: pointer;
@@ -414,40 +552,72 @@
             justify-content: center;
             align-items: center;
             transition: var(--transition);
+            font-size: 1.2rem;
+            box-shadow: 0 0 10px rgba(0, 57, 203, 0.7);
         }
 
-        .close-changelog:hover {
+        .close-modal:hover {
             background: var(--secondary-color);
-            transform: rotate(90deg);
+            transform: rotate(180deg) scale(1.1);
+            box-shadow: 0 0 15px rgba(77, 124, 255, 0.8);
+        }
+
+        .modal-title {
+            font-size: 2.2rem;
+            margin-bottom: 1.8rem;
+            color: var(--secondary-light);
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .modal-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
         }
 
         .changelog-tabs {
             display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
+            gap: 0.7rem;
+            margin-bottom: 1.8rem;
             flex-wrap: wrap;
+            justify-content: center;
+            padding: 0 10px;
         }
 
         .tab-btn {
-            background: rgba(10, 20, 30, 0.8);
+            background: rgba(10, 20, 30, 0.7);
             color: #9999ff;
-            border: 1px solid #004080;
-            padding: 0.6rem 1.2rem;
+            border: 1px solid rgba(0, 64, 128, 0.6);
+            padding: 0.7rem 1.4rem;
             font-family: "Share Tech Mono", monospace;
             cursor: pointer;
             border-radius: 8px;
             transition: var(--transition);
+            font-size: 0.95rem;
+            backdrop-filter: blur(3px);
         }
 
         .tab-btn:hover {
             background: rgba(15, 30, 60, 0.9);
+            color: #fff;
+            border-color: rgba(77, 124, 255, 0.6);
         }
 
         .tab-btn.active {
             background: linear-gradient(135deg, var(--secondary-dark), var(--secondary-color));
             color: white;
             font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0, 57, 203, 0.4);
+            box-shadow: 0 4px 12px rgba(0, 57, 203, 0.5), var(--accent-glow-secondary);
+            border: none;
+            transform: translateY(-2px);
         }
 
         .tab-content {
@@ -459,11 +629,25 @@
             display: block;
         }
 
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .changelog-section {
+            margin-bottom: 1.8rem;
+        }
+
         .changelog-section h3 {
             color: var(--secondary-light);
-            margin-top: 1.2rem;
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
+            margin: 1.4rem 0 0.8rem;
+            font-size: 1.5rem;
             position: relative;
             display: inline-block;
         }
@@ -471,35 +655,68 @@
         .changelog-section h3::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: -4px;
             left: 0;
-            width: 30px;
+            width: 40px;
             height: 2px;
             background: var(--secondary-color);
+            border-radius: 1px;
+        }
+
+        .section-additions h3::after {
+            background: var(--accent-orange);
+        }
+
+        .section-improvements h3::after {
+            background: var(--secondary-color);
+        }
+
+        .section-bugfixes h3::after {
+            background: var(--accent-red);
         }
 
         .changelog-list {
             list-style-type: none;
-            padding-left: 1.2rem;
+            padding-left: 1.5rem;
         }
 
         .changelog-list li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
             position: relative;
+            padding-left: 1.2rem;
             transition: var(--transition);
-            padding: 4px 0;
+            line-height: 1.5;
         }
 
         .changelog-list li:hover {
-            transform: translateX(5px);
+            transform: translateX(4px);
+            color: var(--text-light);
         }
 
-        .changelog-list li:before {
+        .changelog-list li::before {
             content: "•";
-            color: var(--secondary-color);
             position: absolute;
             left: -1.2rem;
-            font-size: 1.2rem;
+            color: var(--secondary-color);
+            font-size: 1.4rem;
+            top: -3px;
+        }
+
+        .section-additions .changelog-list li::before {
+            color: var(--accent-orange);
+        }
+
+        .section-bugfixes .changelog-list li::before {
+            color: var(--accent-red);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 1.5rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(77, 124, 255, 0.2);
         }
 
         .external-link {
@@ -507,6 +724,7 @@
             text-decoration: none;
             transition: var(--transition);
             position: relative;
+            display: inline-block;
         }
 
         .external-link::after {
@@ -522,51 +740,77 @@
 
         .external-link:hover {
             color: #ccccff;
+            text-shadow: 0 0 5px rgba(153, 153, 255, 0.5);
         }
 
         .external-link:hover::after {
             width: 100%;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 900px) {
             .game-info {
                 flex-direction: column;
             }
-
-            h1 {
-                font-size: 2.2rem;
+            
+            .download-buttons {
+                flex-direction: column;
+                align-items: center;
             }
-
-            .container {
-                padding: 0 1rem;
-            }
-
-            .download-section {
-                padding: 2rem 1.5rem;
-            }
-
-            .changelog-btn {
-                margin-top: 1rem;
-                display: inline-block;
-                margin-left: 0;
-            }
-
-            .changelog-tabs {
+            
+            .download-link, .changelog-btn {
+                width: 100%;
+                max-width: 350px;
                 justify-content: center;
             }
         }
 
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.4rem;
+            }
+            
+            .logo-icon {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 0 1rem;
+            }
+            
+            .download-section {
+                padding: 2rem 1.5rem;
+            }
+            
+            .modal-content {
+                padding: 1.8rem;
+                margin: 1rem;
+            }
+            
+            .changelog-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-btn {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 0.5rem;
+            }
+        }
+
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
-            background: rgba(5, 10, 20, 0.5);
+            background: rgba(5, 10, 20, 0.6);
+            border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb {
             background: var(--secondary-dark);
-            border-radius: 4px;
+            border-radius: 5px;
+            border: 2px solid rgba(5, 10, 20, 0.6);
         }
 
         ::-webkit-scrollbar-thumb:hover {
@@ -577,244 +821,337 @@
 
 <body>
     <header>
-        <h1>Infinitarium: Close Quarters</h1>
+        <div class="logo-container">
+            <i class="fas fa-sword logo-icon" aria-hidden="true"></i>
+            <h1>Infinitarium: Close Quarters</h1>
+        </div>
     </header>
+    
     <div class="container">
-
         <div class="game-title">
             <h2>Infinitarium: Close Quarters</h2>
-            <div class="game-badge">NEW</div>
+            <div class="game-badge">ALPHA</div>
         </div>
 
-        <a href="https://minichekfire.github.io/infinitarium.github.io/index.html" class="back"> 
-            Back
-        </a>
+        <div class="back-container">
+            <a href="https://minichekfire.github.io/infinitarium.github.io/index.html" class="back">
+                <i class="fas fa-arrow-left"></i> Back to Main
+            </a>
+        </div>
 
-        <div class="game-info" style="display: flex; gap: 1.5rem; margin-bottom: 2rem;">
-            <div class="description">
-                <h2><strong>Description</strong></h2>
-                <p><strong>Infinitarium: Close Quarters</strong> is a melee fighting game. Work in progress.</p>
+        <div class="game-info">
+            <div class="card description">
+                <div class="card-header">
+                    <i class="fas fa-book card-icon" aria-hidden="true"></i>
+                    <h2>Description</h2>
+                </div>
+                <p><strong>Infinitarium: Close Quarters</strong> is a melee combat game focused on close-range fighting mechanics.</p>
+                <p style="margin-top: 1rem; color: var(--text-accent); font-style: italic;">Expect a lot of bugs, the game is in alpha.</p>
             </div>
-            <div class="features">
-                <h2><strong>Features</strong></h2>
+            
+            <div class="card features">
+                <div class="card-header">
+                    <i class="fas fa-star card-icon" aria-hidden="true"></i>
+                    <h2>Features</h2>
+                </div>
                 <ul class="feature-list">
-                    <li>Improved Melee combat system</li>
-                    <li>Kicking & Dropkicking</li>
-                    <li>Multiplayer</li>
-                    <li>Day & Night cycle</li>
-                    <li>(Alpha Version)</li>
+                    <li>Melee combat system with blocking and parrying</li>
+                    <li>Multiple weapons including chopping and crushing weapons</li>
+                    <li>Multiplayer with server list</li>
+                    <li>Day & night cycle affecting gameplay</li>
+                    <li>Work in progress - new features added regularly</li>
                 </ul>
             </div>
         </div>
+        
         <div class="download-section">
-            <h2>Download Close Quarters</h2>
-            <p>Current version: v1.5.1</p>
+            <h2 class="download-title">Download Close Quarters</h2>
+            <p class="version">Current version: v1.5.1 (Alpha)</p>
             <div class="download-buttons">
-                <a href="https://drive.google.com/file/d/18mW-UJOyOL6YCvDD9XKywL-pmWScNNzB/view?usp=sharing"
-                    target="_blank" class="download-link">Install Close Quarters <small>(GOOGLE DRIVE)</small></a>
-                <button class="changelog-btn" onclick="showCQChangelog()">Changelog</button>
+                <a href="https://drive.google.com/file/d/18mW-UJOyOL6YCvDD9XKywL-pmWScNNzB/view?usp=sharing" target="_blank" class="download-link">
+                    <i class="fas fa-download"></i> Install Game <small>(Google Drive)</small>
+                </a>
+                <button class="changelog-btn" onclick="showChangelog()">
+                    <i class="fas fa-history"></i> View Changelog
+                </button>
             </div>
+        </div>
+        
+        <div class="footer">
+            <p>This project is being developed by <a href="https://github.com/minichekfire" class="external-link" target="_blank">bigWater6464</a></p>
         </div>
     </div>
 
     <!-- Changelog Modal -->
-    <div id="cq-changelog-modal" onclick="hideCQChangelog(event)">
-        <div class="changelog-content" onclick="event.stopPropagation()">
-            <h2>Changelog</h2>
+    <div id="changelog-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2 class="modal-title">Version Changelog</h2>
             <div class="changelog-tabs">
-                <button class="tab-btn active" data-tab="cq-v1.5.1">v1.5.1</button>
-                <button class="tab-btn" data-tab="cq-v1.5">v1.5</button>
-                <button class="tab-btn" data-tab="cq-v1.4.1">v1.4.1</button>
-                <button class="tab-btn" data-tab="cq-v1.4">v1.4</button>
-                <button class="tab-btn" data-tab="cq-v1.3.1">v1.3.1</button>
-                <button class="tab-btn" data-tab="cq-v1.3">v1.3</button>
-                <button class="tab-btn" data-tab="cq-v1.2.1">v1.2.1</button>
-                <button class="tab-btn" data-tab="cq-v1.2">v1.2</button>
+                <button class="tab-btn" data-tab="v1.6">v1.6 Alpha</button>
+                <button class="tab-btn active" data-tab="v1.5.1">v1.5.1 Alpha</button>
+                <button class="tab-btn" data-tab="v1.5">v1.5 Alpha</button>
+                <button class="tab-btn" data-tab="v1.4.1">v1.4.1 Alpha</button>
+                <button class="tab-btn" data-tab="v1.4">v1.4 Alpha</button>
+                <button class="tab-btn" data-tab="v1.3.1">v1.3.1 Alpha</button>
+                <button class="tab-btn" data-tab="v1.3">v1.3 Alpha</button>
+                <button class="tab-btn" data-tab="v1.2.1">v1.2.1 Alpha</button>
+                <button class="tab-btn" data-tab="v1.2">v1.2 Alpha</button>
             </div>
-            <div id="cq-v1.2" class="tab-content">
+            
+            <div id="v1.2" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions:</h3>
                     <ul class="changelog-list">
-                        <li>Added machete</li>
-                        <li>Added sounds</li>
-                        <li>Added block ability (W.I.P.)</li>
+                        <li>Added machete weapon</li>
+                        <li>Added combat sound effects</li>
+                        <li>Added block ability (Work in Progress)</li>
                         <li>Added power attack ability</li>
-                        <li>Added stamina (W.I.P.)</li>
+                        <li>Added stamina system (W.I.P.)</li>
                     </ul>
                     <h3>Improvements:</h3>
                     <ul class="changelog-list">
-                        <li>Improved map</li>
-                        <li>Improved menu</li>
+                        <li>Improved map design</li>
+                        <li>Improved main menu UI</li>
                     </ul>
                     <h3>Bug Fixes:</h3>
                     <ul class="changelog-list">
-                        <li>Fixed connection problems</li>
+                        <li>Fixed connection problems between players</li>
                     </ul>
                 </div>
             </div>
-            <div id="cq-v1.2.1" class="tab-content">
+            
+            <div id="v1.2.1" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions:</h3>
                     <ul class="changelog-list">
-                        <li>Added Settings</li>
-                        <li>Added Minimap</li>
-                        <li>Added low hp effects</li>
-                        <li>Added ability to block NPC's attacks</li>
-                        <li>Added sounds for NPCs</li>
+                        <li>Added game settings menu</li>
+                        <li>Added minimap</li>
+                        <li>Added VFX & SFX for low health</li>
+                        <li>Implemented ability to block NPC attacks</li>
+                        <li>Added custom sounds for NPCs</li>
                     </ul>
                     <h3>Improvements:</h3>
                     <ul class="changelog-list">
-                        <li>Improved Crosshair</li>
-                        <li>Improved stamina system</li>
+                        <li>Improved crosshair visibility</li>
+                        <li>Refined stamina management system</li>
                     </ul>
                 </div>
             </div>
-            <div id="cq-v1.3" class="tab-content">
+            
+            <div id="v1.3" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions:</h3>
                     <ul class="changelog-list">
-                        <li>Added ability to stun NPCs (Perfect Block/Parry)</li>
-                        <li>Added Day Night Cycle</li>
-                        <li>Added new chat commands</li>
-                        <li>Added new game icon</li>
+                        <li>Added NPC stunning mechanic (Perfect Block/Parry)</li>
+                        <li>Day Night Cycle system</li>
+                        <li>Added new chat commands for multiplayer</li>
+                        <li>Updated game icon</li>
                     </ul>
                     <h3>Improvements:</h3>
                     <ul class="changelog-list">
-                        <li>Improved Map</li>
-                        <li>Improved NPCs AI</li>
-                        <li>Improved Dropkick</li>
-                        <li>Added weapon sway</li>
-                        <li>Added camera tilt on attack</li>
-                        <li>Added delay of actions after power attack</li>
+                        <li>Major map redesign</li>
+                        <li>Enhanced NPCs AI</li>
+                        <li>Improved dropkick mechanics and animations</li>
+                        <li>Added weapon sway effect for immersion</li>
+                        <li>Implemented camera tilt on attacks</li>
+                        <li>Added action delay after power attacks</li>
                     </ul>
                     <h3>Bug Fixes:</h3>
                     <ul class="changelog-list">
-                        <li>Fixed HUD</li>
+                        <li>Fixed HUD rendering issues</li>
                     </ul>
                 </div>
             </div>
-            <div id="cq-v1.3.1" class="tab-content">
+            
+            <div id="v1.3.1" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions</h3>
                     <ul class="changelog-list">
-                        <li>Added new weapons: Crowbar, Cleaver, Knife, Hammer, Brass Knuckles, Baseball Bat, Telescopic
-                            Baton, Sledgehammer</li>
+                        <li>Added new weapons: Crowbar, Cleaver, Knife, Hammer, Brass Knuckles, Baseball Bat, Telescopic Baton, Sledgehammer</li>
                     </ul>
                     <h3>Improvements:</h3>
                     <ul class="changelog-list">
-                        <li>Reworked machete model</li>
-                        <li>NPC can now block attacks</li>
+                        <li>Reworked machete model and animations</li>
+                        <li>NPCs can now block player attacks</li>
                     </ul>
                 </div>
             </div>
-            <div id="cq-v1.4" class="tab-content">
+            
+            <div id="v1.4" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions</h3>
                     <ul class="changelog-list">
-                        <li>Region picker</li>
-                        <li>Server List</li>
-                        <li>Firearm weapon: Pistol (path: Firearms/Pistol)</li>
-                        <li>Snow</li>
+                        <li>Region picker for server selection</li>
+                        <li>Server browser with ping display</li>
+                        <li>New firearm weapon: Pistol (path: Firearms/Pistol)</li>
+                        <li>Snow weather effect</li>
                     </ul>
                     <h3>Improvements:</h3>
                     <ul class="changelog-list">
-                        <li>Fixed connection problems</li>
+                        <li>Fixed persistent connection problems</li>
                     </ul>
                 </div>
             </div>
-            <div id="cq-v1.4.1" class="tab-content">
+            
+            <div id="v1.4.1" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions</h3>
                     <ul class="changelog-list">
-                        <li>Added Weapon Durability</li>
-                        <li>Added ability to drop weapons</li>
-                        <li>Added Shop</li>
+                        <li>Added weapon durability system</li>
+                        <li>Implemented weapon dropping mechanics</li>
+                        <li>Added in-game shop for purchasing equipment</li>
                     </ul>
                     <h3>Improvements:</h3>
                     <ul class="changelog-list">
-                        <li>Improved Stamina system</li>
-                        <li>Improved Dropkick</li>
-                        <li>Improved Minimap</li>
-                        <li>Improved Visual</li>
+                        <li>Overhauled stamina management system</li>
+                        <li>Refined dropkick physics and hit detection</li>
+                        <li>Enhanced minimap</li>
+                        <li>Improved overall visual quality</li>
                     </ul>
                     <h3>Bug Fixes:</h3>
                     <ul class="changelog-list">
-                        <li>Fixed /allowGive command</li>
+                        <li>Fixed /allowGive command functionality</li>
                     </ul>
                 </div>
             </div>
-            <div id="cq-v1.5" class="tab-content">
+            
+            <div id="v1.5" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions</h3>
                     <ul class="changelog-list">
-                        <li>Added In-game Menu</li>
-                        <li>Player Ragdoll (W.I.P.)</li>
-                        <li>First person body</li>
+                        <li>Added in-game menu system</li>
+                        <li>Implemented player ragdoll physics (Work in Progress)</li>
+                        <li>Added first-person body view</li>
                     </ul>
                     <h3>Improvements:</h3>
                     <ul class="changelog-list">
-                        <li>Revamp of the map</li>
-                        <li>Improved Shop</li>
-                        <li>Kick / Dropkick animation overhaul</li>
-                        <li>Improved weapons view model</li>
+                        <li>Map revamp</li>
+                        <li>Enhanced shop functionality</li>
+                        <li>Overhauled kick and dropkick animations</li>
+                        <li>Improved weapon view models and handling</li>
                     </ul>
                     <h3>Bug Fixes:</h3>
                     <ul class="changelog-list">
-                        <li>Fixed giving weapon with full inventory</li>
-                        <li>Fixed invisible cursor in main menu</li>
+                        <li>Fixed weapon giving with full inventory issue</li>
+                        <li>Fixed invisible cursor bug in main menu</li>
                     </ul>
                 </div>
             </div>
-            <div id="cq-v1.5.1" class="tab-content active">
+            
+            <div id="v1.5.1" class="tab-content active">
                 <div class="changelog-section">
                     <h3>Additions</h3>
                     <ul class="changelog-list">
-                        <li>Added big buildings</li>
-                        <li>Added Infected</li>
+                        <li>Added large buildings to the map</li>
+                        <li>Implemented Infected NPC type</li>
+                        <li>Added version checker</li>
                     </ul>
                     <h3>Improvements:</h3>
                     <ul class="changelog-list">
-                        <li>Improved the map</li>
-                        <li>Removed ragdoll mode for player</li>
+                        <li>Small map improvements</li>
+                        <li>Removed ragdoll mode</li>
                     </ul>
                     <h3>Bug Fixes:</h3>
                     <ul class="changelog-list">
-                        <li>Fixed FOV slider didn't work</li>
+                        <li>Fixed FOV slider not applying changes properly</li>
                     </ul>
                 </div>
             </div>
-            <button class="close-changelog" onclick="hideCQChangelogDirect()">X</button>
+            
+            <div id="v1.6" class="tab-content">
+                <div class="changelog-section">
+                    <h3>Additions</h3>
+                    <ul class="changelog-list">
+                        <li>Added flashlight</li>
+                    </ul>
+                    <h3>Improvements:</h3>
+                    <ul class="changelog-list">
+                        <li>All buttons in menu are now fully interactive</li>
+                        <li>Expanded map</li>
+                        <li>Small weapon animations improvement</li>
+                        <li>Removed snow effect</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <button class="close-modal" onclick="hideChangelog()">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
     </div>
 
     <script>
-        function showCQChangelog() {
-            document.getElementById('cq-changelog-modal').style.display = 'flex';
-        }
-        function hideCQChangelog(event) {
-            if (event.target.id === 'cq-changelog-modal') {
-                document.getElementById('cq-changelog-modal').style.display = 'none';
-            }
-        }
-        function hideCQChangelogDirect() {
-            document.getElementById('cq-changelog-modal').style.display = 'none';
-        }
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                document.getElementById('cq-changelog-modal').style.display = 'none';
-            }
-        });
-        document.querySelectorAll('.tab-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const tabId = button.getAttribute('data-tab');
-                const modal = button.closest('.changelog-content');
-                modal.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-                modal.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-                button.classList.add('active');
-                document.getElementById(tabId).classList.add('active');
+        document.addEventListener('DOMContentLoaded', () => {
+            // Changelog modal functionality
+            const modal = document.getElementById('changelog-modal');
+            
+            window.showChangelog = function() {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            };
+            
+            window.hideChangelog = function() {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            };
+            
+            // Close modal when clicking outside content
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    hideChangelog();
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    hideChangelog();
+                }
+            });
+            
+            // Tab switching functionality
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    
+                    // Update active button
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === tabId) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.card, .download-section').forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(element);
             });
         });
     </script>
 </body>
-
 </html>
