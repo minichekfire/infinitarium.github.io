@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Infinitarium: Close Quarters - Melee combat game with multiplayer features">
     <title>Infinitarium: Close Quarters</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -68,12 +69,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(10, 20, 40, 0.1) 1px, rgba(10, 20, 40, 0.1) 2px),
                 repeating-linear-gradient(90deg, transparent, transparent 1px, rgba(10, 20, 40, 0.1) 1px, rgba(10, 20, 40, 0.1) 2px);
             opacity: 0.2;
             pointer-events: none;
             z-index: -1;
+        }
+
+        .ripple {
+            position: fixed;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 9999;
+            animation: rippleEffect 0.6s ease-out;
+        }
+
+        @keyframes rippleEffect {
+            to {
+                width: 25px;
+                height: 25px;
+                opacity: 0;
+            }
         }
 
         header {
@@ -99,8 +118,13 @@
         }
 
         @keyframes headerGlow {
-            from { opacity: 0.6; }
-            to { opacity: 1; }
+            from {
+                opacity: 0.6;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         .logo-container {
@@ -118,9 +142,20 @@
         }
 
         @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-            100% { transform: scale(1); opacity: 1; }
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         h1 {
@@ -185,14 +220,18 @@
         }
 
         @keyframes badgePulse {
-            from { box-shadow: 0 0 10px rgba(255, 77, 77, 0.4); }
-            to { box-shadow: 0 0 20px rgba(255, 77, 77, 0.8); }
+            from {
+                box-shadow: 0 0 10px rgba(255, 77, 77, 0.4);
+            }
+
+            to {
+                box-shadow: 0 0 20px rgba(255, 77, 77, 0.8);
+            }
         }
 
         .back-container {
-            position: absolute;
-            top: 0;
-            left: 0;
+            margin-bottom: 1.5rem;
+            display: left;
         }
 
         .back {
@@ -242,6 +281,7 @@
             display: flex;
             gap: 1.8rem;
             margin-bottom: 2.5rem;
+            margin-top: 2rem;
         }
 
         .card {
@@ -268,7 +308,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: 
+            background:
                 linear-gradient(120deg, transparent 0%, rgba(0, 20, 40, 0.2) 100%),
                 var(--bg-card-glow);
             opacity: 0;
@@ -281,13 +321,13 @@
         }
 
         .description::before {
-            background: 
+            background:
                 linear-gradient(120deg, transparent 0%, rgba(0, 20, 40, 0.2) 100%),
                 var(--bg-card-glow);
         }
 
         .features::before {
-            background: 
+            background:
                 linear-gradient(120deg, transparent 0%, rgba(40, 0, 0, 0.2) 100%),
                 radial-gradient(circle at 20% 20%, rgba(255, 77, 77, 0.1) 0%, transparent 50%);
         }
@@ -634,6 +674,7 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -751,13 +792,14 @@
             .game-info {
                 flex-direction: column;
             }
-            
+
             .download-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-            
-            .download-link, .changelog-btn {
+
+            .download-link,
+            .changelog-btn {
                 width: 100%;
                 max-width: 350px;
                 justify-content: center;
@@ -768,29 +810,29 @@
             h1 {
                 font-size: 2.4rem;
             }
-            
+
             .logo-icon {
                 font-size: 2rem;
             }
-            
+
             .container {
                 padding: 0 1rem;
             }
-            
+
             .download-section {
                 padding: 2rem 1.5rem;
             }
-            
+
             .modal-content {
                 padding: 1.8rem;
                 margin: 1rem;
             }
-            
+
             .changelog-tabs {
                 flex-direction: column;
                 align-items: center;
             }
-            
+
             .tab-btn {
                 width: 100%;
                 max-width: 300px;
@@ -826,17 +868,17 @@
             <h1>Infinitarium: Close Quarters</h1>
         </div>
     </header>
-    
-    <div class="container">
-        <div class="game-title">
-            <h2>Infinitarium: Close Quarters</h2>
-            <div class="game-badge">ALPHA</div>
-        </div>
 
+    <div class="container">
         <div class="back-container">
             <a href="https://minichekfire.github.io/infinitarium.github.io/index.html" class="back">
                 <i class="fas fa-arrow-left"></i> Back to Main
             </a>
+        </div>
+
+        <div class="game-title">
+            <h2>Infinitarium: Close Quarters</h2>
+            <div class="game-badge">ALPHA</div>
         </div>
 
         <div class="game-info">
@@ -845,10 +887,12 @@
                     <i class="fas fa-book card-icon" aria-hidden="true"></i>
                     <h2>Description</h2>
                 </div>
-                <p><strong>Infinitarium: Close Quarters</strong> is a melee combat game focused on close-range fighting mechanics.</p>
-                <p style="margin-top: 1rem; color: var(--text-accent); font-style: italic;">Expect a lot of bugs, the game is in alpha.</p>
+                <p><strong>Infinitarium: Close Quarters</strong> is a melee combat game focused on close-range fighting
+                    mechanics.</p>
+                <p style="margin-top: 1rem; color: var(--text-accent); font-style: italic;">Expect a lot of bugs, the
+                    game is in alpha.</p>
             </div>
-            
+
             <div class="card features">
                 <div class="card-header">
                     <i class="fas fa-star card-icon" aria-hidden="true"></i>
@@ -863,12 +907,13 @@
                 </ul>
             </div>
         </div>
-        
+
         <div class="download-section">
             <h2 class="download-title">Download Close Quarters</h2>
             <p class="version">Current version: v1.5.1 (Alpha)</p>
             <div class="download-buttons">
-                <a href="https://drive.google.com/file/d/18mW-UJOyOL6YCvDD9XKywL-pmWScNNzB/view?usp=sharing" target="_blank" class="download-link">
+                <a href="https://drive.google.com/file/d/18mW-UJOyOL6YCvDD9XKywL-pmWScNNzB/view?usp=sharing"
+                    target="_blank" class="download-link">
                     <i class="fas fa-download"></i> Install Game <small>(Google Drive)</small>
                 </a>
                 <button class="changelog-btn" onclick="showChangelog()">
@@ -876,9 +921,10 @@
                 </button>
             </div>
         </div>
-        
+
         <div class="footer">
-            <p>This project is being developed by <a href="https://github.com/minichekfire" class="external-link" target="_blank">bigWater6464</a></p>
+            <p>This project is being developed by <a href="https://github.com/minichekfire" class="external-link"
+                    target="_blank">bigWater6464</a></p>
         </div>
     </div>
 
@@ -897,7 +943,7 @@
                 <button class="tab-btn" data-tab="v1.2.1">v1.2.1 Alpha</button>
                 <button class="tab-btn" data-tab="v1.2">v1.2 Alpha</button>
             </div>
-            
+
             <div id="v1.2" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions:</h3>
@@ -919,7 +965,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div id="v1.2.1" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions:</h3>
@@ -937,7 +983,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div id="v1.3" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions:</h3>
@@ -962,12 +1008,13 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div id="v1.3.1" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions</h3>
                     <ul class="changelog-list">
-                        <li>Added new weapons: Crowbar, Cleaver, Knife, Hammer, Brass Knuckles, Baseball Bat, Telescopic Baton, Sledgehammer</li>
+                        <li>Added new weapons: Crowbar, Cleaver, Knife, Hammer, Brass Knuckles, Baseball Bat, Telescopic
+                            Baton, Sledgehammer</li>
                     </ul>
                     <h3>Improvements:</h3>
                     <ul class="changelog-list">
@@ -976,7 +1023,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div id="v1.4" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions</h3>
@@ -992,7 +1039,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div id="v1.4.1" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions</h3>
@@ -1014,7 +1061,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div id="v1.5" class="tab-content">
                 <div class="changelog-section">
                     <h3>Additions</h3>
@@ -1037,7 +1084,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div id="v1.5.1" class="tab-content active">
                 <div class="changelog-section">
                     <h3>Additions</h3>
@@ -1057,9 +1104,11 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div id="v1.6" class="tab-content">
                 <div class="changelog-section">
+                    <i><small>Unreleased version of the game</small></i>
+                    <br>
                     <h3>Additions</h3>
                     <ul class="changelog-list">
                         <li>Added flashlight</li>
@@ -1074,7 +1123,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <button class="close-modal" onclick="hideChangelog()">
                 <i class="fas fa-times"></i>
             </button>
@@ -1085,43 +1134,43 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Changelog modal functionality
             const modal = document.getElementById('changelog-modal');
-            
-            window.showChangelog = function() {
+
+            window.showChangelog = function () {
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             };
-            
-            window.hideChangelog = function() {
+
+            window.hideChangelog = function () {
                 modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
             };
-            
+
             // Close modal when clicking outside content
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
                     hideChangelog();
                 }
             });
-            
+
             // Close modal with Escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     hideChangelog();
                 }
             });
-            
+
             // Tab switching functionality
             const tabButtons = document.querySelectorAll('.tab-btn');
             const tabContents = document.querySelectorAll('.tab-content');
-            
+
             tabButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const tabId = button.getAttribute('data-tab');
-                    
+
                     // Update active button
                     tabButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
-                    
+
                     tabContents.forEach(content => {
                         content.classList.remove('active');
                         if (content.id === tabId) {
@@ -1130,13 +1179,13 @@
                     });
                 });
             });
-            
+
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
                 threshold: 0.1
             };
-            
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -1145,14 +1194,29 @@
                     }
                 });
             }, observerOptions);
-            
+
             document.querySelectorAll('.card, .download-section').forEach(element => {
                 element.style.opacity = '0';
                 element.style.transform = 'translateY(20px)';
                 element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
                 observer.observe(element);
             });
+
+            document.addEventListener('click', function (e) {
+                const ripple = document.createElement('div');
+                ripple.classList.add('ripple');
+
+                ripple.style.left = e.clientX + 'px';
+                ripple.style.top = e.clientY + 'px';
+
+                document.body.appendChild(ripple);
+
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
         });
     </script>
 </body>
+
 </html>
