@@ -788,6 +788,123 @@
             width: 100%;
         }
 
+        /* === Gallery Styles === */
+        .gallery-section {
+            margin: 2.5rem 0;
+            padding: 0 1.5rem;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--secondary-light);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .gallery-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--secondary-color), transparent);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(77, 124, 255, 0.2);
+            transition: var(--transition);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+        }
+
+        .gallery-grid img:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(77, 124, 255, 0.3);
+            border-color: var(--secondary-color);
+        }
+
+        /* === Lightbox Modal === */
+        #lightbox-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        #lightbox-modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        #lightbox-image {
+            max-width: 90vw;
+            max-height: 90vh;
+            object-fit: contain;
+            border: 2px solid var(--secondary-color);
+            box-shadow: 0 0 30px rgba(77, 124, 255, 0.6);
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        #close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.4rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        #close-lightbox:hover {
+            background: var(--secondary-color);
+            transform: rotate(90deg);
+        }
+
         @media (max-width: 900px) {
             .game-info {
                 flex-direction: column;
@@ -889,7 +1006,7 @@
                 </div>
                 <p><strong>Infinitarium: Close Quarters</strong> is a melee combat game focused on close-range fighting
                     mechanics.</p>
-                <p style="margin-top: 1rem; color: var(--text-accent); font-style: italic;">Expect a lot of bugs, the
+                <p style="margin-top: 1rem; color: var(--text-accent); font-style: italic;">Expect a lot of bugs and changes, the
                     game is in alpha.</p>
             </div>
 
@@ -905,6 +1022,16 @@
                     <li>Day & night cycle affecting gameplay</li>
                     <li>Work in progress - new features added regularly</li>
                 </ul>
+            </div>
+        </div>
+
+        <div class="gallery-section">
+            <h2 class="gallery-title">Game Screenshots</h2>
+            <div class="gallery-grid">
+                <img src="img/icq/screenshot1.png" alt="Game Screenshot 1" loading="lazy">
+                <img src="img/icq/screenshot2.png" alt="Game Screenshot 2" loading="lazy">
+                <img src="img/icq/screenshot3.png" alt="Game Screenshot 3" loading="lazy">
+                <img src="img/icq/screenshot4.png" alt="Game Screenshot 4" loading="lazy">
             </div>
         </div>
 
@@ -1216,8 +1343,43 @@
                     ripple.remove();
                 }, 600);
             });
+            const galleryImages = document.querySelectorAll('.gallery-grid img');
+            const lightboxModal = document.getElementById('lightbox-modal');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const closeLightbox = document.getElementById('close-lightbox');
+
+            galleryImages.forEach(img => {
+                img.addEventListener('click', () => {
+                    lightboxImage.src = img.src;
+                    lightboxModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            closeLightbox.addEventListener('click', () => {
+                lightboxModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+
+            lightboxModal.addEventListener('click', (e) => {
+                if (e.target === lightboxModal) {
+                    lightboxModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
+                    lightboxModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
         });
     </script>
+    <div id="lightbox-modal">
+        <img id="lightbox-image" src="" alt="Fullscreen preview">
+        <button id="close-lightbox">&times;</button>
+    </div>
 </body>
 
 </html>
