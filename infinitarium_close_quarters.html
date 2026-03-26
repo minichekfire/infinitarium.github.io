@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Infinitarium: Close Quarters - Melee combat game with multiplayer features">
+    <meta name="description" content="Melee PVP/PVE combat game">
     <title>Infinitarium: Close Quarters</title>
     <link rel="icon"
         href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚔️</text></svg>">
@@ -503,8 +503,15 @@
             left: 100%;
         }
 
+        .changelog-wrapper {
+            display: flex;
+            gap: 1.5rem;
+            height: 70vh;
+            margin-top: 1rem;
+        }
+
         .changelog-btn {
-            background: rgba(10, 20, 50, 0.7);
+            background: linear-gradient(135deg, rgba(10, 20, 50, 0.8), rgba(15, 30, 70, 0.7));
             color: #9999ff;
             border: 1px solid rgba(0, 64, 128, 0.7);
             padding: 14px 28px;
@@ -518,6 +525,26 @@
             gap: 8px;
             backdrop-filter: blur(5px);
             min-width: 220px;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .changelog-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(153, 153, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .changelog-btn:hover::before {
+            left: 100%;
         }
 
         .changelog-btn i {
@@ -525,11 +552,11 @@
         }
 
         .changelog-btn:hover {
-            background: rgba(15, 30, 80, 0.9);
+            background: linear-gradient(135deg, rgba(15, 30, 80, 0.95), rgba(25, 50, 120, 0.9));
             color: #fff;
             transform: translateY(-3px);
-            box-shadow: 0 6px 16px rgba(0, 57, 203, 0.4), 0 0 15px rgba(100, 150, 255, 0.3);
-            border-color: rgba(77, 124, 255, 0.8);
+            box-shadow: 0 6px 20px rgba(0, 57, 203, 0.5), 0 0 25px rgba(100, 150, 255, 0.4);
+            border-color: rgba(77, 124, 255, 0.9);
         }
 
         .modal-overlay {
@@ -625,39 +652,84 @@
 
         .changelog-tabs {
             display: flex;
-            gap: 0.7rem;
-            margin-bottom: 1.8rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            padding: 0 10px;
+            flex-direction: column;
+            gap: 0.5rem;
+            width: 220px;
+            flex-shrink: 0;
+            border-bottom: none;
+            border-right: 1px solid rgba(77, 124, 255, 0.2);
+            padding-right: 1rem;
+            overflow-y: auto;
+            padding-bottom: 1rem;
+        }
+
+        .changelog-tabs::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .changelog-tabs::-webkit-scrollbar-track {
+            background: rgba(5, 10, 20, 0.3);
+            border-radius: 3px;
+        }
+
+        .changelog-tabs::-webkit-scrollbar-thumb {
+            background: var(--secondary-dark);
+            border-radius: 3px;
         }
 
         .tab-btn {
-            background: rgba(10, 20, 30, 0.7);
+            background: linear-gradient(145deg, rgba(10, 20, 30, 0.6), rgba(8, 15, 25, 0.6));
             color: #9999ff;
-            border: 1px solid rgba(0, 64, 128, 0.6);
-            padding: 0.7rem 1.4rem;
+            border: 1px solid rgba(0, 64, 128, 0.4);
+            padding: 0.8rem 1rem;
             font-family: "Share Tech Mono", monospace;
             cursor: pointer;
             border-radius: 8px;
             transition: var(--transition);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             backdrop-filter: blur(3px);
+            position: relative;
+            overflow: hidden;
+            text-align: left;
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--secondary-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .tab-btn:hover {
-            background: rgba(15, 30, 60, 0.9);
+            background: linear-gradient(145deg, rgba(15, 30, 60, 0.9), rgba(12, 25, 50, 0.9));
             color: #fff;
             border-color: rgba(77, 124, 255, 0.6);
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px rgba(0, 57, 203, 0.2);
+        }
+
+        .tab-btn:hover::before {
+            opacity: 1;
         }
 
         .tab-btn.active {
             background: linear-gradient(135deg, var(--secondary-dark), var(--secondary-color));
             color: white;
             font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0, 57, 203, 0.5), var(--accent-glow-secondary);
+            box-shadow: 0 2px 10px rgba(0, 57, 203, 0.4), var(--accent-glow-secondary);
             border: none;
-            transform: translateY(-2px);
+            transform: translateX(5px);
+        }
+
+        .tab-btn.active::before {
+            opacity: 1;
         }
 
         .tab-content {
@@ -682,65 +754,133 @@
         }
 
         .changelog-section {
-            margin-bottom: 1.8rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(15, 25, 40, 0.4);
+            border-radius: 12px;
+            border-left: 3px solid rgba(77, 124, 255, 0.3);
+            transition: var(--transition);
+        }
+
+        .changelog-section:hover {
+            background: rgba(20, 35, 60, 0.5);
+            border-left-color: rgba(100, 150, 255, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .changelog-section h3 {
             color: var(--secondary-light);
-            margin: 1.4rem 0 0.8rem;
-            font-size: 1.5rem;
+            margin: 0 0 1rem 0;
+            font-size: 1.4rem;
             position: relative;
             display: inline-block;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .changelog-section h3::after {
             content: '';
             position: absolute;
-            bottom: -4px;
+            bottom: -8px;
             left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--secondary-color);
-            border-radius: 1px;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary-color), transparent);
+            border-radius: 2px;
+        }
+
+        .changelog-content-area::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .changelog-content-area::-webkit-scrollbar-track {
+            background: rgba(5, 10, 20, 0.3);
+            border-radius: 4px;
+        }
+
+        .changelog-content-area::-webkit-scrollbar-thumb {
+            background: var(--secondary-dark);
+            border-radius: 4px;
+            border: 2px solid rgba(5, 10, 20, 0.3);
         }
 
         .section-additions h3::after {
-            background: var(--accent-orange);
+            background: linear-gradient(90deg, var(--accent-orange), transparent);
         }
 
         .section-improvements h3::after {
-            background: var(--secondary-color);
+            background: linear-gradient(90deg, var(--secondary-color), transparent);
         }
 
         .section-bugfixes h3::after {
-            background: var(--accent-red);
+            background: linear-gradient(90deg, var(--accent-red), transparent);
         }
 
         .changelog-list {
             list-style-type: none;
             padding-left: 1.5rem;
+            margin: 0;
         }
 
         .changelog-list li {
             margin-bottom: 0.7rem;
             position: relative;
-            padding-left: 1.2rem;
+            padding: 8px 12px;
+            border-radius: 6px;
             transition: var(--transition);
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .changelog-list li:hover {
-            transform: translateX(4px);
-            color: var(--text-light);
+            transform: translateX(8px);
+            background: rgba(77, 124, 255, 0.08);
         }
 
         .changelog-list li::before {
-            content: "•";
+            content: "▸";
             position: absolute;
-            left: -1.2rem;
+            left: -1.3rem;
             color: var(--secondary-color);
-            font-size: 1.4rem;
-            top: -3px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .changelog-list li:hover::before {
+            color: #6699ff;
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            .changelog-wrapper {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .changelog-tabs {
+                width: 100%;
+                flex-direction: row;
+                overflow-x: auto;
+                border-right: none;
+                border-bottom: 1px solid rgba(77, 124, 255, 0.2);
+                padding-right: 0;
+                padding-bottom: 1rem;
+            }
+
+            .tab-btn {
+                width: auto;
+                white-space: nowrap;
+                transform: none !important;
+            }
+
+            .tab-btn.active {
+                transform: none !important;
+            }
+
+            .changelog-content-area {
+                max-height: 50vh;
+            }
         }
 
         .section-additions .changelog-list li::before {
@@ -1004,8 +1144,11 @@
                     <i class="fas fa-book card-icon" aria-hidden="true"></i>
                     <h2>Description</h2>
                 </div>
-                <p><strong>Infinitarium: Close Quarters</strong> is a game that focuses on close combat and survival. To survive, you need to find or buy weapons to protect yourself. This is a multiplayer game, meaning you can be harmed not only by NPCs or the environment, but also by other players.</p>
-                <p style="margin-top: 1rem; color: var(--text-accent); font-style: italic;">Expect a lot of bugs and changes, the
+                <p><strong>Infinitarium: Close Quarters</strong> is a game that focuses on close combat and survival. To
+                    survive, you need to find or buy weapons to protect yourself. This is a multiplayer game, meaning
+                    you can be harmed not only by NPCs or the environment, but also by other players.</p>
+                <p style="margin-top: 1rem; color: var(--text-accent); font-style: italic;">Expect a lot of bugs and
+                    changes, the
                     game is in alpha.</p>
             </div>
 
@@ -1049,7 +1192,8 @@
         </div>
 
         <div class="footer">
-            <p>This project is being developed by <a href="https://github.com/minichekfire" class="external-link" target="_blank">bigWater6464</a></p>
+            <p>This project is being developed by <a href="https://github.com/minichekfire" class="external-link"
+                    target="_blank">bigWater6464</a></p>
         </div>
     </div>
 
@@ -1057,329 +1201,325 @@
     <div id="changelog-modal" class="modal-overlay">
         <div class="modal-content">
             <h2 class="modal-title">Version Changelog</h2>
-            <div class="changelog-tabs">
-                <button class="tab-btn" data-tab="v2.1">v2.1 Beta</button>
-				<button class="tab-btn" data-tab="v2.0">v2.0 Beta</button>
-                <button class="tab-btn" data-tab="v1.9">v1.9 Alpha</button>
-                <button class="tab-btn" data-tab="v1.8">v1.8 Alpha</button>
-                <button class="tab-btn" data-tab="v1.7">v1.7 Alpha</button>
-                <button class="tab-btn" data-tab="v1.6">v1.6 Alpha</button>
-                <button class="tab-btn" data-tab="v1.5.1">v1.5.1 Alpha</button>
-                <button class="tab-btn" data-tab="v1.5">v1.5 Alpha</button>
-                <button class="tab-btn" data-tab="v1.4.1">v1.4.1 Alpha</button>
-                <button class="tab-btn" data-tab="v1.4">v1.4 Alpha</button>
-                <button class="tab-btn" data-tab="v1.3.1">v1.3.1 Alpha</button>
-                <button class="tab-btn" data-tab="v1.3">v1.3 Alpha</button>
-                <button class="tab-btn" data-tab="v1.2.1">v1.2.1 Alpha</button>
-                <button class="tab-btn" data-tab="v1.2">v1.2 Alpha</button>
-            </div>
-
-            <div id="v1.2" class="tab-content">
-                <div class="changelog-section">
-                    <h3>Additions:</h3>
-                    <ul class="changelog-list">
-                        <li>Added machete weapon</li>
-                        <li>Added combat sound effects</li>
-                        <li>Added block ability (Work in Progress)</li>
-                        <li>Added power attack ability</li>
-                        <li>Added stamina system (W.I.P.)</li>
-                    </ul>
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Improved map design</li>
-                        <li>Improved main menu UI</li>
-                    </ul>
-                    <h3>Bug Fixes:</h3>
-                    <ul class="changelog-list">
-                        <li>Fixed connection problems between players</li>
-                    </ul>
+            <div class="changelog-wrapper">
+                <!-- Левая колонка: Список версий -->
+                <div class="changelog-tabs">
+                    <button class="tab-btn active" data-tab="v2.1">v2.1 Beta</button>
+                    <button class="tab-btn" data-tab="v2.0">v2.0 Beta</button>
+                    <button class="tab-btn" data-tab="v1.9">v1.9 Alpha</button>
+                    <button class="tab-btn" data-tab="v1.8">v1.8 Alpha</button>
+                    <button class="tab-btn" data-tab="v1.7">v1.7 Alpha</button>
+                    <button class="tab-btn" data-tab="v1.6">v1.6 Alpha</button>
+                    <button class="tab-btn" data-tab="v1.5.1">v1.5.1 Alpha</button>
+                    <button class="tab-btn" data-tab="v1.5">v1.5 Alpha</button>
+                    <button class="tab-btn" data-tab="v1.4.1">v1.4.1 Alpha</button>
+                    <button class="tab-btn" data-tab="v1.4">v1.4 Alpha</button>
+                    <button class="tab-btn" data-tab="v1.3.1">v1.3.1 Alpha</button>
+                    <button class="tab-btn" data-tab="v1.3">v1.3 Alpha</button>
+                    <button class="tab-btn" data-tab="v1.2.1">v1.2.1 Alpha</button>
+                    <button class="tab-btn" data-tab="v1.2">v1.2 Alpha</button>
                 </div>
-            </div>
 
-            <div id="v1.2.1" class="tab-content">
-                <div class="changelog-section">
-                    <h3>Additions:</h3>
-                    <ul class="changelog-list">
-                        <li>Added game settings menu</li>
-                        <li>Added minimap</li>
-                        <li>Added VFX & SFX for low health</li>
-                        <li>Implemented ability to block NPC attacks</li>
-                        <li>Added custom sounds for NPCs</li>
-                    </ul>
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Improved crosshair visibility</li>
-                        <li>Refined stamina management system</li>
-                    </ul>
-                </div>
-            </div>
+                <!-- Правая колонка: Область контента -->
+                <div class="changelog-content-area">
+                    <!-- Контент версий (остался прежним, просто перемещен внутрь новой обертки) -->
+                    <div id="v1.2" class="tab-content">
+                        <div class="changelog-section">
+                            <h3>Additions:</h3>
+                            <ul class="changelog-list">
+                                <li>Added machete weapon</li>
+                                <li>Added combat sound effects</li>
+                                <li>Added block ability (Work in Progress)</li>
+                                <li>Added power attack ability</li>
+                                <li>Added stamina system (W.I.P.)</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Improved map design</li>
+                                <li>Improved main menu UI</li>
+                            </ul>
+                            <h3>Bug Fixes:</h3>
+                            <ul class="changelog-list">
+                                <li>Fixed connection problems between players</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div id="v1.3" class="tab-content">
-                <div class="changelog-section">
-                    <h3>Additions:</h3>
-                    <ul class="changelog-list">
-                        <li>Added NPC stunning mechanic (Perfect Block/Parry)</li>
-                        <li>Day Night Cycle system</li>
-                        <li>Added new chat commands for multiplayer</li>
-                        <li>Updated game icon</li>
-                    </ul>
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Major map redesign</li>
-                        <li>Enhanced NPCs AI</li>
-                        <li>Improved dropkick mechanics and animations</li>
-                        <li>Added weapon sway effect for immersion</li>
-                        <li>Implemented camera tilt on attacks</li>
-                        <li>Added action delay after power attacks</li>
-                    </ul>
-                    <h3>Bug Fixes:</h3>
-                    <ul class="changelog-list">
-                        <li>Fixed HUD rendering issues</li>
-                    </ul>
-                </div>
-            </div>
+                    <div id="v1.2.1" class="tab-content">
+                        <div class="changelog-section">
+                            <h3>Additions:</h3>
+                            <ul class="changelog-list">
+                                <li>Added game settings menu</li>
+                                <li>Added minimap</li>
+                                <li>Added VFX & SFX for low health</li>
+                                <li>Implemented ability to block NPC attacks</li>
+                                <li>Added custom sounds for NPCs</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Improved crosshair visibility</li>
+                                <li>Refined stamina management system</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div id="v1.3.1" class="tab-content">
-                <div class="changelog-section">
-                    <h3>Additions</h3>
-                    <ul class="changelog-list">
-                        <li>Added new weapons: Crowbar, Cleaver, Knife, Hammer, Brass Knuckles, Baseball Bat, Telescopic
-                            Baton, Sledgehammer</li>
-                    </ul>
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Reworked machete model and animations</li>
-                        <li>NPCs can now block player attacks</li>
-                    </ul>
-                </div>
-            </div>
+                    <div id="v1.3" class="tab-content">
+                        <div class="changelog-section">
+                            <h3>Additions:</h3>
+                            <ul class="changelog-list">
+                                <li>Added NPC stunning mechanic (Perfect Block/Parry)</li>
+                                <li>Day Night Cycle system</li>
+                                <li>Added new chat commands for multiplayer</li>
+                                <li>Updated game icon</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Major map redesign</li>
+                                <li>Enhanced NPCs AI</li>
+                                <li>Improved dropkick mechanics and animations</li>
+                                <li>Added weapon sway effect for immersion</li>
+                                <li>Implemented camera tilt on attacks</li>
+                                <li>Added action delay after power attacks</li>
+                            </ul>
+                            <h3>Bug Fixes:</h3>
+                            <ul class="changelog-list">
+                                <li>Fixed HUD rendering issues</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div id="v1.4" class="tab-content">
-                <div class="changelog-section">
-                    <h3>Additions</h3>
-                    <ul class="changelog-list">
-                        <li>Region picker for server selection</li>
-                        <li>Server browser with ping display</li>
-                        <li>New firearm weapon: Pistol (path: Firearms/Pistol)</li>
-                        <li>Snow weather effect</li>
-                    </ul>
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Fixed persistent connection problems</li>
-                    </ul>
-                </div>
-            </div>
+                    <div id="v1.3.1" class="tab-content">
+                        <div class="changelog-section">
+                            <h3>Additions</h3>
+                            <ul class="changelog-list">
+                                <li>Added new weapons: Crowbar, Cleaver, Knife, Hammer, Brass Knuckles, Baseball Bat,
+                                    Telescopic Baton, Sledgehammer</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Reworked machete model and animations</li>
+                                <li>NPCs can now block player attacks</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div id="v1.4.1" class="tab-content">
-                <div class="changelog-section">
-                    <h3>Additions</h3>
-                    <ul class="changelog-list">
-                        <li>Added weapon durability system</li>
-                        <li>Implemented weapon dropping mechanics</li>
-                        <li>Added in-game shop for purchasing equipment</li>
-                    </ul>
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Overhauled stamina management system</li>
-                        <li>Refined dropkick physics and hit detection</li>
-                        <li>Enhanced minimap</li>
-                        <li>Improved overall visual quality</li>
-                    </ul>
-                    <h3>Bug Fixes:</h3>
-                    <ul class="changelog-list">
-                        <li>Fixed /allowGive command functionality</li>
-                    </ul>
-                </div>
-            </div>
+                    <div id="v1.4" class="tab-content">
+                        <div class="changelog-section">
+                            <h3>Additions</h3>
+                            <ul class="changelog-list">
+                                <li>Region picker for server selection</li>
+                                <li>Server browser with ping display</li>
+                                <li>New firearm weapon: Pistol (path: Firearms/Pistol)</li>
+                                <li>Snow weather effect</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Fixed persistent connection problems</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div id="v1.5" class="tab-content">
-                <div class="changelog-section">
-                    <h3>Additions</h3>
-                    <ul class="changelog-list">
-                        <li>Added in-game menu system</li>
-                        <li>Implemented player ragdoll physics (Work in Progress)</li>
-                        <li>Added first-person body view</li>
-                    </ul>
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Map revamp</li>
-                        <li>Enhanced shop functionality</li>
-                        <li>Overhauled kick and dropkick animations</li>
-                        <li>Improved weapon view models and handling</li>
-                    </ul>
-                    <h3>Bug Fixes:</h3>
-                    <ul class="changelog-list">
-                        <li>Fixed weapon giving with full inventory issue</li>
-                        <li>Fixed invisible cursor bug in main menu</li>
-                    </ul>
-                </div>
-            </div>
+                    <div id="v1.4.1" class="tab-content">
+                        <div class="changelog-section">
+                            <h3>Additions</h3>
+                            <ul class="changelog-list">
+                                <li>Added weapon durability system</li>
+                                <li>Implemented weapon dropping mechanics</li>
+                                <li>Added in-game shop for purchasing equipment</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Overhauled stamina management system</li>
+                                <li>Refined dropkick physics and hit detection</li>
+                                <li>Enhanced minimap</li>
+                                <li>Improved overall visual quality</li>
+                            </ul>
+                            <h3>Bug Fixes:</h3>
+                            <ul class="changelog-list">
+                                <li>Fixed /allowGive command functionality</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div id="v1.5.1" class="tab-content">
-                <div class="changelog-section">
-                    <h3>Additions</h3>
-                    <ul class="changelog-list">
-                        <li>Added large buildings to the map</li>
-                        <li>Implemented Infected NPC type</li>
-                        <li>Added version checker</li>
-                    </ul>
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Small map improvements</li>
-                        <li>Removed ragdoll mode</li>
-                    </ul>
-                    <h3>Bug Fixes:</h3>
-                    <ul class="changelog-list">
-                        <li>Fixed FOV slider not applying changes properly</li>
-                    </ul>
-                </div>
-            </div>
+                    <div id="v1.5" class="tab-content">
+                        <div class="changelog-section">
+                            <h3>Additions</h3>
+                            <ul class="changelog-list">
+                                <li>Added in-game menu system</li>
+                                <li>Implemented player ragdoll physics (Work in Progress)</li>
+                                <li>Added first-person body view</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Map revamp</li>
+                                <li>Enhanced shop functionality</li>
+                                <li>Overhauled kick and dropkick animations</li>
+                                <li>Improved weapon view models and handling</li>
+                            </ul>
+                            <h3>Bug Fixes:</h3>
+                            <ul class="changelog-list">
+                                <li>Fixed weapon giving with full inventory issue</li>
+                                <li>Fixed invisible cursor bug in main menu</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div id="v1.6" class="tab-content">
-                <div class="changelog-section">
-                    <!--<i><small>Unreleased version of the game</small></i>-->
-                    <br>
-                    <h3>Additions</h3>
-                    <ul class="changelog-list">
-                        <li>Added flashlight</li>
-                        <li>Added deploy/pickup animations for some weapons</li>
-                    </ul>
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Improved hitbox system</li>
-                        <li>All buttons in menu are now fully interactive</li>
-                        <li>Expanded map</li>
-                        <li>Small weapon animations improvement</li>
-                        <li>New camera tilt effects</li>
-                        <li>Removed snow effect</li>
-                    </ul>
-                </div>
-            </div>
+                    <div id="v1.5.1" class="tab-content">
+                        <div class="changelog-section">
+                            <h3>Additions</h3>
+                            <ul class="changelog-list">
+                                <li>Added large buildings to the map</li>
+                                <li>Implemented Infected NPC type</li>
+                                <li>Added version checker</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Small map improvements</li>
+                                <li>Removed ragdoll mode</li>
+                            </ul>
+                            <h3>Bug Fixes:</h3>
+                            <ul class="changelog-list">
+                                <li>Fixed FOV slider not applying changes properly</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div id="v1.7" class="tab-content">
-                <div class="changelog-section">
-                    <br>
-                    <h3>Additions:</h3>
-                    <ul class="changelog-list">
-                        <li>Blood particles</li>
-                        <li>New chat command: /summon</li>
-                        <li>Discord Rich Presence</li>
-                        <li>Bandits spawning on the map every 2 minutes</li>
-                        <li>Added Lockers with weapons</li>
-                    </ul> 
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Removed Shop System</li>
-                        <li>Small Settings Improvement</li>
-                        <li>Improved Weapon picking up</li>
-                        <li>Improved Weapon animations</li>
-                    </ul>
-                    <h3>Bug Fixes:</h3>
-                    <ul class="changelog-list">
-                        <li>Fixed sensitivity</li>
-                    </ul>
-                </div>
-            </div>
+                    <div id="v1.6" class="tab-content">
+                        <div class="changelog-section">
+                            <br>
+                            <h3>Additions</h3>
+                            <ul class="changelog-list">
+                                <li>Added flashlight</li>
+                                <li>Added deploy/pickup animations for some weapons</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Improved hitbox system</li>
+                                <li>All buttons in menu are now fully interactive</li>
+                                <li>Expanded map</li>
+                                <li>Small weapon animations improvement</li>
+                                <li>New camera tilt effects</li>
+                                <li>Removed snow effect</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div id="v1.8" class="tab-content">
-                <div class="changelog-section">
-                    <!-- <i><small>Unreleased version of the game</small></i><br> -->
-                    <h3>Additions:</h3>
-                    <ul class="changelog-list">
-                        <li>Damage effects</li>
-                        <li>Custom cursor</li>
-                        <li>Ability to knock players with dropkick</li>
-                    </ul> 
+                    <div id="v1.7" class="tab-content">
+                        <div class="changelog-section">
+                            <br>
+                            <h3>Additions:</h3>
+                            <ul class="changelog-list">
+                                <li>Blood particles</li>
+                                <li>New chat command: /summon</li>
+                                <li>Discord Rich Presence</li>
+                                <li>Bandits spawning on the map every 2 minutes</li>
+                                <li>Added Lockers with weapons</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Removed Shop System</li>
+                                <li>Small Settings Improvement</li>
+                                <li>Improved Weapon picking up</li>
+                                <li>Improved Weapon animations</li>
+                            </ul>
+                            <h3>Bug Fixes:</h3>
+                            <ul class="changelog-list">
+                                <li>Fixed sensitivity</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Death improvement</li>
-                        <li>Smooth Player movement</li>
-                        <li>Graphics improvement</li>
-                        <li>Improved NPC Spawner</li>
-                        <li>Improved weapon holding</li>
-                        <li>Improved main menu</li>
-                        <li>Improved map</li>
-                    </ul>
+                    <div id="v1.8" class="tab-content">
+                        <div class="changelog-section">
+                            <h3>Additions:</h3>
+                            <ul class="changelog-list">
+                                <li>Damage effects</li>
+                                <li>Custom cursor</li>
+                                <li>Ability to knock players with dropkick</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Death improvement</li>
+                                <li>Smooth Player movement</li>
+                                <li>Graphics improvement</li>
+                                <li>Improved NPC Spawner</li>
+                                <li>Improved weapon holding</li>
+                                <li>Improved main menu</li>
+                                <li>Improved map</li>
+                            </ul>
+                            <h3>Bug Fixes:</h3>
+                            <ul class="changelog-list">
+                                <li>Fixed jumping on the walls</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                    <h3>Bug Fixes:</h3>
-                    <ul class="changelog-list">
-                        <li>Fixed jumping on the walls</li>
-                    </ul>
-                </div>
-            </div>
+                    <div id="v1.9" class="tab-content">
+                        <div class="changelog-section">
+                            <h3>Additions:</h3>
+                            <ul class="changelog-list">
+                                <li>New Weapons</li>
+                                <li>Snow toggling</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Admin in-game events</li>
+                                <li>Rebalance of weapons durability</li>
+                                <li>Weapon animations improvement</li>
+                            </ul>
+                            <h3>Bug Fixes:</h3>
+                            <ul class="changelog-list">
+                                <li>Fixed lockers...</li>
+                                <li>Fixed weapon picking up</li>
+                                <li>Fixed weapon inventory sync</li>
+                            </ul>
+                        </div>
+                    </div>
 
-            <div id="v1.9" class="tab-content">
-                <div class="changelog-section">
-                    <h3>Additions:</h3>
-                    <ul class="changelog-list">
-                        <li>New Weapons</li>
-                        <li>Snow toggling</li>
-                    </ul> 
+                    <div id="v2.0" class="tab-content">
+                        <div class="changelog-section">
+                            <i><small>Unreleased version of the game</small></i><br>
+                            <h3>Additions:</h3>
+                            <ul class="changelog-list">
+                                <li>New Weapons</li>
+                                <li>New Firearms</li>
+                                <li>Ambient Music</li>
+                                <li>New locations: Testing2, Harbour</li>
+                                <li>Ladders</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Weapons Animations Improvement</li>
+                                <li>New Hitbox System</li>
+                                <li>New Inventory System</li>
+                                <li>Improved pause menu</li>
+                                <li>Improved HUD</li>
+                                <li>Improved Menu Background</li>
+                            </ul>
+                            <h3>Bug Fixes:</h3>
+                            <ul class="changelog-list">
+                                <li>Fixed weapon durability was showing to other players</li>
+                            </ul>
+                        </div>
+                    </div>
 
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Admin in-game events</li>
-                        <li>Rebalance of weapons durability</li>
-                        <li>Weapon animations improvement</li>
-                    </ul>
-
-                    <h3>Bug Fixes:</h3>
-                    <ul class="changelog-list">
-                        <li>Fixed lockers...</li>
-                        <li>Fixed weapon picking up</li>
-                        <li>Fixed weapon inventory sync</li>
-                    </ul>
-                </div>
-            </div>
-			
-			<div id="v2.0" class="tab-content">
-                <div class="changelog-section">
-					<i><small>Unreleased version of the game</small></i><br>
-				
-                    <h3>Additions:</h3>
-                    <ul class="changelog-list">
-                        <li>New Weapons</li>
-						<li>New Firearms</li>
-						<li>Ambient Music</li>
-						<li>New locations: Testing2, Harbour</li>
-						<li>Ladders</li>
-                    </ul> 
-
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Weapons Animations Improvement</li>
-                        <li>New Hitbox System</li>
-                        <li>New Inventory System</li>
-                        <li>Improved pause menu</li>
-                        <li>Improved HUD</li>
-                        <li>Improved Menu Background</li>
-                    </ul>
-					
-					<h3>Bug Fixes:</h3>
-					<ul class="changelog-list">
-						<li>Fixed weapon durability was showing to other players</li>
-					</ul>
-                </div>
-            </div>
-
-            <div id="v2.1" class="tab-content">
-                <div class="changelog-section">
-					<i><small>Unreleased version of the game</small></i><br>
-				
-                    <h3>Additions:</h3>
-                    <ul class="changelog-list">
-						<li>Proximity Voice Chat</li>
-                        <li>Ziplines</li>
-                        <li>Parkour system</li>
-                    </ul>
-
-                    <h3>Improvements:</h3>
-                    <ul class="changelog-list">
-                        <li>Improved Watch</li>
-                        <li>Improved Melee system</li>
-                        <li>Improved NPCs animations & behaviour</li>
-                    </ul>
+                    <div id="v2.1" class="tab-content active">
+                        <div class="changelog-section">
+                            <i><small>Unreleased version of the game</small></i><br>
+                            <h3>Additions:</h3>
+                            <ul class="changelog-list">
+                                <li>Proximity Voice Chat</li>
+                                <li>Ziplines</li>
+                                <li>Parkour system</li>
+                            </ul>
+                            <h3>Improvements:</h3>
+                            <ul class="changelog-list">
+                                <li>Improved Watch</li>
+                                <li>Improved Melee system</li>
+                                <li>Improved NPCs animations & behaviour</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 
